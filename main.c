@@ -21,10 +21,6 @@ void returnBook(){
     printf("returnBook\n");
 }
 void addBook(){
-    // add a new copy of an existing book
-    printf("addBook\n");
-}
-void newBook(){
     printf("newBook\n");
     // initialize variables
     char isbn[256], newisbn[256], bookTitle[256], bookAuthor[256];
@@ -85,7 +81,7 @@ void showMenu(){
             searchBook();
             break;
         case 'a':
-            addBook();
+            borrowBook();
             break;
         case 'z':
             returnBook();
