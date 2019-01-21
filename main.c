@@ -12,20 +12,20 @@
 #define ss (unsigned char)225
 
 void searchBook(){
-    printf("searchBook");
+    printf("searchBook\n");
 }
 void borrowBook(){
-    printf("borrowBook");
+    printf("borrowBook\n");
 }
 void returnBook(){
-    printf("returnBook");
+    printf("returnBook\n");
 }
 void addBook(){
     // add a new copy of an existing book
-    printf("addBook");
+    printf("addBook\n");
 }
 void newBook(){
-    printf("newBook");
+    printf("newBook\n");
     // initialize variables
     char isbn[256], newisbn[256], bookTitle[256], bookAuthor[256];
     int bookCount;
@@ -64,19 +64,23 @@ void newBook(){
     printf("%d", bookCount);
 }
 void deleteBook(){
+    printf("deleteBook\n");
 }
 
 void showMenu(){
-    char input;
+    char menuPoint;
     printf("[S]: B%ccher suchen\n", ue);
     printf("[A]: Buch ausleihen\n");
     printf("[Z]: Buch zur%cckgeben\n", ue);
     printf("[H]: Buch hinzuf%cgen\n", ue);
     printf("[L]: Buch l%cschen\n", oe);
-    printf("Bitte w%chle eine Aktion von oben: ", ae);
-    scanf("%c", &input);
-    input = tolower(input);
-    switch(input){
+    printf("[E]: Bibliotheksverwaltung verlassen\n");
+    printf("Aktion w%chlen: ", ae);
+    scanf(" %c", &menuPoint);
+    menuPoint = tolower(menuPoint);
+    //printf("%c\n", menuPoint);
+    printf("\n");
+    switch(menuPoint){
         case 's':
             searchBook();
             break;
@@ -92,14 +96,22 @@ void showMenu(){
         case 'l':
             deleteBook();
             break;
+        case 'e':
+            printf("Schlie%ce Bibliothek...", ss);
+            exit(0);
+            break;
         default:
             printf("Falsche Eingabe!\n");
-            showMenu();
             break;
     }
+    printf("\n");
+    showMenu();
 }
-
+void showHeading(){
+    printf("_______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
+}
 int main()
 {
+    showHeading();
     showMenu();
 }
