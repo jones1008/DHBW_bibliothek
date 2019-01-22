@@ -5,6 +5,7 @@
 # specific to CodeBlocks IDE
 *.layout
 *.depend
+*.exe
 # generated directories
 bin/
 obj/
