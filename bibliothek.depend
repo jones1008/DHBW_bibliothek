@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1548089524 source:c:\users\jonas fluhrer\documents\git-repos\bibliothek\main.c
-	<stdio.h>
-	<stdlib.h>
-	<strings.h>
-	<ctype.h>
-
