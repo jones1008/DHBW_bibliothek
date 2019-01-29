@@ -106,15 +106,49 @@ void showMenu(){
 void showHeading(){
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
-void loadDataToArray(){
-    struct book {
-        char[] isbn;
-        int value;
-    };
+// Buchstruktur als struct: weil man keinen Array mit Elementen mit unterschiedlichen Datentypen erstellen kann
+struct book {
+    char isbn[13];
+    char title[256];
+    char author[256];
+    char numberof[8];
+    char borrowlist[];
+};
+void loadDataToArray()
+{
+    char buffer[1024];
+    char *line, *record;
+    char delimiter[] = ";";
+    FILE* dataFile = fopen("datatest.csv", "r");
+    struct book books[100];
+
+    int count = 0;
+    while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL)
+    {
+        record = strtok(line, delimiter);
+        strcpy(books[count].isbn, &record[0]);
+        strcpy(books[count].title, &record[1]);
+        strcpy(books[count].author, &record[2]);
+        strcpy(books[count].numberof, &record[3]);
+        strcpy(books[count].borrowlist, &record[4]);
+        count++;
+//        while(record != NULL)
+//        {
+//            printf("record : %s\n", record);
+//            record = strtok(NULL, delimiter);
+//        }
+//        printf("\n");
+    }
+    fclose(dataFile);
+
+    for(int i=0; i < books.length; i++){
+        printf("%s\n", books[i].isbn);
+    }
+    //return books;
 }
 int main()
 {
     loadDataToArray();
-    showHeading();
-    showMenu();
+    //showHeading();
+    //showMenu();
 }
