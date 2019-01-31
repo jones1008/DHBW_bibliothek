@@ -106,49 +106,102 @@ void showMenu(){
 void showHeading(){
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
-// Buchstruktur als struct: weil man keinen Array mit Elementen mit unterschiedlichen Datentypen erstellen kann
-struct book {
-    char isbn[13];
-    char title[256];
-    char author[256];
-    char numberof[8];
-    char borrowlist[];
-};
-void loadDataToArray()
+
+// define book-structure inside of array
+typedef struct
 {
+    char* isbn;
+    char* title;
+    char* author;
+    char* numberof;
+    char* borrowlist;
+} book;
+typedef struct
+{
+    book *array;
+    size_t used;
+    size_t size;
+} Array;
+
+void loadDataToArray(Array *books)
+{
+    //https://codereview.stackexchange.com/questions/44649/dynamic-array-of-structs-in-c
+    // initialize array
+    int initialSize = 1;
+    // Allocate initial space
+    books->array = (book *)calloc(initialSize * sizeof(book), sizeof(int));
+    books->used = 0;           // no elements used
+    books->size = initialSize; // available nr of elements
+
+    // read every line of the csv-file and write data to the array
     char buffer[1024];
-    char *line, *record;
+    char *line, *records;
     char delimiter[] = ";";
     FILE* dataFile = fopen("datatest.csv", "r");
-    struct book books[100];
-
-    int count = 0;
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL)
     {
-        record = strtok(line, delimiter);
-        strcpy(books[count].isbn, &record[0]);
-        strcpy(books[count].title, &record[1]);
-        strcpy(books[count].author, &record[2]);
-        strcpy(books[count].numberof, &record[3]);
-        strcpy(books[count].borrowlist, &record[4]);
-        count++;
-//        while(record != NULL)
-//        {
-//            printf("record : %s\n", record);
-//            record = strtok(NULL, delimiter);
-//        }
-//        printf("\n");
+        if (books->used == books->size)
+        {
+            books->size *= 2;
+            books->array = (book *)realloc(books->array, books->size * sizeof(book));
+        }
+        records = strtok(line, delimiter);
+
+        // insert isbn
+        books->array[books->used].isbn = (char*)malloc(strlen(&records[0]) + 1);
+        strcpy(books->array[books->used].isbn, &records[0]);
+        // insert title
+        books->array[books->used].title = (char*)malloc(strlen(&records[1]) + 1);
+        strcpy(books->array[books->used].title, &records[1]);
+        // insert author
+        books->array[books->used].author = (char*)malloc(strlen(&records[2]) + 1);
+        strcpy(books->array[books->used].author, &records[2]);
+        // insert numberof
+        books->array[books->used].numberof = (char*)malloc(strlen(&records[3]) + 1);
+        strcpy(books->array[books->used].numberof, &records[3]);
+        // insert borrowlist
+        books->array[books->used].borrowlist = (char*)malloc(strlen(&records[4]) + 1);
+        strcpy(books->array[books->used].borrowlist, &records[4]);
+
+        books->used++;
     }
     fclose(dataFile);
-
-    for(int i=0; i < books.length; i++){
-        printf("%s\n", books[i].isbn);
-    }
-    //return books;
 }
+
+void freeArray(Array *books)
+{
+    // Free all name variables of each array element first
+    for(int i=0; i<books->used; i++)
+    {
+        free(books->array[i].isbn);
+        books->array[i].isbn=NULL;
+        free(books->array[i].title);
+        books->array[i].title=NULL;
+        free(books->array[i].author);
+        books->array[i].author=NULL;
+        free(books->array[i].numberof);
+        books->array[i].numberof=NULL;
+        free(books->array[i].borrowlist);
+        books->array[i].borrowlist=NULL;
+    }
+
+    // Now free the array
+    free(books->array);
+    books->array = NULL;
+
+    books->used = 0;
+    books->size = 0;
+}
+
 int main()
 {
-    loadDataToArray();
+    Array books;
+    loadDataToArray(&books);
+    // how to access the isbn for example
+    printf("%s", books.array[0].isbn);
+
+    //freeArray(&books);
+
     //showHeading();
     //showMenu();
 }
