@@ -1,0 +1,20 @@
+Arbeitsaufteilung:
+
+Jones:
+- searchBooks()
+- search(searchString)
+- save()
+- addBook()
+- exit()
+- printErrorMessage()
+
+Vero:
+- deleteBooks() + actualDelete()
+- addCopies() + actualAddCopies()
+- borrowBook() + actualBorrowBook()
+- returnBook() + actualReturnBook()
+
+
+Rules:
+- nach jeder Methode am Ende den allokierten Bereich der ArrayPointer löschen (free)
+- immer Kommentare hinterlassen
