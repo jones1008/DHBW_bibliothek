@@ -1,9 +1,11 @@
 #include "borrowBook.h"
 
-borrowBook(Array *books){
+borrowBook(Array *books)
+{
 
 }
 
-actualborrowBook(Array *books){
+actualborrowBook(Array *books)
+{
 
 }

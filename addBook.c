@@ -1,6 +1,7 @@
 #include "addBook.h"
 
-addBook(Array *books){
+addBook(Array *books)
+{
     printf("newBook\n");
     // initialize variables
     char isbn[256], newisbn[256], bookTitle[256], bookAuthor[256];

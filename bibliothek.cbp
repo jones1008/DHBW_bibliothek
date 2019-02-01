@@ -31,9 +31,45 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="addBook.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="addBook.h" />
+		<Unit filename="addCopies.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="addCopies.h" />
+		<Unit filename="borrowBook.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="borrowBook.h" />
+		<Unit filename="deleteBooks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="deleteBooks.h" />
+		<Unit filename="loadBooks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="loadBooks.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="returnBook .c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="returnBook.h" />
+		<Unit filename="saveBooks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="saveBooks.h" />
+		<Unit filename="search.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="search.h" />
+		<Unit filename="searchBooks.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="searchBooks.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

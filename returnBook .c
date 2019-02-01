@@ -1,9 +1,11 @@
 #include "returnBook.h"
 
-returnBook(Array *books){
+returnBook(Array *books)
+{
 
 }
 
-actualReturnBook(Array *books){
+actualReturnBook(Array *books)
+{
 
 }

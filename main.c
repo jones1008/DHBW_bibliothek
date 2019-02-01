@@ -18,13 +18,16 @@
 #define ue (unsigned char)129
 #define ss (unsigned char)225
 
-void printErrorMessage(){
+void printErrorMessage()
+{
 
 }
-void exit(){
+void exit()
+{
 
 }
-void showMenu(Array *books){
+void showMenu(Array *books)
+{
     char menuPoint;
     printf("[S]: B%ccher suchen\n", ue);
     printf("[A]: Buch ausleihen\n");
@@ -64,7 +67,8 @@ void showMenu(Array *books){
     printf("\n");
     showMenu();
 }
-void showHeading(){
+void showHeading()
+{
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
 
@@ -113,13 +117,16 @@ int main()
 {
     Array books;
     loadBooks(&books);
-    // how to access the isbn for example
-    printf("%s", books.array[0].isbn);
-    for(int i=0; i<books.array.length; i++){
-        books.array[i].title
-    }
 
-    freeArray(&books);
+    search(&books, "Gatsby");
+
+    // how to access the isbn for example
+//    printf("%s", books.array[0].isbn);
+//    for(int i=0; i<books.array.length; i++){
+//        books.array[i].title
+//    }
+
+    //freeArray(&books);
 
     //showHeading();
     //showMenu();

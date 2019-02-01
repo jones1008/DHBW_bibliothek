@@ -1,9 +1,11 @@
 #include "addCopies.h"
 
-addCopies(Array *books){
+addCopies(Array *books)
+{
 
 }
 
-addActualCopies(Array *books){
+addActualCopies(Array *books)
+{
 
 }

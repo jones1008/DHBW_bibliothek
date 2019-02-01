@@ -1,8 +1,8 @@
 Arbeitsaufteilung:
 
 Jones:
-- searchBooks()
 - search(searchString)
+- searchBooks()
 - save()
 - addBook()
 - exit()
