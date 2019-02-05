@@ -1,11 +1,10 @@
 #include "borrowBook.h"
-
-borrowBook(Array *books)
+void borrowBook(Array *books)
 {
 
 }
 
-actualborrowBook(Array *books)
+void actualborrowBook(Array *books)
 {
 
 }

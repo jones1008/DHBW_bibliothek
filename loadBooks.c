@@ -1,6 +1,5 @@
 #include "loadBooks.h"
-
-loadBooks(Array *books)
+void loadBooks(Array *books)
 {
     //https://codereview.stackexchange.com/questions/44649/dynamic-array-of-structs-in-c
     // initialize array

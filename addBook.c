@@ -1,6 +1,5 @@
 #include "addBook.h"
-
-addBook(Array *books)
+void addBook(Array *books)
 {
     printf("newBook\n");
     // initialize variables

@@ -1,12 +1,11 @@
 #include "deleteBooks.h"
-
-deleteBooks(Array *books)
+void deleteBooks(Array *books)
 {
     printf("Welches Buch soll gelöscht werden?\n");
 
 }
 
-actualDeleteBooks(Array *books)
+void actualDeleteBooks(Array *books)
 {
 
 }

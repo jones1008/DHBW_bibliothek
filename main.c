@@ -9,6 +9,8 @@
 #include "loadBooks.h"
 #include "returnBook.h"
 #include "search.h"
+#include "searchBooks.h"
+#include "structure.h"
 
 #define AE (unsigned char)142
 #define ae (unsigned char)132
@@ -22,7 +24,7 @@ void printErrorMessage()
 {
 
 }
-void exit()
+void exitProgram()
 {
 
 }
@@ -42,7 +44,7 @@ void showMenu(Array *books)
     printf("\n");
     switch(menuPoint){
         case 's':
-            searchBook(books);
+            searchBooks(books);
             break;
         case 'a':
             borrowBook(books);
@@ -54,7 +56,7 @@ void showMenu(Array *books)
             addBook(books);
             break;
         case 'l':
-            deleteBook(books);
+            deleteBooks(books);
             break;
         case 'e':
             printf("Schlie%ce Bibliothek...", ss);
@@ -65,35 +67,19 @@ void showMenu(Array *books)
             break;
     }
     printf("\n");
-    showMenu();
+    showMenu(books);
 }
 void showHeading()
 {
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
 
-// define book-structure inside of array
-typedef struct
-{
-    char* isbn;
-    char* title;
-    char* author;
-    char* numberof;
-    char* borrowlist;
-} book;
-typedef struct
-{
-    book *array;
-    size_t used;
-    size_t size;
-} Array;
-
 void freeArray(Array *books)
 {
     // Free all name variables of each array element first
     for(int i=0; i<books->used; i++)
     {
-        freloadBookse(books->array[i].isbn);
+        free(books->array[i].isbn);
         books->array[i].isbn=NULL;
         free(books->array[i].title);
         books->array[i].title=NULL;
@@ -118,7 +104,11 @@ int main()
     Array books;
     loadBooks(&books);
 
-    search(&books, "Gatsby");
+    book *foundBooks = search(&books, "Gatsby");
+    for(int i=0; i<sizeof(foundBooks)/sizeof(foundBooks[0]); i++){
+        printf("%s\n", foundBooks->title);
+        printf("%s\n", foundBooks->author);
+    }
 
     // how to access the isbn for example
 //    printf("%s", books.array[0].isbn);

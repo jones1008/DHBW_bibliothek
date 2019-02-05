@@ -1,11 +1,10 @@
 #include "addCopies.h"
-
-addCopies(Array *books)
+void addCopies(Array *books)
 {
 
 }
 
-addActualCopies(Array *books)
+void addActualCopies(Array *books)
 {
 
 }

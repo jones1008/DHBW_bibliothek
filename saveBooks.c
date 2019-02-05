@@ -1,6 +1,5 @@
 #include "saveBooks.h"
-
-saveBooks(Array *books)
+void saveBooks(Array *books)
 {
 
 }

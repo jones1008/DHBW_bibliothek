@@ -1,6 +1,5 @@
 #include "searchBooks.h"
-
-searchBooks()
+book searchBooks(Array *books)
 {
 
 }
