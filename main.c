@@ -98,26 +98,37 @@ void freeArray(Array *books)
     books->used = 0;
     books->size = 0;
 }
+void freeMemoryArray(Array *books){
+    for(int i=0; i<books->size-1; i++){
+        free(&books->array[i]);
+    }
+    free(books);
+}
 
 int main()
 {
     Array books;
     loadBooks(&books);
-
-    book *foundBooks = search(&books, "Gatsby");
-    for(int i=0; i<sizeof(foundBooks)/sizeof(foundBooks[0]); i++){
-        printf("%s\n", foundBooks->title);
-        printf("%s\n", foundBooks->author);
-    }
-
-    // how to access the isbn for example
-//    printf("%s", books.array[0].isbn);
-//    for(int i=0; i<books.array.length; i++){
-//        books.array[i].title
+// how to access the books
+//    for(int i=0; i<books.used; i++){
+//        printf("%s\n", books.array[i].isbn);
+//        printf("%s\n", books.array[i].title);
+//        printf("%s\n", books.array[i].author);
+//        printf("%s\n", books.array[i].numberof);
+//        printf("%s\n", books.array[i].borrowlist);
+//        printf("\n");
 //    }
 
-    //freeArray(&books);
-
-    //showHeading();
-    //showMenu();
+    book *foundBooks = search(&books, "a");
+//    printf("got books");
+//    printf("%d\n", sizeof(foundBooks));
+//    printf("%d\n", sizeof(book *));
+    for(int i=0; i<sizeof(*foundBooks)/sizeof(book *); i++){
+        printf("%d:\n", i);
+        printf("author: %s | title: %s\n", foundBooks[i].author, foundBooks[i].title);
+        printf("after printed stuff\n");
+    }
+    freeMemoryArray(&books);
+    printf(books.array[0].author);
+    return 0;
 }

@@ -13,7 +13,10 @@ void loadBooks(Array *books)
     char buffer[1024];
     char *line, *records;
     char delimiter[] = ";";
-    FILE* dataFile = fopen("datatest.csv", "r");
+    FILE *dataFile = fopen("data.csv", "r");
+    if(dataFile == NULL){
+        printf("Can't read data file!");
+    }
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL)
     {
         if (books->used == books->size)
@@ -22,23 +25,39 @@ void loadBooks(Array *books)
             books->array = (book *)realloc(books->array, books->size * sizeof(book));
         }
         records = strtok(line, delimiter);
-
-        // insert isbn
-        books->array[books->used].isbn = (char*)malloc(strlen(&records[0]) + 1);
-        strcpy(books->array[books->used].isbn, &records[0]);
-        // insert title
-        books->array[books->used].title = (char*)malloc(strlen(&records[1]) + 1);
-        strcpy(books->array[books->used].title, &records[1]);
-        // insert author
-        books->array[books->used].author = (char*)malloc(strlen(&records[2]) + 1);
-        strcpy(books->array[books->used].author, &records[2]);
-        // insert numberof
-        books->array[books->used].numberof = (char*)malloc(strlen(&records[3]) + 1);
-        strcpy(books->array[books->used].numberof, &records[3]);
-        // insert borrowlist
-        books->array[books->used].borrowlist = (char*)malloc(strlen(&records[4]) + 1);
-        strcpy(books->array[books->used].borrowlist, &records[4]);
-
+        int index = 0;
+        while(records){
+            switch(index){
+                case 0:
+                    // insert isbn
+                    books->array[books->used].isbn = (char*)malloc(strlen(records) + 1);
+                    strcpy(books->array[books->used].isbn, records);
+                    break;
+                case 1:
+                    // insert title
+                    books->array[books->used].title = (char*)malloc(strlen(records) + 1);
+                    strcpy(books->array[books->used].title, records);
+                    break;
+                case 2:
+                    // insert author
+                    books->array[books->used].author = (char*)malloc(strlen(records) + 1);
+                    strcpy(books->array[books->used].author, records);
+                    break;
+                case 3:
+                    // insert numberof
+                    books->array[books->used].numberof = (char*)malloc(strlen(records) + 1);
+                    strcpy(books->array[books->used].numberof, records);
+                    break;
+                case 4:
+                    // insert borrowlist
+                    books->array[books->used].borrowlist = (char*)malloc(strlen(records) + 1);
+                    strcpy(books->array[books->used].borrowlist, records);
+                    break;
+            }
+//            printf("%d:%s", index, records);
+            records = strtok(NULL, delimiter);
+            index++;
+        }
         books->used++;
     }
     fclose(dataFile);

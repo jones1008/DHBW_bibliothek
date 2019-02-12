@@ -10,8 +10,8 @@
 // define book-structure inside of array
 typedef struct
 {
-    char* isbn;
     char* title;
+    char* isbn;
     char* author;
     char* numberof;
     char* borrowlist;

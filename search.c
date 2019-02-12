@@ -1,15 +1,16 @@
 #include "search.h"
-book * search(Array *books, char* searchString)
+book *search(Array *books, char *searchString)
 {
-    int initialSize = 1;
-    book *foundBooks = (book *)calloc(initialSize * sizeof(book), sizeof(int));
+    // initialize an array of pointer
+    book *foundBooks = malloc(sizeof(book *));
     // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
+    int index = 0;
     for(int i=0; i<books->used; i++)
     {
-        if(strstr(searchString, books->array[i].isbn) != NULL || strstr(searchString, books->array[i].author) != NULL || strstr(searchString, books->array[i].title) != NULL){
-            foundBooks[i] = (book *)malloc(1);
-            book *tmpPointer = &books->array[i];
-            foundBooks[i] = tmpPointer;
+        if(strstr(books->array[i].isbn, searchString) != NULL || strstr(books->array[i].author, searchString) != NULL || strstr(books->array[i].title, searchString) != NULL){
+            foundBooks = (book *) realloc(foundBooks, sizeof(foundBooks)*sizeof(book *));
+            foundBooks[index] = books->array[i];
+            index++;
         }
     }
     return foundBooks;
