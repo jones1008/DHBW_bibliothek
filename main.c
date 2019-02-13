@@ -77,58 +77,59 @@ void showHeading()
 void freeArray(Array *books)
 {
     // Free all name variables of each array element first
+    printf("before loop\n");
+    printf("%d", books->used);
     for(int i=0; i<books->used; i++)
     {
-        free(books->array[i].isbn);
+        printf("loop\n");
+        free(&books->array[i].isbn);
+        printf("after first free");
         books->array[i].isbn=NULL;
-        free(books->array[i].title);
+        printf("after setting NULL");
+
+        printf("%s", books->array[i].title);
+        free(&books->array[i].title);
+        printf("after second free");
         books->array[i].title=NULL;
-        free(books->array[i].author);
+        printf("after setting NULL2");
+
+        free(&books->array[i].author);
         books->array[i].author=NULL;
-        free(books->array[i].numberof);
+        printf("after third free");
+
+        free(&books->array[i].numberof);
         books->array[i].numberof=NULL;
-        free(books->array[i].borrowlist);
+        printf("after fourth free");
+
+        free(&books->array[i].borrowlist);
         books->array[i].borrowlist=NULL;
+        printf("after fifth free");
     }
 
+    printf("after loop\n");
     // Now free the array
     free(books->array);
     books->array = NULL;
 
+    printf("after freeing\n");
+
     books->used = 0;
     books->size = 0;
-}
-void freeMemoryArray(Array *books){
-    for(int i=0; i<books->size-1; i++){
-        free(&books->array[i]);
-    }
-    free(books);
 }
 
 int main()
 {
     Array books;
     loadBooks(&books);
-// how to access the books
-//    for(int i=0; i<books.used; i++){
-//        printf("%s\n", books.array[i].isbn);
-//        printf("%s\n", books.array[i].title);
-//        printf("%s\n", books.array[i].author);
-//        printf("%s\n", books.array[i].numberof);
-//        printf("%s\n", books.array[i].borrowlist);
-//        printf("\n");
-//    }
 
     book *foundBooks = search(&books, "a");
-//    printf("got books");
-//    printf("%d\n", sizeof(foundBooks));
-//    printf("%d\n", sizeof(book *));
     for(int i=0; i<sizeof(*foundBooks)/sizeof(book *); i++){
         printf("%d:\n", i);
         printf("author: %s | title: %s\n", foundBooks[i].author, foundBooks[i].title);
         printf("after printed stuff\n");
     }
-    freeMemoryArray(&books);
-    printf(books.array[0].author);
+
+    // TODO: testen, ob das freeMemoryArray tatsächlich die Daten löscht
+    freeArray(&books);
     return 0;
 }
