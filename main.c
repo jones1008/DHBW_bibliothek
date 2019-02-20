@@ -91,7 +91,7 @@ void freeArray(Array *books)
         free(&books->array[i].title);
         printf("after second free");
         books->array[i].title=NULL;
-        printf("after setting NULL2");
+//        printf("after setting NULL2");
 
         free(&books->array[i].author);
         books->array[i].author=NULL;
@@ -101,6 +101,7 @@ void freeArray(Array *books)
         books->array[i].numberof=NULL;
         printf("after fourth free");
 
+//        printf("%d\n", &books->array[i].borrowlist[0]);
         free(&books->array[i].borrowlist);
         books->array[i].borrowlist=NULL;
         printf("after fifth free");
@@ -122,14 +123,15 @@ int main()
     Array books;
     loadBooks(&books);
 
-    book *foundBooks = search(&books, "a");
-    for(int i=0; i<sizeof(*foundBooks)/sizeof(book *); i++){
-        printf("%d:\n", i);
-        printf("author: %s | title: %s\n", foundBooks[i].author, foundBooks[i].title);
-        printf("after printed stuff\n");
-    }
+    book **foundBooks = search(&books, "a");
+//    for(int i=0; i<sizeof(*foundBooks)/sizeof(book *); i++){
+//        printf("%d:\n", i);
+//        printf("author: %s | title: %s\n", foundBooks[i].author, foundBooks[i].title);
+//        printf("after printed stuff\n");
+//    }
+    printf("asafter for");
 
     // TODO: testen, ob das freeMemoryArray tatsächlich die Daten löscht
-    freeArray(&books);
+//    freeArray(&books);
     return 0;
 }

@@ -25,6 +25,7 @@ void loadBooks(Array *books)
             books->array = (book *)realloc(books->array, books->size * sizeof(book));
         }
         records = strtok(line, delimiter);
+
         int index = 0;
         while(records){
             switch(index){
@@ -52,12 +53,18 @@ void loadBooks(Array *books)
                     // insert borrowlist
                     books->array[books->used].borrowlist = (char*)malloc(strlen(records) + 1);
                     strcpy(books->array[books->used].borrowlist, records);
+//                    printf("%d\n", strlen(records));
+//                    printf("%d\n", records[0]);
+                    if(records[0] == '\n'){
+                        printf("record is empty\n");
+                    }
                     break;
             }
-//            printf("%d:%s", index, records);
+            printf("%d:%s\n", index, records);
             records = strtok(NULL, delimiter);
             index++;
         }
+        printf("\n");
         books->used++;
     }
     fclose(dataFile);
