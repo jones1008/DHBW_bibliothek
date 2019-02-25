@@ -123,13 +123,10 @@ int main()
     Array books;
     loadBooks(&books);
 
-    book **foundBooks = search(&books, "a");
-//    for(int i=0; i<sizeof(*foundBooks)/sizeof(book *); i++){
-//        printf("%d:\n", i);
-//        printf("author: %s | title: %s\n", foundBooks[i].author, foundBooks[i].title);
-//        printf("after printed stuff\n");
-//    }
-    printf("asafter for");
+    book **foundBooks = search(&books, "u");
+    for(int i=0; i<sizeof(**foundBooks)/sizeof(book *); i++){
+        printf("author: %s | title: %s\n", foundBooks[i]->author, foundBooks[i]->title);
+    }
 
     // TODO: testen, ob das freeMemoryArray tatsächlich die Daten löscht
 //    freeArray(&books);

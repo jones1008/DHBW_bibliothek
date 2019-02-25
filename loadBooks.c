@@ -17,10 +17,8 @@ void loadBooks(Array *books)
     if(dataFile == NULL){
         printf("Can't read data file!");
     }
-    while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL)
-    {
-        if (books->used == books->size)
-        {
+    while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL){
+        if (books->used == books->size){
             books->size *= 2;
             books->array = (book *)realloc(books->array, books->size * sizeof(book));
         }
@@ -28,6 +26,7 @@ void loadBooks(Array *books)
 
         int index = 0;
         while(records){
+//            printf("%s", records);
             switch(index){
                 case 0:
                     // insert isbn
@@ -53,18 +52,13 @@ void loadBooks(Array *books)
                     // insert borrowlist
                     books->array[books->used].borrowlist = (char*)malloc(strlen(records) + 1);
                     strcpy(books->array[books->used].borrowlist, records);
-//                    printf("%d\n", strlen(records));
-//                    printf("%d\n", records[0]);
-                    if(records[0] == '\n'){
-                        printf("record is empty\n");
-                    }
                     break;
             }
-            printf("%d:%s\n", index, records);
+//            printf("%d:%s\n", index, records);
             records = strtok(NULL, delimiter);
             index++;
         }
-        printf("\n");
+//        printf("\n");
         books->used++;
     }
     fclose(dataFile);
