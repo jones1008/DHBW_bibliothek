@@ -75,6 +75,12 @@ void showHeading()
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
 
+/*
+ *  function: freeBooks
+ *      frees previously allocated memory of a books structure
+ *  params:
+ *      Array *books    (a pointer to the books structure)
+ */
 void freeBooks(Array *books)
 {
     // Free all name variables of each array element first
@@ -102,9 +108,15 @@ void freeBooks(Array *books)
     books->used = 0;
     books->size = 0;
 }
+
+/*
+ *  function: freeFoundBooks
+ *      frees previously allocated memory of a foundBooks structure
+ *  params:
+ *      foundBooks *foundBooks    (a pointer to the foundBooks structure)
+ */
 void freeFoundBooks(foundBooks *foundBooks){
     // Free all pointers of each array element first
-    printf("size: %d\n", foundBooks->size);
     for(int i=0; i<foundBooks->size-1; i++)
     {
         free(&foundBooks->array[i]);
@@ -119,21 +131,22 @@ void freeFoundBooks(foundBooks *foundBooks){
 
 int main()
 {
+    // initially loading the books from the data-text file
     Array books;
     loadBooks(&books);
 
+    // searching for books and printing the author and the title of the found ones
     char string[] = "e";
     char *searchString = string;
-
     foundBooks foundBooks;
     search(&books, &foundBooks, searchString);
-//    book **foundBooks = search(&books, searchString);
-
     for(int i=0; i<foundBooks.size; i++){
         printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
     }
 
+    // free all previously allocated memory
     freeBooks(&books);
     freeFoundBooks(&foundBooks);
+
     return 0;
 }

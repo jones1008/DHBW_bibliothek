@@ -1,4 +1,10 @@
 #include "search.h"
+/*
+ *  function: stringToLower
+ *      turns a string into a complete lowercased string
+ *  params:
+ *      char *strPtr    (a pointer to the string that should be lowercased)
+ */
 void stringToLower(char *strPtr)
 {
     while(*strPtr != '\0'){
@@ -6,27 +12,24 @@ void stringToLower(char *strPtr)
         strPtr++;
     }
 }
-void search(Array *books, foundBooks *fb, char *searchString)
-//book **search(Array *books, char *searchString)
+
+/*
+ *  function: search
+ *      searches for books with given searchString and adds them to foundBooksArray
+ *  params:
+ *      Array *books        (pointer to books structure)
+ *      foundBooks *foundBooks      (pointer to array of book pointers)
+ *      char *searchString  (pointer to string to search for)
+*/
+void search(Array *books, foundBooks *foundBooks, char *searchString)
 {
-    // TODO: handling, wenn nichts gefunden wurde
-
-    // initialize an array of pointer
-//    book **foundBooks = malloc(sizeof(book *));
-
-    fb->array = malloc(0);
-//    book **foundBooks = malloc(0);
-
-//    book *foundBooks = calloc(sizeof(book *), sizeof(int));
-//    printf("malloc of search()\n");
-//    printf("sizeof book pointer: %d\n", sizeof(book *));
-//    printf("sizeof book pointer: %d\n", sizeof(*foundBooks));
-    // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
+    // initialize the array where the book pointers will be stored
+    foundBooks->array = malloc(0);
 
     // make the searchString to lower case, so the comparison is case insensitive
     stringToLower(searchString);
 
-    // replace Umlaute with corresponding chars
+    // replace umlauts of searchstring with corresponding chars (ä=>ae, ü=>ue, ö=>oe, ß=>ss)
     char newSearchString[strlen(searchString)*2+1];
     strcpy(newSearchString, searchString);
     int i=0;
@@ -62,7 +65,9 @@ void search(Array *books, foundBooks *fb, char *searchString)
         }
         i++;
     }
+    // use variable newSearchString from now on
 
+    // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
     for(int i=0; i<books->used; i++)
     {
@@ -74,23 +79,14 @@ void search(Array *books, foundBooks *fb, char *searchString)
         stringToLower(author);
         stringToLower(title);
 
+        // check if newSearchString matches any of isbn, author or title of the current book
         if(strstr(books->array[i].isbn, newSearchString) != NULL || strstr(author, newSearchString) != NULL || strstr(title, newSearchString) != NULL){
-//        if(strstr(books->array[i].isbn, newSearchString) != NULL || strstr(books->array[i].author, newSearchString) != NULL || strstr(books->array[i].title, newSearchString) != NULL){
-//            printf("adding book pointer\n");
-//            printf("sizeof foundbooks in loop: %d\n", sizeof(*foundBooks));
-//            printf("sizeof book in loop: %d\n", sizeof(book *));
-//            foundBooks = (book *) realloc(foundBooks, sizeof(*foundBooks)+sizeof(book *));
-            fb->array = (book *) realloc(fb->array, (index+1)*sizeof(book *));
-//            foundBooks = (book *) realloc(foundBooks, (index+1)*sizeof(book *));
-            fb->array[index] = &books->array[i];
-//            foundBooks[index] = &books->array[i];
+            // adding the pointer to this book to the foundBooks array
+            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
+            foundBooks->array[index] = &books->array[i];
             index++;
         }
     }
-    fb->size = index;
-
-//    printf("size of foundBooks: %d\n", sizeof(*foundBooks));
-    // returns a pointer to the array of pointers
-
-//    return foundBooks;
+    // write the number of found elements to the size attribute of the foundBooks structure
+    foundBooks->size = index;
 }
