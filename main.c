@@ -123,10 +123,24 @@ int main()
     Array books;
     loadBooks(&books);
 
-    book **foundBooks = search(&books, "u");
-    for(int i=0; i<sizeof(**foundBooks)/sizeof(book *); i++){
-        printf("author: %s | title: %s\n", foundBooks[i]->author, foundBooks[i]->title);
-    }
+//    char string[] = "HallOOOo";
+//    stringToLower(&string);
+//    printf("%s\n", string);
+
+    char string[] = "günter";
+    char *searchString = string;
+    book **foundBooks = search(&books, searchString);
+//    printf("%d\n", sizeof(**foundBooks)/sizeof(book *));
+//    printf("%d\n", sizeof(foundBooks));
+//    printf("%d\n", sizeof(&foundBooks));
+//    printf("%d\n", sizeof(book));
+//    printf("%d\n", sizeof(book *));
+    // TODO: Größe vom Array beim Erstellen von foundBooks speichern
+
+//    for(int i=0; i<sizeof(**foundBooks)/sizeof(book *); i++){
+//    for(int i=0; i<1; i++){
+//        printf("author: %s | title: %s\n", foundBooks[i]->author, foundBooks[i]->title);
+//    }
 
     // TODO: testen, ob das freeMemoryArray tatsächlich die Daten löscht
 //    freeArray(&books);

@@ -23,5 +23,4 @@ typedef struct
     size_t size;
 } Array;
 
-
 #endif
