@@ -12,6 +12,7 @@
 #include "searchBooks.h"
 #include "structure.h"
 
+//TODO: rausschmeißen, falls das nicht mehr gebraucht wird
 #define AE (unsigned char)142
 #define ae (unsigned char)132
 #define OE (unsigned char)153
@@ -74,48 +75,46 @@ void showHeading()
     printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
 
-void freeArray(Array *books)
+void freeBooks(Array *books)
 {
     // Free all name variables of each array element first
-    printf("before loop\n");
-    printf("%d", books->used);
     for(int i=0; i<books->used; i++)
     {
-        printf("loop\n");
         free(&books->array[i].isbn);
-        printf("after first free");
         books->array[i].isbn=NULL;
-        printf("after setting NULL");
 
-        printf("%s", books->array[i].title);
         free(&books->array[i].title);
-        printf("after second free");
         books->array[i].title=NULL;
-//        printf("after setting NULL2");
 
         free(&books->array[i].author);
         books->array[i].author=NULL;
-        printf("after third free");
 
         free(&books->array[i].numberof);
         books->array[i].numberof=NULL;
-        printf("after fourth free");
 
-//        printf("%d\n", &books->array[i].borrowlist[0]);
         free(&books->array[i].borrowlist);
         books->array[i].borrowlist=NULL;
-        printf("after fifth free");
     }
-
-    printf("after loop\n");
     // Now free the array
     free(books->array);
     books->array = NULL;
 
-    printf("after freeing\n");
-
     books->used = 0;
     books->size = 0;
+}
+void freeFoundBooks(foundBooks *foundBooks){
+    // Free all pointers of each array element first
+    printf("size: %d\n", foundBooks->size);
+    for(int i=0; i<foundBooks->size-1; i++)
+    {
+        free(&foundBooks->array[i]);
+        foundBooks->array[i]=NULL;
+    }
+    // Now free the array
+    free(foundBooks->array);
+    foundBooks->array = NULL;
+
+    foundBooks->size = 0;
 }
 
 int main()
@@ -123,26 +122,18 @@ int main()
     Array books;
     loadBooks(&books);
 
-//    char string[] = "HallOOOo";
-//    stringToLower(&string);
-//    printf("%s\n", string);
-
-    char string[] = "günter";
+    char string[] = "e";
     char *searchString = string;
-    book **foundBooks = search(&books, searchString);
-//    printf("%d\n", sizeof(**foundBooks)/sizeof(book *));
-//    printf("%d\n", sizeof(foundBooks));
-//    printf("%d\n", sizeof(&foundBooks));
-//    printf("%d\n", sizeof(book));
-//    printf("%d\n", sizeof(book *));
-    // TODO: Größe vom Array beim Erstellen von foundBooks speichern
 
-//    for(int i=0; i<sizeof(**foundBooks)/sizeof(book *); i++){
-//    for(int i=0; i<1; i++){
-//        printf("author: %s | title: %s\n", foundBooks[i]->author, foundBooks[i]->title);
-//    }
+    foundBooks foundBooks;
+    search(&books, &foundBooks, searchString);
+//    book **foundBooks = search(&books, searchString);
 
-    // TODO: testen, ob das freeMemoryArray tatsächlich die Daten löscht
-//    freeArray(&books);
+    for(int i=0; i<foundBooks.size; i++){
+        printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
+    }
+
+    freeBooks(&books);
+    freeFoundBooks(&foundBooks);
     return 0;
 }

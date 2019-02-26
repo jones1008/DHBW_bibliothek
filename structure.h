@@ -23,4 +23,9 @@ typedef struct
     size_t size;
 } Array;
 
+typedef struct{
+    book **array;
+    size_t size;
+} foundBooks;
+
 #endif

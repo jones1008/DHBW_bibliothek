@@ -6,14 +6,17 @@ void stringToLower(char *strPtr)
         strPtr++;
     }
 }
-book **search(Array *books, char *searchString)
+void search(Array *books, foundBooks *fb, char *searchString)
+//book **search(Array *books, char *searchString)
 {
-    // TODO: umlaute in der Suche ersetzen mit ue, oe, ae, ss etc.
     // TODO: handling, wenn nichts gefunden wurde
 
     // initialize an array of pointer
 //    book **foundBooks = malloc(sizeof(book *));
-    book **foundBooks = malloc(0);
+
+    fb->array = malloc(0);
+//    book **foundBooks = malloc(0);
+
 //    book *foundBooks = calloc(sizeof(book *), sizeof(int));
 //    printf("malloc of search()\n");
 //    printf("sizeof book pointer: %d\n", sizeof(book *));
@@ -64,24 +67,30 @@ book **search(Array *books, char *searchString)
     for(int i=0; i<books->used; i++)
     {
         // make the author and the title to lower case, so the comparison is case insensitive
-        char *author = books->array[i].author;
+        char author[strlen(books->array[i].author)+1];
+        char title[strlen(books->array[i].title)+1];
+        strcpy(author, books->array[i].author);
+        strcpy(title, books->array[i].title);
         stringToLower(author);
-        char *title = books->array[i].title;
         stringToLower(title);
+
         if(strstr(books->array[i].isbn, newSearchString) != NULL || strstr(author, newSearchString) != NULL || strstr(title, newSearchString) != NULL){
 //        if(strstr(books->array[i].isbn, newSearchString) != NULL || strstr(books->array[i].author, newSearchString) != NULL || strstr(books->array[i].title, newSearchString) != NULL){
 //            printf("adding book pointer\n");
 //            printf("sizeof foundbooks in loop: %d\n", sizeof(*foundBooks));
 //            printf("sizeof book in loop: %d\n", sizeof(book *));
 //            foundBooks = (book *) realloc(foundBooks, sizeof(*foundBooks)+sizeof(book *));
-            foundBooks = (book *) realloc(foundBooks, (index+1)*sizeof(book *));
-            foundBooks[index] = &books->array[i];
+            fb->array = (book *) realloc(fb->array, (index+1)*sizeof(book *));
+//            foundBooks = (book *) realloc(foundBooks, (index+1)*sizeof(book *));
+            fb->array[index] = &books->array[i];
+//            foundBooks[index] = &books->array[i];
             index++;
         }
     }
-    printf("Ergebnisse: %d", index);
+    fb->size = index;
 
 //    printf("size of foundBooks: %d\n", sizeof(*foundBooks));
     // returns a pointer to the array of pointers
-    return foundBooks;
+
+//    return foundBooks;
 }
