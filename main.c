@@ -26,6 +26,7 @@ void exitProgram()
 void showMenu(Array *books)
 {
     char menuPoint;
+    printf("\n");
     printf("[S]: B%ccher suchen\n", ue);
     printf("[A]: Buch ausleihen\n");
     printf("[Z]: Buch zur%cckgeben\n", ue);
@@ -35,7 +36,6 @@ void showMenu(Array *books)
     printf("Aktion w%chlen: ", ae);
     scanf(" %c", &menuPoint);
     menuPoint = tolower(menuPoint);
-    //printf("%c\n", menuPoint);
     printf("\n");
     switch(menuPoint){
         case 's':

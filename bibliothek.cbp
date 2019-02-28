@@ -47,6 +47,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="deleteBooks.h" />
+		<Unit filename="helperFunctions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="helperFunctions.h" />
 		<Unit filename="loadBooks.c">
 			<Option compilerVar="CC" />
 		</Unit>
