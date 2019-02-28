@@ -53,3 +53,9 @@ void showReturnToMenu()
         enter = getchar();
     }
 }
+
+void freeTempString(char *var)
+{
+    free(var);
+    var = NULL;
+}

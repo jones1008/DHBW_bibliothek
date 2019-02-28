@@ -13,10 +13,8 @@ void searchBooks(Array *books)
     foundBooks foundBooks;
     search(books, &foundBooks, searchString);
 
-    // TODO: free searchString allocation
-
-    printf("\n");
     // loop over foundBooks
+    printf("\n");
     if(foundBooks.size > 0){
         // TODO: pagination when more than 4 books
         for(int i=0; i<foundBooks.size; i++){
@@ -35,6 +33,9 @@ void searchBooks(Array *books)
         printf("Keine B%ccher mit '%s' gefunden\n", ue, searchString);
     }
     printf("\n");
+
+    // free searchString allocation
+    freeTempString(searchString);
 
     // TODO: vielleicht zusammen in eine Function?
     showReturnToMenu();

@@ -21,5 +21,6 @@ void getUserInput(char *userVariable, const char message[]);
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);
 void showReturnToMenu();
+void freeTempString(char *var);
 
 #endif
