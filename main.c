@@ -13,13 +13,7 @@
 #include "structure.h"
 
 //TODO: rausschmeißen, falls das nicht mehr gebraucht wird
-#define AE (unsigned char)142
-#define ae (unsigned char)132
-#define OE (unsigned char)153
-#define oe (unsigned char)148
-#define UE (unsigned char)154
-#define ue (unsigned char)129
-#define ss (unsigned char)225
+
 
 void printErrorMessage()
 {

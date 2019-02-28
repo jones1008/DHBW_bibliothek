@@ -69,8 +69,7 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
 
     // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
-    for(int i=0; i<books->used; i++)
-    {
+    for(int i=0; i<books->used; i++){
         // make the author and the title to lower case, so the comparison is case insensitive
         char author[strlen(books->array[i].author)+1];
         char title[strlen(books->array[i].title)+1];

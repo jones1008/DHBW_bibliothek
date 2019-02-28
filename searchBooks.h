@@ -6,6 +6,7 @@
 #include <strings.h>
 #include <ctype.h>
 #include "structure.h"
+#include "helperFunctions.h"
 
 void searchBooks(Array *books);
 
