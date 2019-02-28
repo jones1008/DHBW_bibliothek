@@ -7,6 +7,6 @@
 #include <ctype.h>
 #include "structure.h"
 
-book searchBooks(Array *books);
+void searchBooks(Array *books);
 
 #endif

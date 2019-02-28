@@ -135,18 +135,20 @@ int main()
     Array books;
     loadBooks(&books);
 
+    showHeading();
+    showMenu(&books);
     // searching for books and printing the author and the title of the found ones
-    char string[] = "e";
-    char *searchString = string;
-    foundBooks foundBooks;
-    search(&books, &foundBooks, searchString);
-    for(int i=0; i<foundBooks.size; i++){
-        printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
-    }
+//    char string[] = "e";
+//    char *searchString = string;
+//    foundBooks foundBooks;
+//    search(&books, &foundBooks, searchString);
+//    for(int i=0; i<foundBooks.size; i++){
+//        printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
+//    }
 
     // free all previously allocated memory
     freeBooks(&books);
-    freeFoundBooks(&foundBooks);
+//    freeFoundBooks(&foundBooks);
 
     return 0;
 }

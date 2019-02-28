@@ -3,6 +3,7 @@ Arbeitsaufteilung:
 Jones:
 / search(searchString)
 - searchBooks()
+- showMenu
 - save()
 - addBook()
 - exit()
