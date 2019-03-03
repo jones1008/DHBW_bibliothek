@@ -6,6 +6,7 @@
 #include <strings.h>
 #include <ctype.h>
 #include "structure.h"
+#include "saveBooks.h"
 
 void addCopies(Array *books);
 void actualAddCopies(Array *books);

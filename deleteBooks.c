@@ -16,4 +16,5 @@ void deleteBooks(Array *books)
 void actualDeleteBooks(Array *books)
 {
 
+    saveBooks(books);
 }

@@ -4,8 +4,8 @@ Jones:
 / search(searchString)
 - searchBooks()
 / showMenu
-- save()
-- addBook()
+/ save()
+- addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
 - exit()
 - printErrorMessage()
 

@@ -10,6 +10,7 @@
 #include "returnBook.h"
 #include "search.h"
 #include "searchBooks.h"
+#include "saveBooks.h"
 #include "structure.h"
 
 //TODO: rausschmeiﬂen, falls das nicht mehr gebraucht wird
@@ -32,8 +33,10 @@ void showMenu(Array *books)
     printf("[Z]: Buch zur%cckgeben\n", ue);
     printf("[H]: Buch hinzuf%cgen\n", ue);
     printf("[L]: Buch l%cschen\n", oe);
+    printf("[C]: Buchexemplar hinzuf%cgen\n", oe);
     printf("[E]: Bibliotheksverwaltung verlassen\n");
     printf("Aktion w%chlen: ", ae);
+    // TODO: zu getUserInput ‰ndern (nicht scanf verwenden!)
     scanf(" %c", &menuPoint);
     menuPoint = tolower(menuPoint);
     printf("\n");
@@ -52,6 +55,9 @@ void showMenu(Array *books)
             break;
         case 'l':
             deleteBooks(books);
+            break;
+        case 'c':
+            addCopies(books);
             break;
         case 'e':
             printf("Schlie%ce Bibliothek...", ss);
@@ -131,6 +137,10 @@ int main()
 
     showHeading();
     showMenu(&books);
+
+//    books.array[0].author = "neu";
+//    saveBooks(&books);
+
     // searching for books and printing the author and the title of the found ones
 //    char string[] = "e";
 //    char *searchString = string;

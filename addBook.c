@@ -38,4 +38,6 @@ void addBook(Array *books)
     printf("%s", bookTitle);
     printf("%s", bookAuthor);
     printf("%d", bookCount);
+
+    saveBooks(books);
 }

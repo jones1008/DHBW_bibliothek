@@ -7,4 +7,5 @@ void returnBook(Array *books)
 void actualReturnBook(Array *books)
 {
 
+    saveBooks(books);
 }
