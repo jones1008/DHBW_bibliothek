@@ -2,7 +2,7 @@ Arbeitsaufteilung:
 
 Jones:
 / search(searchString)
-- searchBooks()
+/ searchBooks() (ohne Pagination
 / showMenu
 / save()
 - addBook() (Umlaute ersetzen! (siehe saveBooks.c?))

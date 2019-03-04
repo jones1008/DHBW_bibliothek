@@ -26,7 +26,6 @@ void actualSearchBooks(Array *books)
         // loop over foundBooks
         if(foundBooks.size > 0){
             printf("\n");
-            // TODO: pagination when more than 4 books
             for(int i=0; i<foundBooks.size; i++){
                 printf("[%d]\n", i+1);
                 printf("Autor    : %s\n", foundBooks.array[i]->author);
