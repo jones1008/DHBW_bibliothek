@@ -9,7 +9,6 @@ void getUserInput(char *userVariable, const char message[])
     // repeat if user doesn't input anything
     do{
         // print message to show before the user input
-        printf("%d\n", buffer[0]);
         if(buffer[0] == '\0'){
             printf("%s ", message);
         }

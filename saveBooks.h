@@ -8,8 +8,6 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-//void strreplace(char s[], char chr, char repl_chr);
-//char *replaceUmlauts(char* string);
 void saveBooks(Array *books);
 
 #endif
