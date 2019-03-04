@@ -9,6 +9,6 @@
 #include "saveBooks.h"
 
 void deleteBooks(Array *books);
-void actualDeleteBooks(Array *books);
+void actualDeleteBooks(Array *books, book *book);
 
 #endif

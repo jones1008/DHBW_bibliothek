@@ -9,6 +9,6 @@
 #include "saveBooks.h"
 
 void borrowBook(Array *books);
-void actualBorrowBook(Array *books);
+void actualBorrowBook(Array *books, book *book);
 
 #endif

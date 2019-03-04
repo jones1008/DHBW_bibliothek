@@ -21,6 +21,11 @@ void getUserInput(char *userVariable, const char message[])
     strncpy(userVariable, buf, strlen(buf)-1);
 }
 
+//void getUserInt(char *userVariable)
+//{
+//
+//}
+
 void printHeaderTabs()
 {
     for(int i=0; i<HEADERTABSIZE; i++){

@@ -13,7 +13,7 @@ void deleteBooks(Array *books)
 
 }
 
-void actualDeleteBooks(Array *books)
+void actualDeleteBooks(Array *books, book *book)
 {
 
     saveBooks(books);

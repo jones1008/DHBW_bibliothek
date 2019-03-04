@@ -28,6 +28,7 @@ void exitProgram()
 
 void showMenu(Array *books)
 {
+    printf("HAUPTMEN%c:\n", UE);
     // initialize buffer with zeros
     char buffer[BUFFERSIZE];
     memset(buffer, 0, BUFFERSIZE);
@@ -47,7 +48,6 @@ void showMenu(Array *books)
 
         // write menu if user input was wrong
         if(strlen(buffer)==0 || strlen(buffer)>1 || buffer[0]=='\n'){
-            printf("\n");
             printf("[S]: B%ccher suchen\n", ue);
             printf("[A]: Buch ausleihen\n");
             printf("[Z]: Buch zur%cckgeben\n", ue);
@@ -70,6 +70,7 @@ void showMenu(Array *books)
     } while ((strlen(buffer)-1)>1 || strchr(allowedChars, menuPoint) == NULL);
 
     // switch case structure to call the chosen function
+    // TODO: in function
     printf("\n");
     switch(menuPoint){
         case 's':

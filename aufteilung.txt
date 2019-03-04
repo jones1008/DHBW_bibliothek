@@ -8,6 +8,7 @@ Jones:
 - addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
 - exit()
 - printErrorMessage()
+- editBookData()? (title, author, isbn)
 
 Vero:
 - deleteBooks() + actualDelete()

@@ -8,6 +8,10 @@
 #include "structure.h"
 #include "helperFunctions.h"
 #include "search.h"
+#include "borrowBook.h"
+#include "addCopies.h"
+#include "deleteBooks.h"
+#include "returnBook.h"
 
 void searchBooks(Array *books);
 void actualSearchBooks(Array *books);

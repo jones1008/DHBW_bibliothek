@@ -4,7 +4,7 @@ void borrowBook(Array *books)
 
 }
 
-void actualborrowBook(Array *books)
+void actualBorrowBook(Array *books, book *book)
 {
 
     saveBooks(books);

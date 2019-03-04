@@ -9,6 +9,6 @@
 #include "saveBooks.h"
 
 void addCopies(Array *books);
-void actualAddCopies(Array *books);
+void actualAddCopies(Array *books, book *book);
 
 #endif
