@@ -3,16 +3,18 @@
 void getUserInput(char *userVariable, const char message[])
 {
     char buffer[BUFFERSIZE];
+    memset(buffer, 0, BUFFERSIZE);
     char *buf = buffer;
 
     // repeat if user doesn't input anything
     do{
         // print message to show before the user input
-        if(buffer[0] == '\n'){
+        printf("%d\n", buffer[0]);
+        if(buffer[0] == '\0'){
             printf("%s ", message);
         }
         fgets(buf, BUFFERSIZE, stdin);
-    } while (buffer[0] == '\n');
+    } while (buffer[0] == '\0');
 
     // increase size of userVariable to size of user input
     userVariable = realloc(userVariable, strlen(userVariable)+strlen(buf)+1);

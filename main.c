@@ -12,6 +12,7 @@
 #include "searchBooks.h"
 #include "saveBooks.h"
 #include "structure.h"
+#include "helperFunctions.h"
 
 //TODO: rausschmeißen, falls das nicht mehr gebraucht wird
 
@@ -24,21 +25,51 @@ void exitProgram()
 {
 
 }
+
 void showMenu(Array *books)
 {
+    // initialize buffer with zeros
+    char buffer[BUFFERSIZE];
+    memset(buffer, 0, BUFFERSIZE);
+
+    // some more variables
+    char *buf = buffer;
     char menuPoint;
-    printf("\n");
-    printf("[S]: B%ccher suchen\n", ue);
-    printf("[A]: Buch ausleihen\n");
-    printf("[Z]: Buch zur%cckgeben\n", ue);
-    printf("[H]: Buch hinzuf%cgen\n", ue);
-    printf("[L]: Buch l%cschen\n", oe);
-    printf("[C]: Buchexemplar hinzuf%cgen\n", oe);
-    printf("[E]: Bibliotheksverwaltung verlassen\n");
-    printf("Aktion w%chlen: ", ae);
-    // TODO: zu getUserInput ändern (nicht scanf verwenden!)
-    scanf(" %c", &menuPoint);
-    menuPoint = tolower(menuPoint);
+    char *allowedChars = "sazhlce";
+
+    // repeat user input if the input was wrong
+    do{
+        // check if userInput is longer than one character or not the first loop
+        if((strlen(buffer)-1)>1 && strlen(buffer)!=0){
+            // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
+            printf("Bitte nur einen Buchstaben eingeben\n");
+        }
+
+        // write menu if user input was wrong
+        if(strlen(buffer)==0 || strlen(buffer)>1 || buffer[0]=='\n'){
+            printf("\n");
+            printf("[S]: B%ccher suchen\n", ue);
+            printf("[A]: Buch ausleihen\n");
+            printf("[Z]: Buch zur%cckgeben\n", ue);
+            printf("[H]: Buch hinzuf%cgen\n", ue);
+            printf("[L]: Buch l%cschen\n", oe);
+            printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
+            printf("[E]: Bibliotheksverwaltung verlassen\n");
+        }
+
+        printf("Aktion w%chlen: ", ae);
+        fgets(buf, BUFFERSIZE, stdin);
+        strncpy(&menuPoint, buf, 1);
+        menuPoint = tolower(menuPoint);
+
+        // check if user input is an allowed char
+        if(strchr(allowedChars, menuPoint) == NULL){
+            // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
+            printf("Falsche Eingabe!\n");
+        }
+    } while ((strlen(buffer)-1)>1 || strchr(allowedChars, menuPoint) == NULL);
+
+    // switch case structure to call the chosen function
     printf("\n");
     switch(menuPoint){
         case 's':
@@ -68,6 +99,7 @@ void showMenu(Array *books)
             break;
     }
     printf("\n");
+    // call itself after other functions are completed
     showMenu(books);
 }
 void showHeading()

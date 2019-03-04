@@ -7,6 +7,8 @@ void searchBooks(Array *books)
 
     // get user search input
     char *searchString = calloc(1, 1);
+    // TODO: Benutzer die Möglichkeit geben, es abzubrechen (nur ENTER?)
+    // TODO: Benutzer die Möglichkeit geben, erneut zu suchen, ohne zum Menü zurückkehren zu müssen
     getUserInput(searchString, "Suchtext eingeben (IBSN, Buchtitel, Buchautor):");
 
     // pass searchString to the search-function

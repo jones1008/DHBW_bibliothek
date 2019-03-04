@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include "structure.h"
 
-#define BUFFERSIZE 1024
+#define BUFFERSIZE 512
 #define HEADERTABSIZE 6
 #define AE (unsigned char)142
 #define ae (unsigned char)132
