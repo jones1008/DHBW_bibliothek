@@ -17,8 +17,9 @@
 #define ue (unsigned char)129
 #define ss (unsigned char)225
 
-void getUserInput(char *userVariable, const char message[]);
-int isUserInputAborted(char *userVariable, const char message[]);
+//void getUserInput(char *userVariable, const char message[]);
+void getUserInput(char *userVariable);
+int isAborted(char *userVariable);
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);
 void showReturnToMenu();

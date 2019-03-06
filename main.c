@@ -57,6 +57,7 @@ void showMenu(Array *books)
             printf("[E]: Bibliotheksverwaltung verlassen\n");
         }
 
+        // TODO: mit getUserInput bauen!
         printf("Aktion w%chlen: ", ae);
         fgets(buf, BUFFERSIZE, stdin);
         strncpy(&menuPoint, buf, 1);
