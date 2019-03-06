@@ -90,7 +90,7 @@ void showMenu(Array *books)
             returnBook(books);
             break;
         case 'h':
-            menuHeader = "BUCH HINZUFUEGEN";
+            menuHeader = "NEUES BUCH HINZUFUEGEN";
             printMenuHeader(menuHeader);
             addBook(books);
             break;

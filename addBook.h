@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include "structure.h"
 #include "saveBooks.h"
+#include "helperFunctions.h"
 
 void addBook(Array *books);
 

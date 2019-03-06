@@ -8,17 +8,42 @@ void getUserInput(char *userVariable, const char message[])
 
     // repeat if user doesn't input anything
     do{
+        // TODO: sobald über 6 Zeichen eingegeben, kommt Müll raus
         // print message to show before the user input
+//        if(buffer[0] == '\0' || buffer[0] == '\n'){
         if(buffer[0] == '\0'){
             printf("%s ", message);
         }
+        if(buffer[0] == 27){
+            printf("esc detected");
+        }
         fgets(buf, BUFFERSIZE, stdin);
+        printf("bufBefore: %s\n", buf);
+//    } while (buffer[0] == '\0' || buffer[0] == '\n');
     } while (buffer[0] == '\0');
 
     // increase size of userVariable to size of user input
-    userVariable = realloc(userVariable, strlen(userVariable)+strlen(buf)+1);
+    printf("strlen(buf): %d\n", strlen(buf));
+    userVariable = realloc(userVariable, strlen(buf));
+//    userVariable = realloc(userVariable, strlen(userVariable)+strlen(buf)+1);
     // copy the buf into the userVariable without '\n' at the end:
-    strncpy(userVariable, buf, strlen(buf)-1);
+
+    printf("bufAfter: %s\n", buf);
+    strncpy(userVariable, buf, strlen(buf));
+//    strncpy(userVariable, buf, strlen(buf)-1);
+    printf("UserVar: %s\n", userVariable);
+}
+
+int isUserInputAborted(char *userVariable, const char message[])
+{
+    getUserInput(userVariable, message);
+    if(userVariable[0] == '\n'){
+        printf("Abbrechen...\n");
+        return 1;
+    } else{
+        return 0;
+    }
+
 }
 
 //void getUserInt(char *userVariable)

@@ -18,6 +18,7 @@
 #define ss (unsigned char)225
 
 void getUserInput(char *userVariable, const char message[]);
+int isUserInputAborted(char *userVariable, const char message[]);
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);
 void showReturnToMenu();

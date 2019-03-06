@@ -13,6 +13,7 @@ Jones:
 / exit()
 - printErrorMessage()
 - editBookData()? (title, author, isbn)
+- clearScreen?
 
 Vero:
 - deleteBooks() + actualDelete()

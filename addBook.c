@@ -1,6 +1,38 @@
 #include "addBook.h"
 void addBook(Array *books)
 {
+    // TODO: ENTER zum Abbrechen
+    char *isbn = calloc(1, 1);
+    char *title = calloc(1, 1);
+    char *author = calloc(1, 1);
+    char *numberofString = calloc(1, 1);
+
+    while(!isUserInputAborted(isbn, "ISBN eingeben ([ENTER] Abbrechen):") &&
+          !isUserInputAborted(title, "Buchtitel eingeben ([ENTER] Abbrechen):") &&
+          !isUserInputAborted(author, "Buchautor eingeben ([ENTER] Abbrechen):") &&
+          !isUserInputAborted(numberofString, "Anzahl Exemplare eingeben ([ENTER] Abbrechen):")){
+
+        int numberof = atoi(numberofString);
+
+        // TODO: ISBN Logik einfügen
+        printf("Sind die folgenden Angaben korrekt?\n");
+        printf("ISBN  : %s\n", isbn);
+        printf("Titel : %s\n", title);
+        printf("Autor : %s\n", author);
+        printf("Anzahl: %d\n", numberof);
+
+    }
+
+    freeTempString(isbn);
+    freeTempString(title);
+    freeTempString(author);
+    freeTempString(numberofString);
+
+
+//    while(!isUserInputAborted(isbn, "ISBN eingeben:"))
+    // TODO: INT-Overflow checken -> zu long ändern?
+    // TODO: don't allow negative numbers
+
 
 
 //    printf("newBook\n");

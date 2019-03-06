@@ -45,7 +45,6 @@ void searchBooks(Array *books)
 
             // when a number was chosen: ask user what he wants to do with that book
             if(chosenBook != '\0') {
-                // TODO: Absprung zum Buch -> danach Absprung zum Ausleihen/Zurückgeben/Hinzufügen/Löschen/Exemplar hinzufügen etc.
                 printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks.array[chosenBook-1]->author, foundBooks.array[chosenBook-1]->title);
 
                 // initialize buffer with zeros
@@ -108,9 +107,11 @@ void searchBooks(Array *books)
                             break;
                     }
                 } else{
+                    // TODO: isUserInputAborted einbauen?
                     printf("Abbrechen...\n");
                 }
             } else{
+                // TODO: isUserInputAborted einbauen?
                 printf("Abbrechen...\n");
             }
 
