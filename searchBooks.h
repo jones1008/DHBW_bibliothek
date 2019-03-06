@@ -14,6 +14,5 @@
 #include "returnBook.h"
 
 void searchBooks(Array *books);
-void actualSearchBooks(Array *books);
 
 #endif

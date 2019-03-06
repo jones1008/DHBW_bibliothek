@@ -1,17 +1,6 @@
 #include "searchBooks.h"
 
-// wrapper function
 void searchBooks(Array *books)
-{
-    char *menuHeader = "BUCH SUCHEN";
-    printMenuHeader(menuHeader);
-
-    actualSearchBooks(books);
-
-    printMenuEnding(strlen(menuHeader));
-}
-
-void actualSearchBooks(Array *books)
 {
     // get user search input
     char *searchString = calloc(1, 1);
@@ -132,7 +121,7 @@ void actualSearchBooks(Array *books)
             // TODO: in printErrorMessage-function einbauen
             printf("Keine B%ccher mit '%s' gefunden\n", ue, searchString);
             // call itself again to search again
-            actualSearchBooks(books);
+            searchBooks(books);
         }
     } else{
         printf("Abbrechen...\n");

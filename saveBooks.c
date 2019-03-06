@@ -20,6 +20,7 @@
 
 void saveBooks(Array *books)
 {
+    // TODO: nur saven, wenn was verändert wurde?
     // loop over the array
     for(int i=0; i<books->used; i++){
         // get length of the line and allocate the memory for the line
@@ -34,6 +35,7 @@ void saveBooks(Array *books)
         } else{
             dataFile = fopen("data.csv", "a");
         }
+        // TODO: Fehlermeldung, wenn Datei nicht geöffnet werden kann!
         fprintf(dataFile, "%s\n", line);
         fclose(dataFile);
         freeTempString(line);

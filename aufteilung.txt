@@ -1,12 +1,16 @@
 Arbeitsaufteilung:
 
 Jones:
+/ loadBooks()
 / search(searchString)
-/ searchBooks() (ohne Pagination
+	- Levenstein-Methode, um ähnliche Treffer rauszufiltern?
+/ searchBooks()
+	- Pagination?
 / showMenu
-/ save()
+/ save() (verbessern? nur write, wenn auch was geändert wurde?)
 - addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
-- exit()
+	- ISBN-Checker?
+/ exit()
 - printErrorMessage()
 - editBookData()? (title, author, isbn)
 

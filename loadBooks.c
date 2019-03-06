@@ -21,6 +21,7 @@ void loadBooks(Array *books)
         // skip empty lines
         if(!(line[0] == '\n')){
             // initialize books structure
+            // TODO: wird size tatsächlich gebraucht?
             if (books->used == books->size){
                 books->size *= 2;
                 books->array = (book *)realloc(books->array, books->size * sizeof(book));

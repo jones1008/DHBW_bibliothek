@@ -88,4 +88,6 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
     }
     // write the number of found elements to the size attribute of the foundBooks structure
     foundBooks->size = index;
+
+    // TODO: Output, when keine Ergebnisse gefunden wurden -> dementsprechend bei searchBooks() die Fehlermeldung rausnehmen
 }

@@ -71,34 +71,48 @@ void showMenu(Array *books)
 
     // switch case structure to call the chosen function
     // TODO: in function
+    char *menuHeader;
     printf("\n");
     switch(menuPoint){
         case 's':
+            menuHeader = "BUCH SUCHEN";
+            printMenuHeader(menuHeader);
             searchBooks(books);
             break;
         case 'a':
+            menuHeader = "BUCH AUSLEIHEN";
+            printMenuHeader(menuHeader);
             borrowBook(books);
             break;
         case 'z':
+            menuHeader = "BUCH ZURUECKGEBEN";
+            printMenuHeader(menuHeader);
             returnBook(books);
             break;
         case 'h':
+            menuHeader = "BUCH HINZUFUEGEN";
+            printMenuHeader(menuHeader);
             addBook(books);
             break;
         case 'l':
+            menuHeader = "BUCH LOESCHEN";
+            printMenuHeader(menuHeader);
             deleteBooks(books);
             break;
         case 'c':
+            menuHeader = "BUCHEXEMPLAR HINZUFUEGEN";
+            printMenuHeader(menuHeader);
             addCopies(books);
             break;
         case 'e':
-            printf("Schlie%ce Bibliothek...", ss);
+            printf("Schlie%ce Bibliothek...\n", ss);
             exit(0);
             break;
         default:
             printf("Falsche Eingabe!\n");
             break;
     }
+    printMenuEnding(strlen(menuHeader));
     printf("\n");
     // call itself after other functions are completed
     showMenu(books);
@@ -142,6 +156,8 @@ void freeBooks(Array *books)
     books->size = 0;
 }
 
+
+// TODO: ist dies an der richtigen Stelle? Brauchen wir das nicht woanders?
 /*
  *  function: freeFoundBooks
  *      frees previously allocated memory of a foundBooks structure
