@@ -14,14 +14,7 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-//TODO: rausschmeißen, falls das nicht mehr gebraucht wird
-
-
 void printErrorMessage()
-{
-
-}
-void exitProgram()
 {
 
 }
@@ -41,12 +34,14 @@ void showMenu(Array *books)
     // repeat user input if the input was wrong
     do{
         // check if userInput is longer than one character or not the first loop
+        // TODO: Abfrage in function longerThanOneChar() (würde auch in searchBooks Anwendung finden)
         if((strlen(buffer)-1)>1 && strlen(buffer)!=0){
             // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
-            printf("Bitte nur einen Buchstaben eingeben\n");
+            printf("Bitte nur einen Buchstaben eingeben!\n");
         }
 
         // write menu if user input was wrong
+        // TODO: in function?
         if(strlen(buffer)==0 || strlen(buffer)>1 || buffer[0]=='\n'){
             printf("[S]: B%ccher suchen\n", ue);
             printf("[A]: Buch ausleihen\n");
@@ -64,10 +59,12 @@ void showMenu(Array *books)
         menuPoint = tolower(menuPoint);
 
         // check if user input is an allowed char
+        // TODO: in function: checkAllowedChar (würde auch in searchBooks Anwendung finden
         if(strchr(allowedChars, menuPoint) == NULL){
             // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
             printf("Falsche Eingabe!\n");
         }
+        // TODO: in function?
     } while ((strlen(buffer)-1)>1 || strchr(allowedChars, menuPoint) == NULL);
 
     // switch case structure to call the chosen function

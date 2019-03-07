@@ -34,11 +34,16 @@
 void getUserInput(char *userVariable)
 {
     char buffer[BUFFERSIZE];
-    memset(buffer, 0, BUFFERSIZE);
     char *buf = buffer;
 
+    // reset buffer (and userVariable if previous inputs changed strlen of userVariable)
+    memset(buffer, 0, BUFFERSIZE);
+    memset(userVariable, 0, strlen(userVariable));
+
+    // get user input
     fgets(buf, BUFFERSIZE, stdin);
 
+    // write users input into given variable without the \n char
     userVariable = realloc(userVariable, strlen(buf));
     strncpy(userVariable, buf, strlen(buf)-1);
 }
@@ -63,11 +68,6 @@ int isUserInputAborted(char *userVariable, const char message[])
     }
 
 }
-
-//void getUserInt(char *userVariable)
-//{
-//
-//}
 
 void printHeaderTabs()
 {
