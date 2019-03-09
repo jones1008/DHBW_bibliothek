@@ -19,6 +19,8 @@
 
 //void getUserInput(char *userVariable, const char message[]);
 void getUserInput(char *userVariable);
+void verifyCharInput(char *userInput, char *allowedChars);
+int isWrongCharInput(char *userInput, char *allowedChars);
 int isAborted(char *userVariable);
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);

@@ -47,7 +47,31 @@ void getUserInput(char *userVariable)
     userVariable = realloc(userVariable, strlen(buf));
     strncpy(userVariable, buf, strlen(buf)-1);
 }
-int isAborted(char *userInput){
+
+void verifyCharInput(char *userInput, char *allowedChars)
+{
+    if(userInput[0] == '\0'){
+        printf("ERROR: Gib einen Buchstaben ein!\n");
+    } else if(strlen(userInput)>1){
+        // check if userInput is longer than one character or not the first loop
+        printf("ERROR: Bitte nur einen Buchstaben eingeben!\n");
+    } else if(strchr(allowedChars, userInput[0]) == NULL){
+        // check if user input is an allowed char
+        printf("ERROR: Falsche Eingabe!\n");
+    }
+}
+
+int isWrongCharInput(char *userInput, char *allowedChars)
+{
+    if(strlen(userInput)>1 || strchr(allowedChars, userInput[0]) == NULL || userInput[0] == '\0'){
+        return 1;
+    } else{
+        return 0;
+    }
+}
+
+int isAborted(char *userInput)
+{
     if(userInput[0] == '\0'){
         printf("Abbrechen...\n");
         return 1;

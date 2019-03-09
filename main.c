@@ -22,56 +22,34 @@ void printErrorMessage()
 void showMenu(Array *books)
 {
     printf("HAUPTMEN%c:\n", UE);
-    // initialize buffer with zeros
-    char buffer[BUFFERSIZE];
-    memset(buffer, 0, BUFFERSIZE);
 
-    // some more variables
-    char *buf = buffer;
-    char menuPoint;
+    printf("[S]: B%ccher suchen\n", ue);
+    printf("[A]: Buch ausleihen\n");
+    printf("[Z]: Buch zur%cckgeben\n", ue);
+    printf("[H]: Buch hinzuf%cgen\n", ue);
+    printf("[L]: Buch l%cschen\n", oe);
+    printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
+    printf("[E]: Bibliotheksverwaltung verlassen\n");
+
+    char *menuPoint = calloc(1,1);
     char *allowedChars = "sazhlce";
 
     // repeat user input if the input was wrong
     do{
-        // check if userInput is longer than one character or not the first loop
-        // TODO: Abfrage in function longerThanOneChar() (würde auch in searchBooks Anwendung finden)
-        if((strlen(buffer)-1)>1 && strlen(buffer)!=0){
-            // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
-            printf("Bitte nur einen Buchstaben eingeben!\n");
-        }
-
-        // write menu if user input was wrong
-        // TODO: in function?
-        if(strlen(buffer)==0 || strlen(buffer)>1 || buffer[0]=='\n'){
-            printf("[S]: B%ccher suchen\n", ue);
-            printf("[A]: Buch ausleihen\n");
-            printf("[Z]: Buch zur%cckgeben\n", ue);
-            printf("[H]: Buch hinzuf%cgen\n", ue);
-            printf("[L]: Buch l%cschen\n", oe);
-            printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
-            printf("[E]: Bibliotheksverwaltung verlassen\n");
-        }
-
-        // TODO: mit getUserInput bauen!
+        // get user input
         printf("Aktion w%chlen: ", ae);
-        fgets(buf, BUFFERSIZE, stdin);
-        strncpy(&menuPoint, buf, 1);
-        menuPoint = tolower(menuPoint);
+        getUserInput(menuPoint);
+        *menuPoint = tolower(*menuPoint);
 
-        // check if user input is an allowed char
-        // TODO: in function: checkAllowedChar (würde auch in searchBooks Anwendung finden
-        if(strchr(allowedChars, menuPoint) == NULL){
-            // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
-            printf("Falsche Eingabe!\n");
-        }
-        // TODO: in function?
-    } while ((strlen(buffer)-1)>1 || strchr(allowedChars, menuPoint) == NULL);
+        // verify user input and output error messages
+        verifyCharInput(menuPoint, allowedChars);
+
+    } while(isWrongCharInput(menuPoint, allowedChars));
 
     // switch case structure to call the chosen function
-    // TODO: in function
     char *menuHeader;
     printf("\n");
-    switch(menuPoint){
+    switch(menuPoint[0]){
         case 's':
             menuHeader = "BUCH SUCHEN";
             printMenuHeader(menuHeader);
@@ -107,9 +85,12 @@ void showMenu(Array *books)
             exit(0);
             break;
         default:
-            printf("Falsche Eingabe!\n");
+            printf("ERROR: Falsche Eingabe!\n");
             break;
     }
+
+    freeTempString(menuPoint);
+
     printMenuEnding(strlen(menuHeader));
     printf("\n");
     // call itself after other functions are completed

@@ -45,8 +45,7 @@ void searchBooks(Array *books)
 
                 // if number out of index was chosen
                 if(chosenBook<=0 || chosenBook>foundBooks.size){
-                    // TODO: in printErrorMessage reinpacken
-                    printf("Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
+                    printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
                 }
 
                 // check for Abortion through user (pressed ENTER)
@@ -63,37 +62,24 @@ void searchBooks(Array *books)
                 char *menuPoint = calloc(1,1);
                 int isNotAborted;
 
+                printf("[A]: Buch ausleihen\n");
+                printf("[Z]: Buch zur%cckgeben\n", ue);
+                printf("[L]: Buch l%cschen\n", oe);
+                printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
+
                 // repeat user input if the input was wrong or not Aborted
                 do{
-                    // check if menuPoint is longer than one character or not the first loop
-                    if((strlen(menuPoint)-1)>1 && strlen(menuPoint)!=0){
-                        // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
-                        printf("Bitte nur einen Buchstaben eingeben!\n");
-                    }
-
-                    // write menu if user input was wrong
-                    if(strlen(menuPoint)==0 || strlen(menuPoint)>1){
-                        printf("[A]: Buch ausleihen\n");
-                        printf("[Z]: Buch zur%cckgeben\n", ue);
-                        printf("[L]: Buch l%cschen\n", oe);
-                        printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
-                    }
-
                     // get user input and write tolower-variable so comparison is
                     printf("Aktion w%chlen ([ENTER] zum Abbrechen): ", ae);
                     getUserInput(menuPoint);
                     *menuPoint = tolower(*menuPoint);
 
-                    // check for allowed chars and if more than one input char
-                    if(strchr(allowedChars, menuPoint[0]) == NULL && (strlen(menuPoint)-1)<=1){
-                        // TODO: an printErrorMessage schicken, wenn diese geschrieben ist
-                        printf("Falsche Eingabe!\n");
-                    }
+                    verifyCharInput(menuPoint, allowedChars);
 
                     // check for Abortion through user (pressed ENTER)
                     isNotAborted = !isAborted(menuPoint);
 
-                } while ( ((strlen(menuPoint)-1)>1 || strchr(allowedChars, menuPoint[0]) == NULL) && isNotAborted);
+                } while(isWrongCharInput(menuPoint, allowedChars) && isNotAborted);
 
                 // if user chose a number and did not hit ENTER
                 if(isNotAborted){
@@ -122,8 +108,7 @@ void searchBooks(Array *books)
             }
             freeTempString(userNumber);
         } else{
-            // TODO: in printErrorMessage-function einbauen
-            printf("Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
+            printf("ERROR: Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
 
             // call itself again to search again
             searchBooks(books);
