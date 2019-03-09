@@ -35,6 +35,7 @@ void showMenu(Array *books)
     char *allowedChars = "sazhlce";
 
     // repeat user input if the input was wrong
+    // TODO: manchmal spackt user input rum, wenn man beim Suchen rumprobiert
     do{
         // get user input
         printf("Aktion w%chlen: ", ae);
