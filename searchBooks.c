@@ -38,7 +38,6 @@ void searchBooks(Array *books)
             int isNotAborted;
 
             do{
-//                getUserInput(userInput, "Buch waehlen [NUMMER] ([ENTER] zum Abbrechen): ");
                 printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
                 getUserInput(userNumber);
                 chosenBook = atoi(userNumber);
@@ -51,6 +50,8 @@ void searchBooks(Array *books)
                 // check for Abortion through user (pressed ENTER)
                 isNotAborted = !isAborted(userNumber);
 
+                printf("isNotAborted: %d\n", isNotAborted);
+
 //            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
             } while( (chosenBook<=0 || chosenBook>foundBooks.size) && isNotAborted);
 
@@ -59,7 +60,7 @@ void searchBooks(Array *books)
                 printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks.array[chosenBook-1]->author, foundBooks.array[chosenBook-1]->title);
 
                 char *allowedChars = "azlc";
-                char *menuPoint = calloc(1,1);
+                char *userChar = calloc(1,1);
                 int isNotAborted;
 
                 printf("[A]: Buch ausleihen\n");
@@ -71,22 +72,22 @@ void searchBooks(Array *books)
                 do{
                     // get user input and write tolower-variable so comparison is
                     printf("Aktion w%chlen ([ENTER] zum Abbrechen): ", ae);
-                    getUserInput(menuPoint);
-                    *menuPoint = tolower(*menuPoint);
+                    getUserInput(userChar);
+                    *userChar = tolower(*userChar);
 
-                    verifyCharInput(menuPoint, allowedChars);
+                    verifyCharInput(userChar, allowedChars);
 
                     // check for Abortion through user (pressed ENTER)
-                    isNotAborted = !isAborted(menuPoint);
+                    isNotAborted = !isAborted(userChar);
 
-                } while(isWrongCharInput(menuPoint, allowedChars) && isNotAborted);
+                } while(isWrongCharInput(userChar, allowedChars) && isNotAborted);
 
                 // if user chose a number and did not hit ENTER
                 if(isNotAborted){
                     printf("\n");
                     // run the corresponding function with a pointer to the chosen book
                     // TODO: add feedback to the user that the action was performed
-                    switch(menuPoint[0]){
+                    switch(userChar[0]){
                         case 'a':
                             actualBorrowBook(books, foundBooks.array[chosenBook-1]);
                             break;
@@ -104,7 +105,7 @@ void searchBooks(Array *books)
                             break;
                     }
                 }
-                freeTempString(menuPoint);
+                freeTempString(userChar);
             }
             freeTempString(userNumber);
         } else{

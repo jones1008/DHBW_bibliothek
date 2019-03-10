@@ -14,11 +14,6 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-void printErrorMessage()
-{
-
-}
-
 void showMenu(Array *books)
 {
     printf("HAUPTMEN%c:\n", UE);

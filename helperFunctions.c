@@ -46,10 +46,18 @@ void getUserInput(char *userVariable)
     // write users input into given variable without the \n char
     userVariable = realloc(userVariable, strlen(buf));
     strncpy(userVariable, buf, strlen(buf)-1);
+
+    printf("userVar: %s\n", userVariable);
+    printf("userVarD: %d\n", userVariable[0]);
+    printf("len: %d\n", strlen(userVariable));
 }
 
 void verifyCharInput(char *userInput, char *allowedChars)
 {
+    printf("verifyUI: %s\n", userInput);
+    printf("verifyUId: %d\n", userInput[0]);
+    printf("verifyLength: %d\n", strlen(userInput));
+
     if(userInput[0] == '\0'){
         printf("ERROR: Gib einen Buchstaben ein!\n");
     } else if(strlen(userInput)>1){
