@@ -3,9 +3,43 @@ void addBook(Array *books)
 {
     // TODO: ENTER zum Abbrechen
     char *isbn = calloc(1, 1);
-    char *title = calloc(1, 1);
-    char *author = calloc(1, 1);
-    char *numberofString = calloc(1, 1);
+
+    printf("ISBN eingeben ([ENTER] zum Abbrechen): ");
+    getUserInput(isbn);
+
+    if(!isAborted(isbn)){
+        char *title = calloc(1, 1);
+        printf("Titel eingeben ([ENTER] zum Abbrechen): ");
+        getUserInput(title);
+        // TODO: verify isbn-pattern (repeat while wrong)
+
+        if(!isAborted(title)){
+            char *author = calloc(1, 1);
+            printf("Autor eingeben ([ENTER] zum Abbrechen): ");
+            getUserInput(author);
+
+            if(!isAborted(author)){
+                char *numberOfString = calloc(1, 1);
+                printf("Anzahl Exemplare eingeben ([ENTER] zum Abbrechen): ");
+                getUserInput(numberOfString);
+
+                // TODO: verify number input (repeat while wrong)
+                int numberOf = atoi(numberOfString);
+
+                if(!isAborted(numberOfString)){
+                    printf("Sind die folgenden Angaben korrekt?\n");
+                    printf("ISBN  : %s\n", isbn);
+                    printf("Titel : %s\n", title);
+                    printf("Autor : %s\n", author);
+                    printf("Anzahl: %d\n", numberOf);
+                }
+                freeTempString(numberOfString);
+            }
+            freeTempString(author);
+        }
+        freeTempString(title);
+    }
+    freeTempString(isbn);
 
 //    while(!isUserInputAborted(isbn, "ISBN eingeben ([ENTER] Abbrechen):") &&
 //          !isUserInputAborted(title, "Buchtitel eingeben ([ENTER] Abbrechen):") &&
@@ -23,10 +57,7 @@ void addBook(Array *books)
 //
 //    }
 
-    freeTempString(isbn);
-    freeTempString(title);
-    freeTempString(author);
-    freeTempString(numberofString);
+
 
 
 //    while(!isUserInputAborted(isbn, "ISBN eingeben:"))

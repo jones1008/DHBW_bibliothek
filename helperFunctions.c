@@ -80,6 +80,8 @@ int isWrongCharInput(char *userInput, char *allowedChars)
 
 int isAborted(char *userInput)
 {
+    printf("abortUI: %s\n", userInput);
+    printf("abortUId: %d\n", userInput[0]);
     if(userInput[0] == '\0'){
         printf("Abbrechen...\n");
         return 1;
@@ -88,18 +90,18 @@ int isAborted(char *userInput)
     }
 }
 
-int isUserInputAborted(char *userVariable, const char message[])
-{
-    getUserInput(userVariable);
-//    getUserInput(userVariable, message);
-    if(userVariable[0] == '\n'){
-        printf("Abbrechen...\n");
-        return 1;
-    } else{
-        return 0;
-    }
-
-}
+//int isUserInputAborted(char *userVariable, const char message[])
+//{
+//    getUserInput(userVariable);
+////    getUserInput(userVariable, message);
+//    if(userVariable[0] == '\n'){
+//        printf("Abbrechen...\n");
+//        return 1;
+//    } else{
+//        return 0;
+//    }
+//
+//}
 
 void printHeaderTabs()
 {

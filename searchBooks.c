@@ -9,6 +9,9 @@ void searchBooks(Array *books)
     printf("Suchtext ([ENTER] zum Abbrechen): ");
     getUserInput(searchString);
 
+    printf("searchString: %s\n", searchString);
+    printf("searchStringD: %d\n", searchString[0]);
+
     // check if the input was aborted
     if(!isAborted(searchString)){
         // pass searchString to the search-function
