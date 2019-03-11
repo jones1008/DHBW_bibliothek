@@ -2,10 +2,36 @@
 void addBook(Array *books)
 {
     // TODO: ENTER zum Abbrechen
-    char *isbn = calloc(1, 1);
+    char *isbn = malloc(1);
+//    char *newIsbn = malloc(1);
 
-    printf("ISBN eingeben ([ENTER] zum Abbrechen): ");
-    getUserInput(isbn);
+    do{
+        printf("ISBN-13 eingeben (13 Ziffern) ([ENTER] zum Abbrechen): ");
+        getUserInput(isbn);
+
+        // TODO: strlen of isbn is somehow 3 if input was over 7 chars (has something to do with newIsbn being calloced after it
+        printf("strlen(isbn): %d\n", strlen(isbn));
+        printf("isbn: %s\n", isbn);
+//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+
+//        memset(newIsbn, 0, strlen(newIsbn));
+//        newIsbn = realloc(newIsbn, strlen(isbn));
+//        memset(newIsbn, 0, strlen(isbn));
+
+        // delete all other characters not being a digit from isbn
+//        int j=0;
+//        for(int i=0; i<strlen(isbn); i++){
+//            if(isdigit(isbn[i])){
+//                printf("%c\n", isbn[i]);
+//                newIsbn[j] = isbn[i];
+//                j++;
+//            }
+//        }
+//        printf("newisbn: %s\n", newIsbn);
+//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+
+//    } while(strlen(newIsbn)!=13);
+    } while(strlen(isbn)!=13);
 
     if(!isAborted(isbn)){
         char *title = calloc(1, 1);
