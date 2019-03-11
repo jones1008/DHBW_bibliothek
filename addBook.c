@@ -2,8 +2,8 @@
 void addBook(Array *books)
 {
     // TODO: ENTER zum Abbrechen
-    char *isbn = malloc(1);
-//    char *newIsbn = malloc(1);
+    char *isbn = calloc(1, 1);
+    char *newIsbn = "";
 
     do{
         printf("ISBN-13 eingeben (13 Ziffern) ([ENTER] zum Abbrechen): ");
@@ -14,24 +14,35 @@ void addBook(Array *books)
         printf("isbn: %s\n", isbn);
 //        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
 
-//        memset(newIsbn, 0, strlen(newIsbn));
-//        newIsbn = realloc(newIsbn, strlen(isbn));
-//        memset(newIsbn, 0, strlen(isbn));
+        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
+        if(strlen(newIsbn) == 0){
+            printf("is 0\n");
+            newIsbn = calloc(1, 1);
+        }
+//      // realloc newIsbn and zero content from the loop before
+        newIsbn = realloc(newIsbn, strlen(isbn));
+        memset(newIsbn, 0, strlen(isbn));
 
-        // delete all other characters not being a digit from isbn
-//        int j=0;
-//        for(int i=0; i<strlen(isbn); i++){
-//            if(isdigit(isbn[i])){
-//                printf("%c\n", isbn[i]);
-//                newIsbn[j] = isbn[i];
-//                j++;
-//            }
-//        }
-//        printf("newisbn: %s\n", newIsbn);
-//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
+
+        // delete all other characters not being a digit from isbn and add the null terminator at the end
+        int j=0;
+        for(int i=0; i<strlen(isbn); i++){
+            if(isdigit(isbn[i])){
+                printf("%c\n", isbn[i]);
+                newIsbn[j] = isbn[i];
+                j++;
+            }
+        }
+        newIsbn[j] = '\0';
+
+        printf("newisbn: %s\n", newIsbn);
+        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
 
 //    } while(strlen(newIsbn)!=13);
-    } while(strlen(isbn)!=13);
+    } while(strlen(newIsbn)!=13);
 
     if(!isAborted(isbn)){
         char *title = calloc(1, 1);
