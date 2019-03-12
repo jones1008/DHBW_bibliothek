@@ -29,32 +29,32 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
     // make the searchString to lower case, so the comparison is case insensitive
     stringToLower(searchString);
 
-    // replace umlauts of searchstring with corresponding chars (ä=>ae, ü=>ue, ö=>oe, ß=>ss)
+    // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
     char newSearchString[strlen(searchString)*2+1];
     strcpy(newSearchString, searchString);
     int i=0;
     int occ=0;
     while(searchString[i]){
-        if(searchString[i]=='ä' || searchString[i]=='ö' || searchString[i]=='ü' || searchString[i]=='ß' ){
+        if(searchString[i]==-127 || searchString[i]==-108 || searchString[i]==-124 || searchString[i]==-31){
             strncpy(newSearchString, newSearchString, i+occ);
             newSearchString[i+occ] = '\0';
             switch(searchString[i]){
-                case 'ä':{
+                case -124:{
                     char addText[3] = "ae";
                     strcat(newSearchString, addText);
                     break;
                 }
-                case 'ö':{
+                case -108:{
                     char addText[3] = "oe";
                     strcat(newSearchString, addText);
                     break;
                 }
-                case 'ü':{
+                case -127:{
                     char addText[3] = "ue";
                     strcat(newSearchString, addText);
                     break;
                 }
-                case 'ß':{
+                case -31:{
                     char addText[3] = "ss";
                     strcat(newSearchString, addText);
                     break;
