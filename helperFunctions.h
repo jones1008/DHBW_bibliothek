@@ -23,7 +23,9 @@
 void getUserInput(char *userVariable);
 int wrongCharInput(char *userInput, char *allowedChars);
 int isAborted(char *userVariable);
+
 char *trimwhitespace(char *str);
+char *replaceUmlauts(char *str);
 
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);

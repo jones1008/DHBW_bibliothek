@@ -29,5 +29,6 @@ typedef struct{
 } foundBooks;
 
 void writeStringToArrayNode(Array *books, char node, char *string);
+void newBook(Array *books);
 
 #endif

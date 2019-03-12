@@ -27,46 +27,11 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
     // initialize the array where the book pointers will be stored
     foundBooks->array = malloc(0);
 
+    // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
+    searchString = replaceUmlauts(searchString);
+
     // make the searchString to lower case, so the comparison is case insensitive
     stringToLower(searchString);
-
-    // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
-    char newSearchString[strlen(searchString)*2+1];
-    strcpy(newSearchString, searchString);
-    int i=0;
-    int occ=0;
-    while(searchString[i]){
-        if(searchString[i]==-127 || searchString[i]==-108 || searchString[i]==-124 || searchString[i]==-31){
-            strncpy(newSearchString, newSearchString, i+occ);
-            newSearchString[i+occ] = '\0';
-            switch(searchString[i]){
-                case -124:{
-                    char addText[3] = "ae";
-                    strcat(newSearchString, addText);
-                    break;
-                }
-                case -108:{
-                    char addText[3] = "oe";
-                    strcat(newSearchString, addText);
-                    break;
-                }
-                case -127:{
-                    char addText[3] = "ue";
-                    strcat(newSearchString, addText);
-                    break;
-                }
-                case -31:{
-                    char addText[3] = "ss";
-                    strcat(newSearchString, addText);
-                    break;
-                }
-            }
-            strcat(newSearchString, searchString+i+1);
-            occ++;
-        }
-        i++;
-    }
-    // use variable newSearchString from now on
 
     // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
@@ -79,8 +44,8 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
         stringToLower(author);
         stringToLower(title);
 
-        // check if newSearchString matches any of isbn, author or title of the current book
-        if(strstr(books->array[i].isbn, newSearchString) != NULL || strstr(author, newSearchString) != NULL || strstr(title, newSearchString) != NULL){
+        // check if searchString matches any of isbn, author or title of the current book
+        if(strstr(books->array[i].isbn, searchString) != NULL || strstr(author, searchString) != NULL || strstr(title, searchString) != NULL){
             // adding the pointer to this book to the foundBooks array
             foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
             foundBooks->array[index] = &books->array[i];
