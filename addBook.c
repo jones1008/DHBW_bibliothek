@@ -5,8 +5,6 @@ void addBook(Array *books)
     int isNotAborted;
     char *isbn = calloc(1, 1);
 
-    // TODO memset variables in new call so it wont crash
-
     do{
         printf("ISBN-13 eingeben (13 Ziffern) ([ENTER] zum Abbrechen): ");
         getUserInput(isbn);
@@ -114,9 +112,9 @@ void addBook(Array *books)
                         printf("borrow: %s\n", books->array[books->used].borrowlist);
 
                         // increase books-used-parameter
-                        printf("books used: %d", books->used);
+//                        printf("books used: %d", books->used);
                         books->used = books->used+1;
-                        printf("books used: %d", books->used);
+//                        printf("books used: %d", books->used);
 
                         // save books to text-file
                         saveBooks(books);

@@ -22,12 +22,13 @@ void saveBooks(Array *books)
 {
     // TODO: nur saven, wenn was verändert wurde?
     // loop over the array
+    int fileSuccess = 1;
     for(int i=0; i<books->used; i++){
-        printf("isbn  : %s\n", books->array[i].isbn);
-        printf("title : %s\n", books->array[i].title);
-        printf("author: %s\n", books->array[i].author);
-        printf("anzahl: %s\n", books->array[i].numberof);
-        printf("borrow: %s\n", books->array[i].borrowlist);
+//        printf("isbn  : %s\n", books->array[i].isbn);
+//        printf("title : %s\n", books->array[i].title);
+//        printf("author: %s\n", books->array[i].author);
+//        printf("anzahl: %s\n", books->array[i].numberof);
+//        printf("borrow: %s\n", books->array[i].borrowlist);
         // get length of the line and allocate the memory for the line
         int lineSize = strlen(books->array[i].isbn)+strlen(books->array[i].title)+strlen(books->array[i].author)+strlen(books->array[i].numberof)+strlen(books->array[i].borrowlist);
         char *line = calloc(lineSize+5, lineSize+5);
@@ -41,8 +42,18 @@ void saveBooks(Array *books)
             dataFile = fopen("data.csv", "a");
         }
         // TODO: Fehlermeldung, wenn Datei nicht geöffnet werden kann!
+        // TODO: auch in loadBooks machen?
+        if(dataFile == NULL){
+            printf("Problem beim Öffnen der Datenbank-Datei: %s\n", strerror(errno));
+            fileSuccess = 0;
+            fclose(dataFile);
+            break;
+        }
         fprintf(dataFile, "%s\n", line);
         fclose(dataFile);
         freeTempString(line);
+    }
+    if(fileSuccess){
+        printf("Erfolgreich gespeichert!\n");
     }
 }

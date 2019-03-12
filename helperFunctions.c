@@ -11,8 +11,8 @@ void getUserInput(char *userVariable)
 
     // get user input
     fgets(buf, BUFFERSIZE, stdin);
-    printf("buf: %s\n", buf);
-    printf("bufD: %d\n", strlen(buf));
+//    printf("buf: %s\n", buf);
+//    printf("bufD: %d\n", strlen(buf));
 
     // write users input into given variable without the newline char and add the null terminator to the string if input wasn't ENTER
     // TODO: in function (wird auch in replaceUmlauts verwendet + suchen, wo realloc noch verwendet wird)
@@ -21,13 +21,15 @@ void getUserInput(char *userVariable)
     // TODO: fix: ENTER zum abbrechen
 //    userVariable[strlen(buf)] = '\0';
     if(buf[0] != '\n'){
-        printf("nullify");
+//        printf("nullify");
         userVariable[strlen(buf)-1] = '\0';
+    } else{
+        userVariable[strlen(buf)] = '\0';
     }
 
-    printf("userVar: %s\n", userVariable);
-    printf("userVarD: %d\n", userVariable[0]);
-    printf("userVar(len): %d\n", strlen(userVariable));
+//    printf("userVar: %s\n", userVariable);
+//    printf("userVarD: %d\n", userVariable[0]);
+//    printf("userVar(len): %d\n", strlen(userVariable));
 }
 
 int wrongCharInput(char *userInput, char *allowedChars)
@@ -142,6 +144,7 @@ char *replaceUmlauts(char *str)
 //    printf("newString after: %s\n", newString);
     str = realloc(str, sizeof(newString)*sizeof(char));
     strncpy(str, newString, strlen(newString));
+    str[strlen(newString)] = '\0';
 //    printf("stringAfter: %s\n", str);
     return str;
 }

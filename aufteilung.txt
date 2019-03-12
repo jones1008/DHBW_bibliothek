@@ -8,10 +8,9 @@ Jones:
 	- Pagination?
 / showMenu
 / save() (verbessern? nur write, wenn auch was geändert wurde?)
-- addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
-	- ISBN-Checker?
+/ addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
+	/ ISBN-Checker?
 / exit()
-- printErrorMessage()
 - editBookData()? (title, author, isbn)
 - clearScreen?
 - alle anzeigen

@@ -24,6 +24,7 @@ void writeStringToArrayNode(Array *books, char node, char *string)
             books->array[books->used].title[strlen(string)] = '\0';
             break;
         case 'a':
+//            printf("saving author\n");
             books->array[books->used].author = malloc(strlen(string));
             strncpy(books->array[books->used].author, string, strlen(string));
             books->array[books->used].author[strlen(string)] = '\0';
@@ -39,13 +40,6 @@ void writeStringToArrayNode(Array *books, char node, char *string)
             strncpy(books->array[books->used].numberof, string, strlen(string));
 //            printf("before before 0ing\n");
             books->array[books->used].numberof[strlen(string)] = '\0';
-//            printf("number of done\n");
-//            printf("before alloc\n");
-//            books->array[books->used].numberof = malloc(strlen(string));
-//            printf("afer alloc\n");
-//            strncpy(books->array[books->used].numberof, string, strlen(string));
-//            printf("before before 0ing\n");
-//            books->array[books->used].numberof[strlen(string)] = '\0';
 //            printf("number of done\n");
             break;
         case 'b':

@@ -15,7 +15,7 @@ void loadBooks(Array *books)
     char delimiter[] = ";";
     FILE *dataFile = fopen("data.csv", "r");
     if(dataFile == NULL){
-        printf("ERROR: Datenbank-Datei kann nicht gelesen werden!");
+        printf("ERROR: Datenbank-Datei kann nicht gelesen werden!\n");
     }
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL){
 
@@ -49,20 +49,20 @@ void loadBooks(Array *books)
                         break;
                     case 3:
                         // insert numberof
-//                        writeStringToArrayNode(books, 'n', records);
+                        writeStringToArrayNode(books, 'n', records);
                         // TODO: hier schmierts ab und zu einfach so ab...
-                        printf("strlen: %d\n", strlen(records));
-                        printf("string: %s\n", records);
-                        printf("before alloc\n");
-                        books->array[books->used].numberof = malloc(strlen(records));
-//                        books->array[books->used].numberof = malloc(sizeof(records)*sizeof(char));
-                        printf("afer alloc\n");
-                        printf("array->numberof: %s\n", books->array[books->used].numberof);
-                        printf("record: %s\n", records);
-                        strncpy(books->array[books->used].numberof, records, strlen(records));
-                        printf("before before 0ing\n");
-                        books->array[books->used].numberof[strlen(records)] = '\0';
-                        printf("number of done\n");
+//                        printf("strlen: %d\n", strlen(records));
+//                        printf("string: %s\n", records);
+//                        printf("before alloc\n");
+//                        books->array[books->used].numberof = malloc(strlen(records));
+////                        books->array[books->used].numberof = malloc(sizeof(records)*sizeof(char));
+//                        printf("afer alloc\n");
+//                        printf("array->numberof: %s\n", books->array[books->used].numberof);
+//                        printf("record: %s\n", records);
+//                        strncpy(books->array[books->used].numberof, records, strlen(records));
+//                        printf("before before 0ing\n");
+//                        books->array[books->used].numberof[strlen(records)] = '\0';
+//                        printf("number of done\n");
                         break;
                     case 4:
                         // insert borrowlist
