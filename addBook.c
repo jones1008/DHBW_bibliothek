@@ -10,36 +10,40 @@ void addBook(Array *books)
         getUserInput(isbn);
 
         // TODO: strlen of isbn is somehow 3 if input was over 7 chars (has something to do with newIsbn being calloced after it
-        printf("strlen(isbn): %d\n", strlen(isbn));
-        printf("isbn: %s\n", isbn);
+//        printf("strlen(isbn): %d\n", strlen(isbn));
+//        printf("isbn: %s\n", isbn);
 //        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
 
-        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
-        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
+//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+//        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
         if(strlen(newIsbn) == 0){
-            printf("is 0\n");
+//            printf("is 0\n");
             newIsbn = calloc(1, 1);
         }
 //      // realloc newIsbn and zero content from the loop before
         newIsbn = realloc(newIsbn, strlen(isbn));
         memset(newIsbn, 0, strlen(isbn));
 
-        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
-        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
+//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+//        printf("sizeof(newIsbn): %d\n", sizeof(newIsbn));
 
         // delete all other characters not being a digit from isbn and add the null terminator at the end
         int j=0;
         for(int i=0; i<strlen(isbn); i++){
             if(isdigit(isbn[i])){
-                printf("%c\n", isbn[i]);
+//                printf("%c\n", isbn[i]);
                 newIsbn[j] = isbn[i];
                 j++;
             }
         }
         newIsbn[j] = '\0';
 
-        printf("newisbn: %s\n", newIsbn);
-        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+//        printf("newisbn: %s\n", newIsbn);
+//        printf("strlen(newIsbn): %d\n", strlen(newIsbn));
+
+        if(strlen(newIsbn)!=13){
+            printf("ERROR: Die ISBN muss 13 Ziffern lang sein\n");
+        }
 
 //    } while(strlen(newIsbn)!=13);
     } while(strlen(newIsbn)!=13);
