@@ -26,6 +26,7 @@ int isAborted(char *userVariable);
 
 char *trimwhitespace(char *str);
 char *replaceUmlauts(char *str);
+void stringToLower(char *strPtr);
 
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);

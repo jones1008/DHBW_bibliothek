@@ -149,6 +149,20 @@ char *replaceUmlauts(char *str)
     return str;
 }
 
+/*
+ *  function: stringToLower
+ *      turns a string into a complete lowercased string
+ *  params:
+ *      char *strPtr    (a pointer to the string that should be lowercased)
+ */
+void stringToLower(char *strPtr)
+{
+    while(*strPtr != '\0'){
+        *strPtr = tolower(*strPtr);
+        strPtr++;
+    }
+}
+
 void printHeaderTabs()
 {
     for(int i=0; i<HEADERTABSIZE; i++){

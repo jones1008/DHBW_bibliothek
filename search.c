@@ -1,19 +1,5 @@
 #include "search.h"
 /*
- *  function: stringToLower
- *      turns a string into a complete lowercased string
- *  params:
- *      char *strPtr    (a pointer to the string that should be lowercased)
- */
-void stringToLower(char *strPtr)
-{
-    while(*strPtr != '\0'){
-        *strPtr = tolower(*strPtr);
-        strPtr++;
-    }
-}
-
-/*
  *  function: search
  *      searches for books with given searchString and adds them to foundBooksArray
  *  params:
@@ -55,5 +41,29 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
     // write the number of found elements to the size attribute of the foundBooks structure
     foundBooks->size = index;
 
-    // TODO: Output, when keine Ergebnisse gefunden wurden -> dementsprechend bei searchBooks() die Fehlermeldung rausnehmen
+    // output if no books were found
+    if(foundBooks->size == 0){
+        printf("ERROR: Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
+    }
+}
+
+void chooseBook(char *userNumber, foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
+{
+    do{
+        printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
+        getUserInput(userNumber);
+        *chosenBook = atoi(userNumber);
+
+        // if number out of index was chosen
+        if(*chosenBook<=0 || *chosenBook>foundBooks->size){
+            printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
+        }
+
+        // check for Abortion through user (pressed ENTER)
+        *isNotAborted = !isAborted(userNumber);
+
+        printf("isNotAborted: %d\n", *isNotAborted);
+
+//            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
+    } while(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size));
 }

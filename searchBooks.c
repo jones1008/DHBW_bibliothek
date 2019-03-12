@@ -39,24 +39,25 @@ void searchBooks(Array *books)
             int chosenBook = 0;
             char *userNumber = calloc(1,1);
             int isNotAborted;
+            chooseBook(userNumber, &foundBooks, &chosenBook, &isNotAborted);
 
-            do{
-                printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
-                getUserInput(userNumber);
-                chosenBook = atoi(userNumber);
-
-                // if number out of index was chosen
-                if(chosenBook<=0 || chosenBook>foundBooks.size){
-                    printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
-                }
-
-                // check for Abortion through user (pressed ENTER)
-                isNotAborted = !isAborted(userNumber);
-
-                printf("isNotAborted: %d\n", isNotAborted);
-
-//            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
-            } while(isNotAborted && (chosenBook<=0 || chosenBook>foundBooks.size));
+//            do{
+//                printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
+//                getUserInput(userNumber);
+//                chosenBook = atoi(userNumber);
+//
+//                // if number out of index was chosen
+//                if(chosenBook<=0 || chosenBook>foundBooks.size){
+//                    printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
+//                }
+//
+//                // check for Abortion through user (pressed ENTER)
+//                isNotAborted = !isAborted(userNumber);
+//
+//                printf("isNotAborted: %d\n", isNotAborted);
+//
+////            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
+//            } while(isNotAborted && (chosenBook<=0 || chosenBook>foundBooks.size));
 
             // when a number was chosen: ask user what he wants to do with that book
             if(isNotAborted) {
@@ -112,9 +113,6 @@ void searchBooks(Array *books)
             }
             freeTempString(userNumber);
         } else{
-            printf("ERROR: Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
-
-            // call itself again to search again
             searchBooks(books);
         }
     }
