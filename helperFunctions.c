@@ -42,8 +42,8 @@ void getUserInput(char *userVariable)
 
     // get user input
     fgets(buf, BUFFERSIZE, stdin);
-    printf("buf: %s\n", buf);
-    printf("bufD: %d\n", strlen(buf));
+//    printf("buf: %s\n", buf);
+//    printf("bufD: %d\n", strlen(buf));
 
     // write users input into given variable without the newline char and add the null terminator to the string if input wasn't ENTER
     userVariable = realloc(userVariable, strlen(buf));
@@ -52,37 +52,27 @@ void getUserInput(char *userVariable)
         userVariable[strlen(buf)-1] = '\0';
     }
 
-    printf("userVar: %s\n", userVariable);
-    printf("userVarD: %d\n", userVariable[0]);
-    printf("userVar(len): %d\n", strlen(userVariable));
+//    printf("userVar: %s\n", userVariable);
+//    printf("userVarD: %d\n", userVariable[0]);
+//    printf("userVar(len): %d\n", strlen(userVariable));
 }
 
-void verifyCharInput(char *userInput, char *allowedChars)
+int wrongCharInput(char *userInput, char *allowedChars)
 {
 //    printf("verifyUI: %s\n", userInput);
 //    printf("verifyUId: %d\n", userInput[0]);
 //    printf("verifyLength: %d\n", strlen(userInput));
 
-    // TODO: isWrongCharInput in verifyCharInput einbauen
     if(userInput[0] == '\0'){
         printf("ERROR: Gib einen Buchstaben ein!\n");
-//        return 1;
+        return 1;
     } else if(strlen(userInput)>1){
         // check if userInput is longer than one character or not the first loop
         printf("ERROR: Bitte nur einen Buchstaben eingeben!\n");
-//        return 1;
+        return 1;
     } else if(strchr(allowedChars, userInput[0]) == NULL){
         // check if user input is an allowed char
         printf("ERROR: Falsche Eingabe!\n");
-//        return 1;
-    } else{
-//        return 0;
-    }
-}
-
-int isWrongCharInput(char *userInput, char *allowedChars)
-{
-    if(strlen(userInput)>1 || strchr(allowedChars, userInput[0]) == NULL || userInput[0] == '\0'){
         return 1;
     } else{
         return 0;
@@ -100,19 +90,6 @@ int isAborted(char *userInput)
         return 0;
     }
 }
-
-//int isUserInputAborted(char *userVariable, const char message[])
-//{
-//    getUserInput(userVariable);
-////    getUserInput(userVariable, message);
-//    if(userVariable[0] == '\n'){
-//        printf("Abbrechen...\n");
-//        return 1;
-//    } else{
-//        return 0;
-//    }
-//
-//}
 
 void printHeaderTabs()
 {

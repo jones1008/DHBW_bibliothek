@@ -78,12 +78,12 @@ void searchBooks(Array *books)
                     getUserInput(userChar);
                     *userChar = tolower(*userChar);
 
-                    verifyCharInput(userChar, allowedChars);
+//                    verifyCharInput(userChar, allowedChars);
 
                     // check for Abortion through user (pressed ENTER)
                     isNotAborted = !isAborted(userChar);
 
-                } while(isWrongCharInput(userChar, allowedChars) && isNotAborted);
+                } while(wrongCharInput(userChar, allowedChars) && isNotAborted);
 
                 // if user chose a number and did not hit ENTER
                 if(isNotAborted){

@@ -37,13 +37,13 @@ void showMenu(Array *books)
         getUserInput(menuPoint);
         *menuPoint = tolower(*menuPoint);
 
-        printf("menuPoint: %s\n", menuPoint);
-        printf("menuPointD: %d\n", menuPoint[0]);
+//        printf("menuPoint: %s\n", menuPoint);
+//        printf("menuPointD: %d\n", menuPoint[0]);
 
         // verify user input and output error messages
-        verifyCharInput(menuPoint, allowedChars);
+//        verifyCharInput(menuPoint, allowedChars);
 
-    } while(isWrongCharInput(menuPoint, allowedChars));
+    } while(wrongCharInput(menuPoint, allowedChars));
 
     // switch case structure to call the chosen function
     char *menuHeader;
