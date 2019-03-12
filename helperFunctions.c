@@ -1,36 +1,5 @@
 #include "helperFunctions.h"
 
-// TODO: umschreiben! darf wirklich nur den UserInput zurückgeben -> die Logik mit der Message und muss außerhalb passieren
-//void getUserInput(char *userVariable, const char message[])
-//{
-//    char buffer[BUFFERSIZE];
-//    memset(buffer, 0, BUFFERSIZE);
-//    char *buf = buffer;
-//
-//    // repeat if user doesn't input anything
-//    do{
-//        // TODO: sobald über 6 Zeichen eingegeben, kommt Müll raus
-//        // print message to show before the user input
-////        if(buffer[0] == '\0' || buffer[0] == '\n'){
-//        if(buffer[0] == '\0'){
-//            printf("%s ", message);
-//        }
-//        fgets(buf, BUFFERSIZE, stdin);
-//        printf("bufBefore: %s\n", buf);
-////    } while (buffer[0] == '\0' || buffer[0] == '\n');
-//    } while (buffer[0] == '\0');
-//
-//    // increase size of userVariable to size of user input
-//    printf("strlen(buf): %d\n", strlen(buf));
-//    userVariable = realloc(userVariable, strlen(buf));
-////    userVariable = realloc(userVariable, strlen(userVariable)+strlen(buf)+1);
-//    // copy the buf into the userVariable without '\n' at the end:
-//
-//    printf("bufAfter: %s\n", buf);
-////    strncpy(userVariable, buf, strlen(buf));
-//    strncpy(userVariable, buf, strlen(buf)-1);
-//    printf("UserVar: %s\n", userVariable);
-//}
 void getUserInput(char *userVariable)
 {
     char buffer[BUFFERSIZE];
@@ -46,8 +15,9 @@ void getUserInput(char *userVariable)
 //    printf("bufD: %d\n", strlen(buf));
 
     // write users input into given variable without the newline char and add the null terminator to the string if input wasn't ENTER
-    userVariable = realloc(userVariable, strlen(buf));
-    strncpy(userVariable, buf, strlen(buf)-1);
+    userVariable = realloc(userVariable, sizeof(buf)*sizeof(char));
+    strncpy(userVariable, buf, strlen(buf));
+//    userVariable[strlen(buf)] = '\0';
     if(buf[0] != '\n'){
         userVariable[strlen(buf)-1] = '\0';
     }
@@ -89,6 +59,26 @@ int isAborted(char *userInput)
     } else{
         return 0;
     }
+}
+
+char *trimwhitespace(char *str)
+{
+  char *end;
+
+  // Trim leading space
+  while(isspace((unsigned char)*str)) str++;
+
+  if(*str == 0)  // All spaces?
+    return str;
+
+  // Trim trailing space
+  end = str + strlen(str) - 1;
+  while(end > str && isspace((unsigned char)*end)) end--;
+
+  // Write new null terminator character
+  end[1] = '\0';
+
+  return str;
 }
 
 void printHeaderTabs()

@@ -23,6 +23,7 @@ void stringToLower(char *strPtr)
 */
 void search(Array *books, foundBooks *foundBooks, char *searchString)
 {
+    // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
     // initialize the array where the book pointers will be stored
     foundBooks->array = malloc(0);
 

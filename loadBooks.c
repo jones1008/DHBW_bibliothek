@@ -15,7 +15,7 @@ void loadBooks(Array *books)
     char delimiter[] = ";";
     FILE *dataFile = fopen("data.csv", "r");
     if(dataFile == NULL){
-        printf("Can't read data file!");
+        printf("ERROR: Datenbank-Datei kann nicht gelesen werden!");
     }
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL){
         // skip empty lines
@@ -34,31 +34,46 @@ void loadBooks(Array *books)
                 switch(index){
                     case 0:
                         // insert isbn
-                        books->array[books->used].isbn = (char*)malloc(strlen(records) + 1);
-                        strcpy(books->array[books->used].isbn, records);
+//                        books->array[books->used].isbn = malloc(strlen(records));
+//                        strncpy(books->array[books->used].isbn, records, strlen(records));
+//                        books->array[books->used].isbn[strlen(records)-1] = 0;
+                        // TODO: use strncpy instead?
+                        writeStringToArrayNode(books, 'i', records);
+//                        books->array[books->used].isbn = (char*)malloc(strlen(records) + 1);
+//                        strcpy(books->array[books->used].isbn, records);
                         break;
                     case 1:
                         // insert title
-                        books->array[books->used].title = (char*)malloc(strlen(records) + 1);
-                        strcpy(books->array[books->used].title, records);
+//                        books->array[books->used].title = malloc(strlen(records));
+//                        strncpy(books->array[books->used].title, records, strlen(records));
+//                        books->array[books->used].title[strlen(records)-1] = 0;
+                        writeStringToArrayNode(books, 't', records);
+//                        books->array[books->used].title = (char*)malloc(strlen(records) + 1);
+//                        strcpy(books->array[books->used].title, records);
                         break;
                     case 2:
                         // insert author
-                        books->array[books->used].author = (char*)malloc(strlen(records) + 1);
-                        strcpy(books->array[books->used].author, records);
+//                        books->array[books->used].author = malloc(strlen(records));
+//                        strncpy(books->array[books->used].title, records, strlen(records));
+//                        books->array[books->used].title[strlen(records)-1] = 0;
+                        writeStringToArrayNode(books, 'a', records);
+//                        books->array[books->used].author = (char*)malloc(strlen(records) + 1);
+//                        strcpy(books->array[books->used].author, records);
                         break;
                     case 3:
                         // insert numberof
-                        books->array[books->used].numberof = (char*)malloc(strlen(records) + 1);
-                        strcpy(books->array[books->used].numberof, records);
+                        writeStringToArrayNode(books, 'n', records);
+//                        books->array[books->used].numberof = (char*)malloc(strlen(records) + 1);
+//                        strcpy(books->array[books->used].numberof, records);
                         break;
                     case 4:
                         // insert borrowlist and delete last newline-char if there is one
-                        books->array[books->used].borrowlist = (char*)malloc(strlen(records) + 1);
-                        strcpy(books->array[books->used].borrowlist, records);
-                        if(books->array[books->used].borrowlist[strlen(books->array[books->used].borrowlist)-1] == '\n'){
-                            books->array[books->used].borrowlist[strlen(books->array[books->used].borrowlist)-1] = 0;
-                        }
+                        writeStringToArrayNode(books, 'b', records);
+//                        books->array[books->used].borrowlist = (char*)malloc(strlen(records) + 1);
+//                        strcpy(books->array[books->used].borrowlist, records);
+//                        if(books->array[books->used].borrowlist[strlen(books->array[books->used].borrowlist)-1] == '\n'){
+//                            books->array[books->used].borrowlist[strlen(books->array[books->used].borrowlist)-1] = 0;
+//                        }
                         break;
                 }
     //            printf("%d:%s\n", index, records);

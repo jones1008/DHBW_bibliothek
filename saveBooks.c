@@ -24,6 +24,11 @@ void saveBooks(Array *books)
     // loop over the array
     for(int i=0; i<books->used; i++){
         // get length of the line and allocate the memory for the line
+//        printf("isbn: %s\n", books->array[i].isbn);
+//        printf("title: %s\n", books->array[i].title);
+//        printf("autor: %s\n", books->array[i].author);
+//        printf("numberof: %s\n", books->array[i].numberof);
+//        printf("borrowlist: %s\n", books->array[i].borrowlist);
         int lineSize = strlen(books->array[i].isbn)+strlen(books->array[i].title)+strlen(books->array[i].author)+strlen(books->array[i].numberof)+strlen(books->array[i].borrowlist);
         char *line = calloc(lineSize+5, lineSize+5);
         // write all entries of array into line variable

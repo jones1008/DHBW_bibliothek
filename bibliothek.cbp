@@ -74,6 +74,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="searchBooks.h" />
+		<Unit filename="structure.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="structure.h" />
 		<Extensions>
 			<code_completion />

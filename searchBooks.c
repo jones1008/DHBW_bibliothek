@@ -56,7 +56,7 @@ void searchBooks(Array *books)
                 printf("isNotAborted: %d\n", isNotAborted);
 
 //            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
-            } while( (chosenBook<=0 || chosenBook>foundBooks.size) && isNotAborted);
+            } while(isNotAborted && (chosenBook<=0 || chosenBook>foundBooks.size));
 
             // when a number was chosen: ask user what he wants to do with that book
             if(isNotAborted) {
@@ -83,7 +83,7 @@ void searchBooks(Array *books)
                     // check for Abortion through user (pressed ENTER)
                     isNotAborted = !isAborted(userChar);
 
-                } while(wrongCharInput(userChar, allowedChars) && isNotAborted);
+                } while(isNotAborted && wrongCharInput(userChar, allowedChars));
 
                 // if user chose a number and did not hit ENTER
                 if(isNotAborted){

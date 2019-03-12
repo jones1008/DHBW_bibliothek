@@ -14,6 +14,7 @@ Jones:
 - printErrorMessage()
 - editBookData()? (title, author, isbn)
 - clearScreen?
+- alle anzeigen
 
 Vero:
 - deleteBooks() + actualDelete()

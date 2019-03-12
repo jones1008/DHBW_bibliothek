@@ -28,4 +28,6 @@ typedef struct{
     size_t size;
 } foundBooks;
 
+void writeStringToArrayNode(Array *books, char node, char *string);
+
 #endif
