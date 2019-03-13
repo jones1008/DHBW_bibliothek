@@ -30,26 +30,31 @@ void saveBooks(Array *books)
 //        printf("anzahl: %s\n", books->array[i].numberof);
 //        printf("borrow: %s\n", books->array[i].borrowlist);
         // get length of the line and allocate the memory for the line
-        int lineSize = strlen(books->array[i].isbn)+strlen(books->array[i].title)+strlen(books->array[i].author)+strlen(books->array[i].numberof)+strlen(books->array[i].borrowlist);
-        char *line = calloc(lineSize+5, lineSize+5);
-        // write all entries of array into line variable
-        snprintf(line, lineSize+5, "%s;%s;%s;%s;%s\n", books->array[i].isbn, books->array[i].title, books->array[i].author, books->array[i].numberof, books->array[i].borrowlist);
-        // write first line and append the following lines
+        int lineSize = 5+strlen(books->array[i].isbn)+strlen(books->array[i].title)+strlen(books->array[i].author)+strlen(books->array[i].numberof)+strlen(books->array[i].borrowlist);
+//        printf("lineSize: %d\n", lineSize);
+        char *line = malloc(lineSize*sizeof(char));
+//        printf("after malloc\n");
+//        // write all entries of array into line variable
+        snprintf(line, lineSize, "%s;%s;%s;%s;%s\n", books->array[i].isbn, books->array[i].title, books->array[i].author, books->array[i].numberof, books->array[i].borrowlist);
+//        printf("line: %s", line);
+//        // write first line and append the following lines
         FILE *dataFile;
         if(i==0){
             dataFile = fopen("data.csv", "w");
         } else{
             dataFile = fopen("data.csv", "a");
         }
-        // TODO: Fehlermeldung, wenn Datei nicht geöffnet werden kann!
-        // TODO: auch in loadBooks machen?
+        // TODO: skip line if it is the same as before (only write new lines)
         if(dataFile == NULL){
             printf("Problem beim Öffnen der Datenbank-Datei: %s\n", strerror(errno));
             fileSuccess = 0;
+
             fclose(dataFile);
             break;
         }
+//        printf("before printing into file");
         fprintf(dataFile, "%s\n", line);
+//        printf("after printing into file");
         fclose(dataFile);
         freeTempString(line);
     }

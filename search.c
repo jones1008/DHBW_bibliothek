@@ -9,15 +9,21 @@
 */
 void search(Array *books, foundBooks *foundBooks, char *searchString)
 {
+    printf("search: searchString: %s\n", searchString);
     // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
     // initialize the array where the book pointers will be stored
     foundBooks->array = malloc(0);
 
     // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
+
+//    printf("search: before replaceUmlauts\n");
     searchString = replaceUmlauts(searchString);
+//    printf("search: after replaceUmlauts\n");
 
     // make the searchString to lower case, so the comparison is case insensitive
+//    printf("search: before strToLower\n");
     stringToLower(searchString);
+//    printf("search: after strToLower\n");
 
     // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
@@ -33,7 +39,8 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
         // check if searchString matches any of isbn, author or title of the current book
         if(strstr(books->array[i].isbn, searchString) != NULL || strstr(author, searchString) != NULL || strstr(title, searchString) != NULL){
             // adding the pointer to this book to the foundBooks array
-            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
+            foundBooks->array = realloc(foundBooks->array, (index+1)*sizeof(book *));
+//            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
             foundBooks->array[index] = &books->array[i];
             index++;
         }

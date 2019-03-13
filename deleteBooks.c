@@ -2,7 +2,7 @@
 
 void deleteBooks(Array *books)
 {
-    char *searchString = calloc(1, 1);
+    char *searchString = malloc(0);
     printf("Welches Buch soll gel%cscht werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ", oe);
     getUserInput(searchString);
     if(!isAborted(searchString)){
@@ -11,7 +11,7 @@ void deleteBooks(Array *books)
 
         // let the user choose a book
         int chosenBook = 0;
-        char *userNumber = calloc(1,1);
+        char *userNumber = malloc(0);
         int isNotAborted;
         chooseBook(userNumber, &foundBooks, &chosenBook, &isNotAborted);
     }

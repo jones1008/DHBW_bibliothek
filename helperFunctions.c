@@ -2,34 +2,95 @@
 
 void getUserInput(char *userVariable)
 {
-    char buffer[BUFFERSIZE];
-    char *buf = buffer;
-
-    // reset buffer (and userVariable if previous inputs changed strlen of userVariable)
-    memset(buffer, 0, BUFFERSIZE);
-    memset(userVariable, 0, strlen(userVariable));
-
-    // get user input
-    fgets(buf, BUFFERSIZE, stdin);
+//    char buffer[BUFFERSIZE];
+//    char *buf = buffer;
+//
+//    // reset buffer (and userVariable if previous inputs changed strlen of userVariable)
+//    memset(buffer, 0, BUFFERSIZE);
+//    memset(userVariable, 0, strlen(buf));
+//
+//    // get user input
+//    fgets(buf, BUFFERSIZE, stdin);
 //    printf("buf: %s\n", buf);
 //    printf("bufD: %d\n", strlen(buf));
-
-    // write users input into given variable without the newline char and add the null terminator to the string if input wasn't ENTER
-    // TODO: in function (wird auch in replaceUmlauts verwendet + suchen, wo realloc noch verwendet wird)
-    userVariable = realloc(userVariable, sizeof(buf)*sizeof(char));
-    strncpy(userVariable, buf, strlen(buf));
-    // TODO: fix: ENTER zum abbrechen
-//    userVariable[strlen(buf)] = '\0';
-    if(buf[0] != '\n'){
-//        printf("nullify");
-        userVariable[strlen(buf)-1] = '\0';
-    } else{
-        userVariable[strlen(buf)] = '\0';
-    }
-
+//    if(buf[strlen(buf)-1] == '\n'){
+//        buf[strlen(buf)-1] = '\0';
+//    }
+//    printf("buf: %s\n", buf);
+//    printf("bufD: %d\n", strlen(buf));
+//
+//    // write users input into given variable without the newline char and add the null terminator to the string if input wasn't ENTER
+//    printf("sizeof realloc: %d\n", strlen(buf)*sizeof(char));
+//    userVariable = realloc(userVariable, strlen(buf)*sizeof(char));
+//    strncpy(userVariable, buf, strlen(buf));
+//    // TODO: fix: ENTER zum abbrechen
+////    printf("before terminatoring: %s\n", userVariable);
+////    userVariable[strlen(buf)-1] = '\0';
+////    printf("after terminatoring: %s\n", userVariable);
+////    if(buf[0] != '\n'){
+//////        printf("nullify");
+////        userVariable[strlen(buf)-1] = '\0';
+////    }
+////    else{
+////        userVariable[strlen(buf)] = '\0';
+////    }
+//
+//    printf("userVar: %s\n", userVariable);
+////    printf("userVarD: %d\n", userVariable[0]);
+////    printf("userVar(len): %d\n", strlen(userVariable));
+//    char buffer[BUFFERSIZE];
+//    char *buf = buffer;
+//
+//    // reset buffer (and userVariable if previous inputs changed strlen of userVariable)
+//    memset(buffer, 0, BUFFERSIZE);
+//    memset(userVariable, 0, strlen(userVariable));
+//
+//    // get user input
+//    fgets(buf, BUFFERSIZE, stdin);
+//
+//    printf("buf: %s\n", buf);
+//    printf("bufD: %d\n", strlen(buf));
+//
+//    userVariable = realloc(userVariable, sizeof(buf)*sizeof(char));
+//    strncpy(userVariable, buf, strlen(buf));
+//    // TODO: fix: ENTER zum abbrechen
+////    userVariable[strlen(buf)] = '\0';
+//    if(buf[0] != '\n'){
+////        printf("nullify");
+//        userVariable[strlen(buf)-1] = '\0';
+//    } else{
+//        userVariable[strlen(buf)] = '\0';
+//    }
 //    printf("userVar: %s\n", userVariable);
 //    printf("userVarD: %d\n", userVariable[0]);
 //    printf("userVar(len): %d\n", strlen(userVariable));
+
+//    char userVariable[BUFFERSIZE];
+
+
+
+    fgets(userVariable, BUFFERSIZE, stdin);
+//    printf("userVar: %s\n", userVariable);
+    if ( strlen(userVariable)>0 && userVariable[strlen(userVariable)-1] == '\n' ){
+        userVariable[strlen(userVariable)-1] = '\0';
+    }
+//    printf("userVariableD: %d\n", userVariable[0]);
+//    printf("userVariable: %s\n", userVariable);
+
+
+
+//    return *userVariable;
+
+//    if(line[0] != '\n'){
+//        userVariable = realloc(userVariable, sizeof(line)*sizeof(char));
+//        int sscanf_result = scanf(line, "%s", userVariable);
+//
+//        if(sscanf_result == 0 || sscanf_result == EOF){
+//            printf("error: wrong input\n");
+//        }
+//        printf("userinput: %s\n", userVariable);
+//    }
+
 }
 
 int wrongCharInput(char *userInput, char *allowedChars)
@@ -142,7 +203,7 @@ char *replaceUmlauts(char *str)
         i++;
     }
 //    printf("newString after: %s\n", newString);
-    str = realloc(str, sizeof(newString)*sizeof(char));
+//    str = realloc(str, sizeof(newString)*sizeof(char));
     strncpy(str, newString, strlen(newString));
     str[strlen(newString)] = '\0';
 //    printf("stringAfter: %s\n", str);

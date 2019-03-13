@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include "structure.h"
 
-#define BUFFERSIZE 1024
+#define BUFFERSIZE 256
 #define HEADERTABSIZE 6
 
 // TODO: brauchen wir das noch?

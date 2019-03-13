@@ -3,11 +3,11 @@ void loadBooks(Array *books)
 {
     //https://codereview.stackexchange.com/questions/44649/dynamic-array-of-structs-in-c
     // initialize array
-    int initialSize = 1;
+//    int initialSize = 1;
     // Allocate initial space
-    books->array = (book *)calloc(initialSize * sizeof(book), sizeof(int));
+    books->array = malloc(0);
     books->used = 0;           // no elements used
-    books->size = initialSize; // available nr of elements
+    books->size = 0; // available nr of elements
 
     // read every line of the csv-file and write data to the array
     char buffer[1024];
@@ -18,22 +18,19 @@ void loadBooks(Array *books)
         printf("ERROR: Datenbank-Datei kann nicht gelesen werden!\n");
     }
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL){
-
 //        printf("loop\n");
         // skip empty lines
-        if(!(line[0] == '\n')){
+        if(line[0] != '\n'){
+//            line[strlen(line)-1] = '\0';
+//            printf("line: %s\n", line);
             // initialize books structure
             // TODO: wird size tatsächlich gebraucht?
-//            newBook(books);
-            if (books->used == books->size){
-                books->size *= 2;
-                books->array = (book *)realloc(books->array, books->size * sizeof(book));
-            }
+            newBook(books);
             records = strtok(line, delimiter);
 
             int index = 0;
             while(records){
-                printf("%s\n", records);
+//                printf("%s\n", records);
                 switch(index){
                     case 0:
                         // insert isbn

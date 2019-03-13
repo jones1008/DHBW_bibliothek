@@ -26,7 +26,8 @@ void showMenu(Array *books)
     printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
     printf("[E]: Bibliotheksverwaltung verlassen\n");
 
-    char *menuPoint = calloc(1,1);
+//    char *menuPoint = malloc(0);
+    char menuPoint[BUFFERSIZE];
     char *allowedChars = "sazhlce";
 
     // repeat user input if the input was wrong
@@ -46,7 +47,7 @@ void showMenu(Array *books)
     } while(wrongCharInput(menuPoint, allowedChars));
 
     // switch case structure to call the chosen function
-    char *menuHeader;
+    char *menuHeader = "";
     printf("\n");
     switch(menuPoint[0]){
         case 's':
@@ -88,7 +89,7 @@ void showMenu(Array *books)
             break;
     }
 
-    freeTempString(menuPoint);
+//    freeTempString(menuPoint);
 
     printMenuEnding(strlen(menuHeader));
     printf("\n");
@@ -135,7 +136,7 @@ void freeBooks(Array *books)
 }
 
 
-// TODO: ist dies an der richtigen Stelle? Brauchen wir das nicht woanders?
+// TODO: ist dies an der richtigen Stelle? Brauchen wir das nicht woanders? brauchen wir das überhaupt noch?
 /*
  *  function: freeFoundBooks
  *      frees previously allocated memory of a foundBooks structure

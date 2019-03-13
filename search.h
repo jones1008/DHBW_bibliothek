@@ -9,6 +9,7 @@
 #include "helperFunctions.h"
 #include "searchBooks.h"
 
-void search(Array *books, foundBooks *foundBooks, char* searchString);
+void search(Array *books, foundBooks *foundBooks, char *searchString);
+void chooseBook(char *userNumber, foundBooks *foundBooks, int *chosenBook, int *isNotAborted);
 
 #endif

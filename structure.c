@@ -2,9 +2,10 @@
 
 void newBook(Array *books)
 {
+    // TODO: brauchen wir ->size überhaupt?
     if (books->used == books->size){
-        books->size *= 2;
-        books->array = (book *)realloc(books->array, books->size * sizeof(book));
+        books->size++;
+        books->array = realloc(books->array, books->size*sizeof(book));
     }
 }
 
@@ -14,39 +15,63 @@ void writeStringToArrayNode(Array *books, char node, char *string)
 //    printf("string: %s\n", string);
     switch(node){
         case 'i':
-            books->array[books->used].isbn = malloc(strlen(string));
+//            printf("saving isbn\n");
+            books->array[books->used].isbn = malloc((strlen(string)+1)*sizeof(char));
             strncpy(books->array[books->used].isbn, string, strlen(string));
-            books->array[books->used].isbn[strlen(string)] = '\0';
+//            if(string[strlen(string)-1] != '\0'){
+                books->array[books->used].isbn[strlen(string)] = '\0';
+//            }
             break;
         case 't':
-            books->array[books->used].title = malloc(strlen(string));
+//            printf("before saving title\n");
+//            printf("array-title: %s\n", books->array[books->used].title);
+//            printf("books->used: %d\n", books->used);
+//            printf("strlen: %d\n", strlen(string));
+            books->array[books->used].title = malloc((strlen(string)+1)*sizeof(char));
+//            printf("before strncpy\n");
             strncpy(books->array[books->used].title, string, strlen(string));
-            books->array[books->used].title[strlen(string)] = '\0';
+//            printf("before 0 terminator\n");
+//            if(string[strlen(string)-1] != '\0'){
+                books->array[books->used].title[strlen(string)] = '\0';
+//            }
             break;
         case 'a':
 //            printf("saving author\n");
-            books->array[books->used].author = malloc(strlen(string));
+            books->array[books->used].author = malloc((strlen(string)+1)*sizeof(char));
             strncpy(books->array[books->used].author, string, strlen(string));
-            books->array[books->used].author[strlen(string)] = '\0';
+//            if(string[strlen(string)-1] != '\0'){
+                books->array[books->used].author[strlen(string)] = '\0';
+//            }
             break;
         case 'n':
 //            printf("strlen: %d\n", strlen(string));
 //            printf("string: %s\n", string);
 //            printf("before alloc\n");
-            books->array[books->used].numberof = malloc(strlen(string));
+            books->array[books->used].numberof = malloc((strlen(string)+1)*sizeof(char));
 //            printf("afer alloc\n");
 //            printf("array->numberof: %s\n", books->array[books->used].numberof);
 //            printf("record: %s\n", string);
             strncpy(books->array[books->used].numberof, string, strlen(string));
 //            printf("before before 0ing\n");
-            books->array[books->used].numberof[strlen(string)] = '\0';
+//            if(string[strlen(string)-1] != '\0'){
+                books->array[books->used].numberof[strlen(string)] = '\0';
+//            }
 //            printf("number of done\n");
             break;
         case 'b':
 //            printf("before borrowlist\n");
-            books->array[books->used].borrowlist = malloc(strlen(string));
+            books->array[books->used].borrowlist = malloc((strlen(string)+1)*sizeof(char));
             strncpy(books->array[books->used].borrowlist, string, strlen(string));
-            books->array[books->used].borrowlist[strlen(string)-1] = '\0';
+//            printf("last char of string: %d\n", string[strlen(string)-1]);
+//            printf("strlen(string): %d\n", strlen(string));
+//            if(string[strlen(string)-1] != '\0'){
+            if(string[0] != '\0'){
+//                printf("is null\n");
+                books->array[books->used].borrowlist[strlen(string)-1] = '\0';
+            } else{
+                books->array[books->used].borrowlist[strlen(string)] = '\0';
+            }
+//            }
 //            printf("after borrowlist\n");
 //            books->array[books->used].borrowlist[strlen(string)] = '\0';
             break;

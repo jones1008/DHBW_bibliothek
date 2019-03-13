@@ -3,20 +3,24 @@
 void searchBooks(Array *books)
 {
     // get user search input
-    char *searchString = calloc(1, 1);
+//    char *searchString = malloc(0);
+    char searchString[BUFFERSIZE];
 
 //    getUserInput(searchString, "Suchtext ([ENTER] zum Abbrechen): ");
     printf("Suchtext ([ENTER] zum Abbrechen): ");
     getUserInput(searchString);
 
-    printf("searchString: %s\n", searchString);
-    printf("searchStringD: %d\n", searchString[0]);
+//    printf("searchString: %s\n", searchString);
+//    printf("searchStringD: %d\n", searchString[0]);
 
     // check if the input was aborted
+//    printf("isAborted: %d\n", isAborted(searchString));
     if(!isAborted(searchString)){
         // pass searchString to the search-function
         foundBooks foundBooks;
+//        printf("before search\n");
         search(books, &foundBooks, searchString);
+//        printf("after search\n");
 
         // loop over foundBooks
         if(foundBooks.size > 0){
@@ -37,7 +41,7 @@ void searchBooks(Array *books)
 
             // let the user choose a book to borrow/return/delete/addCopy the chosen book
             int chosenBook = 0;
-            char *userNumber = calloc(1,1);
+            char userNumber[BUFFERSIZE];
             int isNotAborted;
             chooseBook(userNumber, &foundBooks, &chosenBook, &isNotAborted);
 
@@ -64,7 +68,7 @@ void searchBooks(Array *books)
                 printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks.array[chosenBook-1]->author, foundBooks.array[chosenBook-1]->title);
 
                 char *allowedChars = "azlc";
-                char *userChar = calloc(1,1);
+                char userChar[BUFFERSIZE];
                 int isNotAborted;
 
                 printf("[A]: Buch ausleihen\n");
@@ -109,12 +113,13 @@ void searchBooks(Array *books)
                             break;
                     }
                 }
-                freeTempString(userChar);
+//                freeTempString(userChar);
             }
-            freeTempString(userNumber);
+//            freeTempString(userNumber);
         } else{
             searchBooks(books);
         }
     }
-    freeTempString(searchString);
+//    freeTempString(searchString);
+//    printf("end of searchBooks()\n");
 }

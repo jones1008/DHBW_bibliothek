@@ -1,9 +1,9 @@
 #include "addBook.h"
 void addBook(Array *books)
 {
-    char *newIsbn = "";
+//    char *newIsbn = "";
     int isNotAborted;
-    char *isbn = calloc(1, 1);
+    char isbn[BUFFERSIZE];
 
     do{
         printf("ISBN-13 eingeben (13 Ziffern) ([ENTER] zum Abbrechen): ");
@@ -12,42 +12,43 @@ void addBook(Array *books)
         isNotAborted = !isAborted(isbn);
         if(isNotAborted){
             // if in first loop allocate the newisbn
-            if(strlen(newIsbn) == 0){
-                newIsbn = calloc(1, 1);
-            }
+//            if(strlen(newIsbn) == 0){
+//                newIsbn = calloc(1, 1);
+//            }
     //      // realloc newIsbn and zero content from the loop before
-            newIsbn = realloc(newIsbn, strlen(isbn));
-            memset(newIsbn, 0, strlen(isbn));
+//            newIsbn = realloc(newIsbn, (strlen(isbn)+1)*sizeof(char));
+//            memset(isbn, 0, strlen(isbn));
 
             // delete all other characters not being a digit from isbn and add the null terminator at the end
             int j=0;
             for(int i=0; i<strlen(isbn); i++){
                 if(isdigit(isbn[i])){
-                    newIsbn[j] = isbn[i];
+                    isbn[j] = isbn[i];
                     j++;
                 }
             }
-            newIsbn[j] = '\0';
+            isbn[j] = '\0';
+            printf("isbn: %s\n", isbn);
 
-            if(strlen(newIsbn)!=13){
+            if(strlen(isbn)!=13){
                 printf("ERROR: Die ISBN muss 13 Ziffern lang sein\n");
             }
         }
-    } while(strlen(newIsbn)!=13 && isNotAborted);
+    } while(strlen(isbn)!=13 && isNotAborted);
 
     if(isNotAborted){
-        char *title = calloc(1, 1);
+        char title[BUFFERSIZE];
         printf("Titel eingeben ([ENTER] zum Abbrechen): ");
         getUserInput(title);
 
         if(!isAborted(title)){
-            char *author = calloc(1, 1);
+            char author[BUFFERSIZE];
             printf("Autor eingeben ([ENTER] zum Abbrechen): ");
             getUserInput(author);
 
             if(!isAborted(author)){
                 int isNumber;
-                char *numberof = calloc(1, 1);
+                char numberof[BUFFERSIZE];
                 do{
                     printf("Anzahl Exemplare eingeben ([ENTER] zum Abbrechen): ");
                     getUserInput(numberof);
@@ -68,21 +69,31 @@ void addBook(Array *books)
                 } while(isNotAborted && !isNumber);
 
                 if(isNotAborted){
+//                    // remove trailing and leading spaces
+//                    isbn = trimwhitespace(newIsbn);
+//                    title = trimwhitespace(title);
+//                    author = trimwhitespace(author);
+//                    // convert Umlaute to corresponding characters
+//                    title = replaceUmlauts(title);
+//                    author = replaceUmlauts(author);
+
                     // remove trailing and leading spaces
-                    isbn = trimwhitespace(newIsbn);
-                    title = trimwhitespace(title);
-                    author = trimwhitespace(author);
+
+                    // funktioniert nicht, wenn whitespace vorne ist
+                    trimwhitespace(isbn);
+                    trimwhitespace(title);
+                    trimwhitespace(author);
                     // convert Umlaute to corresponding characters
-                    title = replaceUmlauts(title);
-                    author = replaceUmlauts(author);
+                    replaceUmlauts(title);
+                    replaceUmlauts(author);
 
                     // ask user if input was correct
                     printf("---------\n");
-                    printf("ISBN  : %s\n", newIsbn);
+                    printf("ISBN  : %s\n", isbn);
                     printf("Titel : %s\n", title);
                     printf("Autor : %s\n", author);
                     printf("Anzahl: %s\n", numberof);
-                    char *choice = calloc(1, 1);
+                    char *choice = malloc(0);
                     char *allowedChars = "jn";
                     do{
                         printf("Sind die obigen Angaben korrekt? [J][N]: ");
@@ -94,22 +105,22 @@ void addBook(Array *books)
                     if(choice[0] == 'j'){
                         // create new Book array and adding information to this new added book-array-element
                         newBook(books);
-                        printf("ISBN  : %s\n", newIsbn);
+                        printf("ISBN  : %s\n", isbn);
                         printf("Titel : %s\n", title);
                         printf("Autor : %s\n", author);
                         printf("Anzahl: %s\n", numberof);
 
-                        writeStringToArrayNode(books, 'i', newIsbn);
+                        writeStringToArrayNode(books, 'i', isbn);
                         writeStringToArrayNode(books, 't', title);
                         writeStringToArrayNode(books, 'a', author);
                         writeStringToArrayNode(books, 'n', numberof);
                         writeStringToArrayNode(books, 'b', "");
 
-                        printf("isbn  : %s\n", books->array[books->used].isbn);
-                        printf("title : %s\n", books->array[books->used].title);
-                        printf("author: %s\n", books->array[books->used].author);
-                        printf("anzahl: %s\n", books->array[books->used].numberof);
-                        printf("borrow: %s\n", books->array[books->used].borrowlist);
+//                        printf("isbn  : %s\n", books->array[books->used].isbn);
+//                        printf("title : %s\n", books->array[books->used].title);
+//                        printf("author: %s\n", books->array[books->used].author);
+//                        printf("anzahl: %s\n", books->array[books->used].numberof);
+//                        printf("borrow: %s\n", books->array[books->used].borrowlist);
 
                         // increase books-used-parameter
 //                        printf("books used: %d", books->used);
@@ -123,11 +134,11 @@ void addBook(Array *books)
                         addBook(books);
                     }
                 }
-                freeTempString(numberof);
+//                freeTempString(numberof);
             }
-            freeTempString(author);
+//            freeTempString(author);
         }
-        freeTempString(title);
+//        freeTempString(title);
     }
-    freeTempString(isbn);
+//    freeTempString(isbn);
 }
