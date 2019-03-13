@@ -93,7 +93,7 @@ void addBook(Array *books)
                     printf("Titel : %s\n", title);
                     printf("Autor : %s\n", author);
                     printf("Anzahl: %s\n", numberof);
-                    char *choice = malloc(0);
+                    char choice[BUFFERSIZE];
                     char *allowedChars = "jn";
                     do{
                         printf("Sind die obigen Angaben korrekt? [J][N]: ");

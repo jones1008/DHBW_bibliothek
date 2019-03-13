@@ -12,7 +12,7 @@ Jones:
 	/ ISBN-Checker?
 / exit()
 - editBookData()? (title, author, isbn)
-- clearScreen?
+- clearScreen -> system("cls") oder system("clear")
 - alle anzeigen
 - deleteBooks() + actualDelete()
 (- addCopies() + actualAddCopies())

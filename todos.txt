@@ -1,3 +1,0 @@
-TODO Mindmap:
-- Logik für Zugriff auf Array überlegen
-- speichern soll sowohl in Datei speichern, als auch in Array, um Inkonsistenz in Daten im laufenden Programm zu vermeiden

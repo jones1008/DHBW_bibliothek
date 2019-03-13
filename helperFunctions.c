@@ -224,6 +224,23 @@ void stringToLower(char *strPtr)
     }
 }
 
+int countChars(char* str, char c)
+{
+    return (*str == '\0') ? 0 : countChars(str+1, c) + (*str == c);
+}
+
+void removeChar(char *str, int c)
+{
+    int j, n = strlen(str);
+    for (int i=j=0; i<n; i++){
+        if (str[i] != c){
+            str[j++] = str[i];
+        }
+    }
+
+    str[j] = '\0';
+}
+
 void printHeaderTabs()
 {
     for(int i=0; i<HEADERTABSIZE; i++){
@@ -249,14 +266,14 @@ void printMenuEnding(int menuHeaderLength)
     printf("\n");
 }
 
-void showReturnToMenu()
-{
-    printf("Zur%cck zum Men%c [ENTER]:", ue, ue);
-    char enter = 0;
-    while (enter != '\r' && enter != '\n'){
-        enter = getchar();
-    }
-}
+//void showReturnToMenu()
+//{
+//    printf("Zur%cck zum Men%c [ENTER]:", ue, ue);
+//    char enter = 0;
+//    while (enter != '\r' && enter != '\n'){
+//        enter = getchar();
+//    }
+//}
 
 void freeTempString(char *var)
 {

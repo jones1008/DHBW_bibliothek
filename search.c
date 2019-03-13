@@ -43,7 +43,7 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
 //            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
             // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks()
             foundBooks->array[index] = &books->array[i];
-            printf("pointer to book: %d\n", &books->array[i]);
+//            printf("pointer to book: %d\n", &books->array[i]);
             index++;
         }
     }
@@ -107,7 +107,7 @@ void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
         // check for Abortion through user (pressed ENTER)
         *isNotAborted = !isAborted(userNumber);
 
-        printf("isNotAborted: %d\n", *isNotAborted);
+//        printf("isNotAborted: %d\n", *isNotAborted);
 
 //            } while((chosenBook<=0 || chosenBook>foundBooks.size) && chosenBook != '\0');
     } while(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size));

@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include "structure.h"
 #include "saveBooks.h"
+#include "search.h"
 
 void borrowBook(Array *books);
 void actualBorrowBook(Array *books, book *book);
