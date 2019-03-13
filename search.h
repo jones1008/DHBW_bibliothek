@@ -10,6 +10,7 @@
 #include "searchBooks.h"
 
 void search(Array *books, foundBooks *foundBooks, char *searchString);
-void chooseBook(char *userNumber, foundBooks *foundBooks, int *chosenBook, int *isNotAborted);
+void showFoundBooks(foundBooks *foundBooks, char *attributes);
+void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted);
 
 #endif

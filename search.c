@@ -41,7 +41,9 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
             // adding the pointer to this book to the foundBooks array
             foundBooks->array = realloc(foundBooks->array, (index+1)*sizeof(book *));
 //            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
+            // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks()
             foundBooks->array[index] = &books->array[i];
+            printf("pointer to book: %d\n", &books->array[i]);
             index++;
         }
     }
@@ -53,9 +55,45 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
         printf("ERROR: Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
     }
 }
-
-void chooseBook(char *userNumber, foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
+// for each found book in foundbooks print the given attributes in order
+void showFoundBooks(foundBooks *foundBooks, char attributes[])
 {
+    printf("\n");
+    for(int i=0; i<foundBooks->size; i++){
+        printf("[%d]\n", i+1);
+        // loop over attributes to print attributes in correct order
+        for(int j=0; j<strlen(attributes); j++){
+            switch(attributes[j]){
+                case 'a':
+                    printf("Autor    : %s\n", foundBooks->array[i]->author);
+                    break;
+                case 't':
+                    printf("Titel    : %s\n", foundBooks->array[i]->title);
+                    break;
+                case 'i':
+                    printf("ISBN     : %s\n", foundBooks->array[i]->isbn);
+                    break;
+                case 'n':
+                    printf("Anzahl   : %s\n", foundBooks->array[i]->numberof);
+                    break;
+                case 'b':
+                    printf("Ausleiher: %s\n", foundBooks->array[i]->borrowlist);
+                    break;
+                default:
+                    printf("ERROR: unbekanntes Attribut!\n");
+            }
+        }
+        // add Line if it isn't the last found book
+        if(i+1<foundBooks->size){
+            printf("---------\n");
+        }
+    }
+    printf("\n");
+}
+
+void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
+{
+    char userNumber[BUFFERSIZE];
     do{
         printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
         getUserInput(userNumber);

@@ -164,6 +164,7 @@ int main()
     loadBooks(&books);
 
     showHeading();
+//    system("cls");
     showMenu(&books);
 
 //    books.array[0].author = "neu";

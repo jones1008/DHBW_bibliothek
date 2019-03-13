@@ -24,26 +24,12 @@ void searchBooks(Array *books)
 
         // loop over foundBooks
         if(foundBooks.size > 0){
-            printf("\n");
-            for(int i=0; i<foundBooks.size; i++){
-                printf("[%d]\n", i+1);
-                printf("Autor    : %s\n", foundBooks.array[i]->author);
-                printf("Titel    : %s\n", foundBooks.array[i]->title);
-                printf("ISBN     : %s\n", foundBooks.array[i]->isbn);
-                printf("Anzahl   : %s\n", foundBooks.array[i]->numberof);
-                printf("Ausleiher: %s\n", foundBooks.array[i]->borrowlist);
-                // add Line if it isn't the last found book
-                if(i+1<foundBooks.size){
-                    printf("---------\n");
-                }
-            }
-            printf("\n");
+            showFoundBooks(&foundBooks, "atinb");
 
             // let the user choose a book to borrow/return/delete/addCopy the chosen book
             int chosenBook = 0;
-            char userNumber[BUFFERSIZE];
             int isNotAborted;
-            chooseBook(userNumber, &foundBooks, &chosenBook, &isNotAborted);
+            chooseBook(&foundBooks, &chosenBook, &isNotAborted);
 
 //            do{
 //                printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);

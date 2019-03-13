@@ -14,10 +14,8 @@ Jones:
 - editBookData()? (title, author, isbn)
 - clearScreen?
 - alle anzeigen
-
-Vero:
 - deleteBooks() + actualDelete()
-- addCopies() + actualAddCopies()
+(- addCopies() + actualAddCopies())
 - borrowBook() + actualBorrowBook()
 - returnBook() + actualReturnBook()
 
