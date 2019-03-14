@@ -18,7 +18,7 @@
 //    return string;
 //}
 
-void saveBooks(Array *books)
+void saveBooks(Bib *books)
 {
     // TODO: nur saven, wenn was verändert wurde?
     // loop over the array

@@ -7,6 +7,6 @@
 #include <ctype.h>
 #include "structure.h"
 
-void loadBooks(Array *books);
+void loadBooks(Bib *books);
 
 #endif

@@ -1,5 +1,5 @@
 #include "addBook.h"
-void addBook(Array *books)
+void addBook(Bib *books)
 {
 //    char *newIsbn = "";
     int isNotAborted;

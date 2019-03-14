@@ -3,11 +3,11 @@
  *  function: search
  *      searches for books with given searchString and adds them to foundBooksArray
  *  params:
- *      Array *books        (pointer to books structure)
+ *      Bib *books        (pointer to books structure)
  *      foundBooks *foundBooks      (pointer to array of book pointers)
  *      char *searchString  (pointer to string to search for)
 */
-void search(Array *books, foundBooks *foundBooks, char *searchString)
+void search(Bib *books, foundBooks *foundBooks, char *searchString)
 {
     printf("search: searchString: %s\n", searchString);
     // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
@@ -25,7 +25,7 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
     stringToLower(searchString);
 //    printf("search: after strToLower\n");
 
-    // iterate over array of books and add pointer to PointerArray "foundBooks" if isbn, author or title matches the given SearchString
+    // iterate over array of books and add pointer to PointerBib "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
     for(int i=0; i<books->used; i++){
         // make the author and the title to lower case, so the comparison is case insensitive

@@ -15,7 +15,7 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-void showMenu(Array *books)
+void showMenu(Bib *books)
 {
     printf("HAUPTMEN%c:\n", UE);
 
@@ -112,9 +112,9 @@ void showHeading()
  *  function: freeBooks
  *      frees previously allocated memory of a books structure
  *  params:
- *      Array *books    (a pointer to the books structure)
+ *      Bib *books    (a pointer to the books structure)
  */
-void freeBooks(Array *books)
+void freeBooks(Bib *books)
 {
     // Free all name variables of each array element first
     for(int i=0; i<books->used; i++)
@@ -167,7 +167,7 @@ void freeFoundBooks(foundBooks *foundBooks){
 int main()
 {
     // initially loading the books from the data-text file
-    Array books;
+    Bib books;
     loadBooks(&books);
 
     showHeading();

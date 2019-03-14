@@ -1,6 +1,6 @@
 #include "searchBooks.h"
 
-void searchBooks(Array *books)
+void searchBooks(Bib *books)
 {
     // get user search input
 //    char *searchString = malloc(0);
@@ -30,7 +30,7 @@ void searchBooks(Array *books)
     }
 }
 
-void contextBookAction(Array *books, foundBooks *foundBooks)
+void contextBookAction(Bib *books, foundBooks *foundBooks)
 {
     // let the user choose a book to borrow/return/delete/addCopy the chosen book
     int chosenBook = 0;

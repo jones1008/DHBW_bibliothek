@@ -9,6 +9,6 @@
 #include "search.h"
 #include "searchBooks.h"
 
-void showAll(Array *books);
+void showAll(Bib *books);
 
 #endif

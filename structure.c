@@ -1,6 +1,6 @@
 #include "structure.h"
 
-void newBook(Array *books)
+void newBook(Bib *books)
 {
     // TODO: brauchen wir ->size überhaupt?
     if (books->used == books->size){
@@ -9,7 +9,7 @@ void newBook(Array *books)
     }
 }
 
-void writeStringToArrayNode(Array *books, char node, char *string)
+void writeStringToArrayNode(Bib *books, char node, char *string)
 {
 //    printf("strlen: %d\n", strlen(string));
 //    printf("string: %s\n", string);

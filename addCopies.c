@@ -1,5 +1,5 @@
 #include "addCopies.h"
-void addCopies(Array *books)
+void addCopies(Bib *books)
 {
 //    char searchString[BUFFERSIZE];
 //    printf("Zu welchem Buch sollen Exemplare hinzugef%cgt werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ", ue);
@@ -25,7 +25,7 @@ void addCopies(Array *books)
 //    }
 }
 
-void actualAddCopies(Array *books, book *book)
+void actualAddCopies(Bib *books, book *book)
 {
 
     saveBooks(books);

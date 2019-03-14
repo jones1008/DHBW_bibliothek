@@ -1,6 +1,6 @@
 #include "showAll.h"
 
-void showAll(Array *books)
+void showAll(Bib *books)
 {
     foundBooks foundBooks;
     char searchString[] = "";

@@ -1,5 +1,5 @@
 #include "returnBook.h"
-void returnBook(Array *books)
+void returnBook(Bib *books)
 {
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll zurückgegeben werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
@@ -27,7 +27,7 @@ void returnBook(Array *books)
     }
 }
 
-void actualReturnBook(Array *books, book *book)
+void actualReturnBook(Bib *books, book *book)
 {
     // TODO: testen!!! ist bisher ungetestet
 

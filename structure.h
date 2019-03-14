@@ -21,14 +21,13 @@ typedef struct
     book *array;
     size_t used;
     size_t size;
-} Array;
-
+} Bib;
 typedef struct{
     book **array;
     size_t size;
 } foundBooks;
 
-void writeStringToArrayNode(Array *books, char node, char *string);
-void newBook(Array *books);
+void writeStringToArrayNode(Bib *books, char node, char *string);
+void newBook(Bib *books);
 
 #endif

@@ -9,6 +9,6 @@
 #include "saveBooks.h"
 #include "helperFunctions.h"
 
-void addBook(Array *books);
+void addBook(Bib *books);
 
 #endif

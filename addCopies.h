@@ -8,7 +8,7 @@
 #include "structure.h"
 #include "saveBooks.h"
 
-void addCopies(Array *books);
-void actualAddCopies(Array *books, book *book);
+void addCopies(Bib *books);
+void actualAddCopies(Bib *books, book *book);
 
 #endif

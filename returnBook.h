@@ -7,8 +7,9 @@
 #include <ctype.h>
 #include "structure.h"
 #include "saveBooks.h"
+#include "search.h"
 
-void returnBook(Array *books);
-void actualReturnBook(Array *books, book *book);
+void returnBook(Bib *books);
+void actualReturnBook(Bib *books, book *book);
 
 #endif

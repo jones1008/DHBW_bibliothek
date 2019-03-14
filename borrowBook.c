@@ -1,5 +1,5 @@
 #include "borrowBook.h"
-void borrowBook(Array *books)
+void borrowBook(Bib *books)
 {
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll ausgeliehen werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
@@ -26,7 +26,7 @@ void borrowBook(Array *books)
     }
 }
 
-void actualBorrowBook(Array *books, book *book)
+void actualBorrowBook(Bib *books, book *book)
 {
     // TODO: testen!!! ist bisher ungetestet
 

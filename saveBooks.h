@@ -8,6 +8,6 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-void saveBooks(Array *books);
+void saveBooks(Bib *books);
 
 #endif

@@ -9,7 +9,7 @@
 #include "saveBooks.h"
 #include "search.h"
 
-void borrowBook(Array *books);
-void actualBorrowBook(Array *books, book *book);
+void borrowBook(Bib *books);
+void actualBorrowBook(Bib *books, book *book);
 
 #endif
