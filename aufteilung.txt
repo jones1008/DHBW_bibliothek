@@ -18,6 +18,7 @@ Jones:
 (- addCopies() + actualAddCopies())
 - borrowBook() + actualBorrowBook()
 - returnBook() + actualReturnBook()
+- close Window after exiting
 
 
 Rules:

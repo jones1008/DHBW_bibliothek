@@ -62,6 +62,6 @@ void saveBooks(Bib *bib)
         }
     }
     if(fileSuccess){
-        printf("Erfolgreich gespeichert!\n");
+        printf("Datenbank erfolgreich aktualisiert!\n");
     }
 }

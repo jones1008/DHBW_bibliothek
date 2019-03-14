@@ -18,7 +18,9 @@ void searchBooks(Bib *bib)
     if(!isAborted(searchString)){
         // pass searchString to the search-function
         foundBooks foundBooks;
+//        printf("vor search: book->numberof: %s\n", bib->books[5].numberof);
         search(bib, &foundBooks, searchString);
+//        printf("searchBooks: nach dem Suchen: book->author: %s\n", foundBooks.books[0]->numberof);
 
         if(foundBooks.size > 0){
             showFoundBooks(&foundBooks, "atinb");

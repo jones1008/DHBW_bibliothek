@@ -6,8 +6,8 @@ void loadBooks(Bib *bib)
 //    int initialSize = 1;
     // Allocate initial space
     bib->books = malloc(0);
-    bib->used = 0;           // no elements used
-    bib->size = 0; // available nr of elements
+    bib->used = 0;
+    bib->size = 0;
 
     // read every line of the csv-file and write data to the array
     char buffer[1024];

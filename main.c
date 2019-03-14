@@ -36,9 +36,12 @@ void showMenu(Bib *bib)
     // TODO: manchmal spackt user input rum, wenn man beim Suchen rumprobiert
     do{
         // get user input
+//        printf("vor UserInput: book->numberof: %s\n", bib->books[5].numberof);
         printf("Aktion w%chlen: ", ae);
         getUserInput(menuPoint);
+//        printf("nach UserInput: book->numberof: %s\n", bib->books[5].numberof);
         *menuPoint = tolower(*menuPoint);
+//        return 0;
 
 //        printf("menuPoint: %s\n", menuPoint);
 //        printf("menuPointD: %d\n", menuPoint[0]);
@@ -183,7 +186,7 @@ int main()
 //    foundBooks foundBooks;
 //    search(&bib, &foundBooks, searchString);
 //    for(int i=0; i<foundBooks.size; i++){
-//        printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
+//        printf("author: %s | title: %s\n", foundBooks.books[i]->author, foundBooks.books[i]->title);
 //    }
 
     // free all previously allocated memory
