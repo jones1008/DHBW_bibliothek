@@ -18,17 +18,18 @@ typedef struct
 } book;
 typedef struct
 {
-    book *array;
+    book *books;
     size_t used;
     size_t size;
 } Bib;
 
+// TODO: direkt auf das Buch pointern (normaler Pointer)
 typedef struct{
     book **array;
     size_t size;
 } foundBooks;
 
-void writeStringToArrayNode(Bib *books, char node, char *string);
-void newBook(Bib *books);
+void writeStringToArrayNode(Bib *bib, char node, char *string);
+void newBook(Bib *bib);
 
 #endif
