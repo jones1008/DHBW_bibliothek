@@ -1,5 +1,5 @@
 #include "returnBook.h"
-void returnBook(Bib *books)
+void returnBook(Bib *bib)
 {
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll zurückgegeben werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
@@ -8,7 +8,7 @@ void returnBook(Bib *books)
     if(!isAborted(searchString)){
         // TODO: evtl in function (wird auch in delte und borrowBooks verwendet)
         foundBooks foundBooks;
-        search(books, &foundBooks, searchString);
+        search(bib, &foundBooks, searchString);
         showFoundBooks(&foundBooks, "atib");
 
         // let the user choose a book
@@ -22,12 +22,12 @@ void returnBook(Bib *books)
 
 
 //            printf("pointer to chosenBook: %s\n", foundBooks.array[chosenBook]->author);
-//            actualReturnBook(books, &foundBooks.array[chosenBook]);
+//            actualReturnBook(bib, &foundBooks.array[chosenBook]);
         }
     }
 }
 
-void actualReturnBook(Bib *books, book *book)
+void actualReturnBook(Bib *bib, book *book)
 {
     // TODO: testen!!! ist bisher ungetestet
 
@@ -57,7 +57,7 @@ void actualReturnBook(Bib *books, book *book)
 //                // TODO: ask user if he really wants to remove X
 //                // TODO: remove name from book->borrowlist
 //
-////                saveBooks(books);
+////                saveBooks(bib);
 //            } else{
 //                printf("ERROR: Name '%s' in Ausleihliste nicht gefunden!\n");
 //            }

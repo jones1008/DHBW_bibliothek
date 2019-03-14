@@ -9,7 +9,7 @@
 #include "helperFunctions.h"
 #include "search.h"
 
-void deleteBooks(Bib *books);
-void actualDeleteBooks(Bib *books, book **book);
+void deleteBooks(Bib *bib);
+void actualDeleteBooks(Bib *bib, book **book);
 
 #endif

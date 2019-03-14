@@ -9,7 +9,7 @@
 #include "saveBooks.h"
 #include "search.h"
 
-void returnBook(Bib *books);
-void actualReturnBook(Bib *books, book *book);
+void returnBook(Bib *bib);
+void actualReturnBook(Bib *bib, book *book);
 
 #endif

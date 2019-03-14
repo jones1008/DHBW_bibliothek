@@ -3,11 +3,11 @@
  *  function: search
  *      searches for books with given searchString and adds them to foundBooksArray
  *  params:
- *      Bib *books        (pointer to books structure)
+ *      Bib *bib        (pointer to bib structure)
  *      foundBooks *foundBooks      (pointer to array of book pointers)
  *      char *searchString  (pointer to string to search for)
 */
-void search(Bib *books, foundBooks *foundBooks, char *searchString)
+void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 {
     printf("search: searchString: %s\n", searchString);
     // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
@@ -25,25 +25,25 @@ void search(Bib *books, foundBooks *foundBooks, char *searchString)
     stringToLower(searchString);
 //    printf("search: after strToLower\n");
 
-    // iterate over array of books and add pointer to PointerBib "foundBooks" if isbn, author or title matches the given SearchString
+    // iterate over array of bib and add pointer to PointerBib "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
-    for(int i=0; i<books->used; i++){
+    for(int i=0; i<bib->used; i++){
         // make the author and the title to lower case, so the comparison is case insensitive
-        char author[strlen(books->array[i].author)+1];
-        char title[strlen(books->array[i].title)+1];
-        strcpy(author, books->array[i].author);
-        strcpy(title, books->array[i].title);
+        char author[strlen(bib->array[i].author)+1];
+        char title[strlen(bib->array[i].title)+1];
+        strcpy(author, bib->array[i].author);
+        strcpy(title, bib->array[i].title);
         stringToLower(author);
         stringToLower(title);
 
         // check if searchString matches any of isbn, author or title of the current book
-        if(strstr(books->array[i].isbn, searchString) != NULL || strstr(author, searchString) != NULL || strstr(title, searchString) != NULL){
+        if(strstr(bib->array[i].isbn, searchString) != NULL || strstr(author, searchString) != NULL || strstr(title, searchString) != NULL){
             // adding the pointer to this book to the foundBooks array
             foundBooks->array = realloc(foundBooks->array, (index+1)*sizeof(book *));
 //            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
             // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks() (evtl in struct ein * weglassen?)
-            foundBooks->array[index] = &books->array[i];
-//            printf("pointer to book: %d\n", &books->array[i]);
+            foundBooks->array[index] = &bib->array[i];
+//            printf("pointer to book: %d\n", &bib->array[i]);
             index++;
         }
     }

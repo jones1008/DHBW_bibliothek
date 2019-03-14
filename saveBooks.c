@@ -18,26 +18,26 @@
 //    return string;
 //}
 
-void saveBooks(Bib *books)
+void saveBooks(Bib *bib)
 {
     // TODO: nur saven, wenn was verändert wurde?
     // loop over the array
     int fileSuccess = 1;
-    for(int i=0; i<books->used; i++){
-//        printf("isbn  : %s\n", books->array[i].isbn);
-//        printf("title : %s\n", books->array[i].title);
-//        printf("author: %s\n", books->array[i].author);
-//        printf("anzahl: %s\n", books->array[i].numberof);
-//        printf("borrow: %s\n", books->array[i].borrowlist);
+    for(int i=0; i<bib->used; i++){
+//        printf("isbn  : %s\n", bib->array[i].isbn);
+//        printf("title : %s\n", bib->array[i].title);
+//        printf("author: %s\n", bib->array[i].author);
+//        printf("anzahl: %s\n", bib->array[i].numberof);
+//        printf("borrow: %s\n", bib->array[i].borrowlist);
         // skip line, if book was deleted
-        if(!(books->array[i].isbn == NULL && books->array[i].title == NULL && books->array[i].author == NULL && books->array[i].numberof == NULL && books->array[i].borrowlist == NULL)){
+        if(!(bib->array[i].isbn == NULL && bib->array[i].title == NULL && bib->array[i].author == NULL && bib->array[i].numberof == NULL && bib->array[i].borrowlist == NULL)){
             // get length of the line and allocate the memory for the line
-            int lineSize = 5+strlen(books->array[i].isbn)+strlen(books->array[i].title)+strlen(books->array[i].author)+strlen(books->array[i].numberof)+strlen(books->array[i].borrowlist);
+            int lineSize = 5+strlen(bib->array[i].isbn)+strlen(bib->array[i].title)+strlen(bib->array[i].author)+strlen(bib->array[i].numberof)+strlen(bib->array[i].borrowlist);
     //        printf("lineSize: %d\n", lineSize);
             char *line = malloc(lineSize*sizeof(char));
     //        printf("after malloc\n");
     //        // write all entries of array into line variable
-            snprintf(line, lineSize, "%s;%s;%s;%s;%s\n", books->array[i].isbn, books->array[i].title, books->array[i].author, books->array[i].numberof, books->array[i].borrowlist);
+            snprintf(line, lineSize, "%s;%s;%s;%s;%s\n", bib->array[i].isbn, bib->array[i].title, bib->array[i].author, bib->array[i].numberof, bib->array[i].borrowlist);
     //        printf("line: %s", line);
     //        // write first line and append the following lines
             FILE *dataFile;

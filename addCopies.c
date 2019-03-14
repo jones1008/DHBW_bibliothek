@@ -1,12 +1,12 @@
 #include "addCopies.h"
-void addCopies(Bib *books)
+void addCopies(Bib *bib)
 {
 //    char searchString[BUFFERSIZE];
 //    printf("Zu welchem Buch sollen Exemplare hinzugef%cgt werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ", ue);
 //    getUserInput(searchString);
 //    if(!isAborted(searchString)){
 //        foundBooks foundBooks;
-//        search(books, &foundBooks, searchString);
+//        search(bib, &foundBooks, searchString);
 //        showFoundBooks(&foundBooks, "atin");
 //
 //        // let the user choose a book
@@ -20,13 +20,13 @@ void addCopies(Bib *books)
 //
 //
 ////            printf("pointer to chosenBook: %s\n", foundBooks.array[chosenBook]->author);
-////            actualDeleteBooks(books, &foundBooks.array[chosenBook]);
+////            actualDeleteBooks(bib, &foundBooks.array[chosenBook]);
 //        }
 //    }
 }
 
-void actualAddCopies(Bib *books, book *book)
+void actualAddCopies(Bib *bib, book *book)
 {
 
-    saveBooks(books);
+    saveBooks(bib);
 }

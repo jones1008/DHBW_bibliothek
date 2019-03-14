@@ -9,6 +9,6 @@
 #include "saveBooks.h"
 #include "helperFunctions.h"
 
-void addBook(Bib *books);
+void addBook(Bib *bib);
 
 #endif

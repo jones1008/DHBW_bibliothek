@@ -1,6 +1,6 @@
 #include "deleteBooks.h"
 
-void deleteBooks(Bib *books)
+void deleteBooks(Bib *bib)
 {
     // TODO: Abfrage, wieviel gelöscht werden soll oder ob kompletter Vorrat gelöscht werden soll
     char searchString[BUFFERSIZE];
@@ -9,7 +9,7 @@ void deleteBooks(Bib *books)
     getUserInput(searchString);
     if(!isAborted(searchString)){
         foundBooks foundBooks;
-        search(books, &foundBooks, searchString);
+        search(bib, &foundBooks, searchString);
         showFoundBooks(&foundBooks, "ati");
 
         // let the user choose a book
@@ -25,12 +25,12 @@ void deleteBooks(Bib *books)
 
 
 //            printf("pointer to chosenBook: %s\n", foundBooks.array[chosenBook]->author);
-//            actualDeleteBooks(books, &foundBooks.array[chosenBook]);
+//            actualDeleteBooks(bib, &foundBooks.array[chosenBook]);
         }
     }
 }
 
-void actualDeleteBooks(Bib *books, book **book)
+void actualDeleteBooks(Bib *bib, book **book)
 {
 //    printf("Anzahl Exemplare von %s - %s: %s\n", book->title, book->author, book->numberof);
 //    char deleteCount[BUFFERSIZE];
@@ -79,7 +79,7 @@ void actualDeleteBooks(Bib *books, book **book)
 //            }
 //        }
 //        if(isNotAborted){
-//            saveBooks(books);
+//            saveBooks(bib);
 //        }
 //    }
 }

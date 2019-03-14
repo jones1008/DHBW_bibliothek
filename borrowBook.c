@@ -1,5 +1,5 @@
 #include "borrowBook.h"
-void borrowBook(Bib *books)
+void borrowBook(Bib *bib)
 {
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll ausgeliehen werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
@@ -7,7 +7,7 @@ void borrowBook(Bib *books)
     getUserInput(searchString);
     if(!isAborted(searchString)){
         foundBooks foundBooks;
-        search(books, &foundBooks, searchString);
+        search(bib, &foundBooks, searchString);
         showFoundBooks(&foundBooks, "atinb");
 
         // let the user choose a book
@@ -21,12 +21,12 @@ void borrowBook(Bib *books)
 
 
 //            printf("pointer to chosenBook: %s\n", foundBooks.array[chosenBook]->author);
-//            actualBorrowBook(books, &foundBooks.array[chosenBook]);
+//            actualBorrowBook(bib, &foundBooks.array[chosenBook]);
         }
     }
 }
 
-void actualBorrowBook(Bib *books, book *book)
+void actualBorrowBook(Bib *bib, book *book)
 {
     // TODO: testen!!! ist bisher ungetestet
 
@@ -60,7 +60,7 @@ void actualBorrowBook(Bib *books, book *book)
 //            snprintf(newBorrowList, "%s, %s", book->borrowlist, name);
 //            book->borrowlist = newBorrowList;
 //
-//            saveBooks(books);
+//            saveBooks(bib);
 //        }
 //    }
 }

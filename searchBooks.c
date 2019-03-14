@@ -1,6 +1,6 @@
 #include "searchBooks.h"
 
-void searchBooks(Bib *books)
+void searchBooks(Bib *bib)
 {
     // get user search input
 //    char *searchString = malloc(0);
@@ -18,19 +18,19 @@ void searchBooks(Bib *books)
     if(!isAborted(searchString)){
         // pass searchString to the search-function
         foundBooks foundBooks;
-        search(books, &foundBooks, searchString);
+        search(bib, &foundBooks, searchString);
 
         if(foundBooks.size > 0){
             showFoundBooks(&foundBooks, "atinb");
             // run context-action for the foundBooks
-            contextBookAction(books, &foundBooks);
+            contextBookAction(bib, &foundBooks);
         } else{
-            searchBooks(books);
+            searchBooks(bib);
         }
     }
 }
 
-void contextBookAction(Bib *books, foundBooks *foundBooks)
+void contextBookAction(Bib *bib, foundBooks *foundBooks)
 {
     // let the user choose a book to borrow/return/delete/addCopy the chosen book
     int chosenBook = 0;
@@ -69,16 +69,16 @@ void contextBookAction(Bib *books, foundBooks *foundBooks)
             // TODO: add feedback to the user that the action was performed
             switch(userChar[0]){
                 case 'a':
-//                    actualBorrowBook(books, foundBooks->array[chosenBook-1]);
+//                    actualBorrowBook(bib, foundBooks->array[chosenBook-1]);
                     break;
                 case 'z':
-//                    actualReturnBook(books, foundBooks->array[chosenBook-1]);
+//                    actualReturnBook(bib, foundBooks->array[chosenBook-1]);
                     break;
                 case 'l':
-//                    actualDeleteBooks(books, foundBooks->array[chosenBook-1]);
+//                    actualDeleteBooks(bib, foundBooks->array[chosenBook-1]);
                     break;
                 case 'c':
-//                    actualAddCopies(books, foundBooks->array[chosenBook-1]);
+//                    actualAddCopies(bib, foundBooks->array[chosenBook-1]);
                     break;
                 default:
                     printf("Falsche Eingabe!\n");

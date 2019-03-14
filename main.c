@@ -15,7 +15,7 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
-void showMenu(Bib *books)
+void showMenu(Bib *bib)
 {
     printf("HAUPTMEN%c:\n", UE);
 
@@ -55,37 +55,37 @@ void showMenu(Bib *books)
         case 'b':
             menuHeader = "ALLE BUECHER";
             printMenuHeader(menuHeader);
-            showAll(books);
+            showAll(bib);
             break;
         case 's':
             menuHeader = "BUCH SUCHEN";
             printMenuHeader(menuHeader);
-            searchBooks(books);
+            searchBooks(bib);
             break;
         case 'a':
             menuHeader = "BUCH AUSLEIHEN";
             printMenuHeader(menuHeader);
-            borrowBook(books);
+            borrowBook(bib);
             break;
         case 'z':
             menuHeader = "BUCH ZURUECKGEBEN";
             printMenuHeader(menuHeader);
-            returnBook(books);
+            returnBook(bib);
             break;
         case 'h':
             menuHeader = "NEUES BUCH HINZUFUEGEN";
             printMenuHeader(menuHeader);
-            addBook(books);
+            addBook(bib);
             break;
         case 'l':
             menuHeader = "BUCH LOESCHEN";
             printMenuHeader(menuHeader);
-            deleteBooks(books);
+            deleteBooks(bib);
             break;
         case 'c':
             menuHeader = "BUCHEXEMPLAR HINZUFUEGEN";
             printMenuHeader(menuHeader);
-            addCopies(books);
+            addCopies(bib);
             break;
         case 'e':
             printf("Schlie%ce Bibliothek...\n", ss);
@@ -101,7 +101,7 @@ void showMenu(Bib *books)
     printMenuEnding(strlen(menuHeader));
     printf("\n");
     // call itself after other functions are completed
-    showMenu(books);
+    showMenu(bib);
 }
 void showHeading()
 {
@@ -114,32 +114,32 @@ void showHeading()
  *  params:
  *      Bib *books    (a pointer to the books structure)
  */
-void freeBooks(Bib *books)
+void freeBooks(Bib *bib)
 {
     // Free all name variables of each array element first
-    for(int i=0; i<books->used; i++)
+    for(int i=0; i<bib->used; i++)
     {
-        free(&books->array[i].isbn);
-        books->array[i].isbn=NULL;
+        free(&bib->array[i].isbn);
+        bib->array[i].isbn=NULL;
 
-        free(&books->array[i].title);
-        books->array[i].title=NULL;
+        free(&bib->array[i].title);
+        bib->array[i].title=NULL;
 
-        free(&books->array[i].author);
-        books->array[i].author=NULL;
+        free(&bib->array[i].author);
+        bib->array[i].author=NULL;
 
-        free(&books->array[i].numberof);
-        books->array[i].numberof=NULL;
+        free(&bib->array[i].numberof);
+        bib->array[i].numberof=NULL;
 
-        free(&books->array[i].borrowlist);
-        books->array[i].borrowlist=NULL;
+        free(&bib->array[i].borrowlist);
+        bib->array[i].borrowlist=NULL;
     }
     // Now free the array
-    free(books->array);
-    books->array = NULL;
+    free(bib->array);
+    bib->array = NULL;
 
-    books->used = 0;
-    books->size = 0;
+    bib->used = 0;
+    bib->size = 0;
 }
 
 
@@ -155,7 +155,7 @@ void freeFoundBooks(foundBooks *foundBooks){
     for(int i=0; i<foundBooks->size-1; i++)
     {
         free(&foundBooks->array[i]);
-        foundBooks->array[i]=NULL;
+//        foundBooks->array[i]=NULL;
     }
     // Now free the array
     free(foundBooks->array);
@@ -167,27 +167,27 @@ void freeFoundBooks(foundBooks *foundBooks){
 int main()
 {
     // initially loading the books from the data-text file
-    Bib books;
-    loadBooks(&books);
+    Bib bib;
+    loadBooks(&bib);
 
     showHeading();
 //    system("cls");
-    showMenu(&books);
+    showMenu(&bib);
 
-//    books.array[0].author = "neu";
-//    saveBooks(&books);
+//    bib.array[0].author = "neu";
+//    saveBooks(&bib);
 
     // searching for books and printing the author and the title of the found ones
 //    char string[] = "e";
 //    char *searchString = string;
 //    foundBooks foundBooks;
-//    search(&books, &foundBooks, searchString);
+//    search(&bib, &foundBooks, searchString);
 //    for(int i=0; i<foundBooks.size; i++){
 //        printf("author: %s | title: %s\n", foundBooks.array[i]->author, foundBooks.array[i]->title);
 //    }
 
     // free all previously allocated memory
-    freeBooks(&books);
+    freeBooks(&bib);
 //    freeFoundBooks(&foundBooks);
 
     return 0;

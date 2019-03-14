@@ -1,5 +1,5 @@
 #include "addBook.h"
-void addBook(Bib *books)
+void addBook(Bib *bib)
 {
 //    char *newIsbn = "";
     int isNotAborted;
@@ -104,34 +104,34 @@ void addBook(Bib *books)
                     printf("---------\n");
                     if(choice[0] == 'j'){
                         // create new Book array and adding information to this new added book-array-element
-                        newBook(books);
+                        newBook(bib);
                         printf("ISBN  : %s\n", isbn);
                         printf("Titel : %s\n", title);
                         printf("Autor : %s\n", author);
                         printf("Anzahl: %s\n", numberof);
 
-                        writeStringToArrayNode(books, 'i', isbn);
-                        writeStringToArrayNode(books, 't', title);
-                        writeStringToArrayNode(books, 'a', author);
-                        writeStringToArrayNode(books, 'n', numberof);
-                        writeStringToArrayNode(books, 'b', "");
+                        writeStringToArrayNode(bib, 'i', isbn);
+                        writeStringToArrayNode(bib, 't', title);
+                        writeStringToArrayNode(bib, 'a', author);
+                        writeStringToArrayNode(bib, 'n', numberof);
+                        writeStringToArrayNode(bib, 'b', "");
 
-//                        printf("isbn  : %s\n", books->array[books->used].isbn);
-//                        printf("title : %s\n", books->array[books->used].title);
-//                        printf("author: %s\n", books->array[books->used].author);
-//                        printf("anzahl: %s\n", books->array[books->used].numberof);
-//                        printf("borrow: %s\n", books->array[books->used].borrowlist);
+//                        printf("isbn  : %s\n", bib->array[bib->used].isbn);
+//                        printf("title : %s\n", bib->array[bib->used].title);
+//                        printf("author: %s\n", bib->array[bib->used].author);
+//                        printf("anzahl: %s\n", bib->array[bib->used].numberof);
+//                        printf("borrow: %s\n", bib->array[bib->used].borrowlist);
 
-                        // increase books-used-parameter
-//                        printf("books used: %d", books->used);
-                        books->used = books->used+1;
-//                        printf("books used: %d", books->used);
+                        // increase bib-used-parameter
+//                        printf("bib used: %d", bib->used);
+                        bib->used = bib->used+1;
+//                        printf("books used: %d", bib->used);
 
-                        // save books to text-file
-                        saveBooks(books);
+                        // save bib to text-file
+                        saveBooks(bib);
                     }
                     if(choice[0] == 'n'){
-                        addBook(books);
+                        addBook(bib);
                     }
                 }
 //                freeTempString(numberof);

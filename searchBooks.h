@@ -13,7 +13,7 @@
 #include "deleteBooks.h"
 #include "returnBook.h"
 
-void searchBooks(Bib *books);
-void contextBookAction(Bib *books, foundBooks *foundBooks);
+void searchBooks(Bib *bib);
+void contextBookAction(Bib *bib, foundBooks *foundBooks);
 
 #endif

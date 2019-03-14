@@ -22,6 +22,7 @@ typedef struct
     size_t used;
     size_t size;
 } Bib;
+
 typedef struct{
     book **array;
     size_t size;

@@ -1,12 +1,12 @@
 #include "showAll.h"
 
-void showAll(Bib *books)
+void showAll(Bib *bib)
 {
     foundBooks foundBooks;
     char searchString[] = "";
-    search(books, &foundBooks, searchString);
+    search(bib, &foundBooks, searchString);
 
     showFoundBooks(&foundBooks, "itanb");
 
-    contextBookAction(books, &foundBooks);
+    contextBookAction(bib, &foundBooks);
 }
