@@ -9,4 +9,5 @@ void showAll(Bib *bib)
     showFoundBooks(&foundBooks, "itanb");
 
     contextBookAction(bib, &foundBooks);
+    freeFoundBooks(&foundBooks);
 }

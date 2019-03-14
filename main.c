@@ -28,12 +28,10 @@ void showMenu(Bib *bib)
     printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
     printf("[E]: Bibliotheksverwaltung verlassen\n");
 
-//    char *menuPoint = malloc(0);
     char menuPoint[BUFFERSIZE];
     char *allowedChars = "bsazhlce";
 
     // repeat user input if the input was wrong
-    // TODO: manchmal spackt user input rum, wenn man beim Suchen rumprobiert
     do{
         // get user input
 //        printf("vor UserInput: book->numberof: %s\n", bib->books[5].numberof);
@@ -143,28 +141,6 @@ void freeBooks(Bib *bib)
 
     bib->used = 0;
     bib->size = 0;
-}
-
-
-// TODO: ist dies an der richtigen Stelle? Brauchen wir das nicht woanders? brauchen wir das überhaupt noch?
-/*
- *  function: freeFoundBooks
- *      frees previously allocated memory of a foundBooks structure
- *  params:
- *      foundBooks *foundBooks    (a pointer to the foundBooks structure)
- */
-void freeFoundBooks(foundBooks *foundBooks){
-    // Free all pointers of each array element first
-    for(int i=0; i<foundBooks->size-1; i++)
-    {
-        free(&foundBooks->books[i]);
-        foundBooks->books[i]=NULL;
-    }
-    // Now free the array
-    free(foundBooks->books);
-    foundBooks->books = NULL;
-
-    foundBooks->size = 0;
 }
 
 int main()

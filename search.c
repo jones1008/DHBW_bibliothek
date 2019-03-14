@@ -17,7 +17,7 @@ void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 
     // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
 //    printf("search: before replaceUmlauts\n");
-    searchString = replaceUmlauts(searchString);
+    replaceUmlauts(searchString);
 //    printf("search: after replaceUmlauts\n");
 
     // make the searchString to lower case, so the comparison is case insensitive
@@ -112,6 +112,4 @@ void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
             printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
         }
     } while(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size));
-    // decrease chosenBook since arrays start at 0
-    (*chosenBook)--;
 }

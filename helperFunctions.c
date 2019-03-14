@@ -73,6 +73,7 @@ void getUserInput(char *userVariable)
 //    printf("userVar: %s\n", userVariable);
     if ( strlen(userVariable)>0 && userVariable[strlen(userVariable)-1] == '\n' ){
         userVariable[strlen(userVariable)-1] = '\0';
+        trim(userVariable);
     }
 //    printf("userVariableD: %d\n", userVariable[0]);
 //    printf("userVariable: %s\n", userVariable);
@@ -127,24 +128,98 @@ int isAborted(char *userInput)
     }
 }
 
-char *trimwhitespace(char *str)
+//char *trimWhitespace(char *str)
+//{
+//    char *end;
+//    // Trim leading space
+//    while(isspace((unsigned char)*str)){
+//        str++;
+//    }
+//    // All spaces
+//    if(*str == 0){
+//        return str;
+//    }
+//    // Trim trailing space
+//    end = str + strlen(str)-1;
+//    while(end > str && isspace((unsigned char)*end)){
+//        end--;
+//    }
+//    // Write new null terminator character
+//    end[1] = '\0';
+//    return str;
+//}
+char *trim(char *str)
 {
-    char *end;
-    // Trim leading space
-    while(isspace((unsigned char)*str)){
-        str++;
+    size_t len = 0;
+    char *frontp = str;
+    char *endp = NULL;
+
+    if(str == NULL){
+        return NULL;
     }
-    // All spaces
-    if(*str == 0){
+    if(str[0] == '\0'){
         return str;
     }
-    // Trim trailing space
-    end = str + strlen(str) - 1;
-    while(end > str && isspace((unsigned char)*end)) end--;
-    // Write new null terminator character
-    end[1] = '\0';
+
+    len = strlen(str);
+    endp = str + len;
+
+    // Move the front and back pointers to address the first non-whitespace characters from each end.
+    while(isspace((unsigned char) *frontp)){
+        ++frontp;
+    }
+    if(endp != frontp){
+        while(isspace((unsigned char) *(--endp)) && endp != frontp){}
+    }
+    if(str + len-1 != endp){
+        *(endp + 1) = '\0';
+    } else if(frontp != str &&  endp == frontp){
+        *str = '\0';
+    }
+
+    // Shift the string so that it starts at str
+    endp = str;
+    if(frontp != str)
+    {
+        while(*frontp){
+            *endp++ = *frontp++;
+        }
+        *endp = '\0';
+    }
+
     return str;
 }
+//size_t trimWhitespace(char *out, size_t len, const char *str)
+//{
+//    if(len == 0){
+//        return 0;
+//    }
+//    const char *end;
+//    size_t out_size;
+//
+//    // Trim leading space
+//    while(isspace((unsigned char)*str)){
+//        str++;
+//    }
+//    // all spaces?
+//    if(*str == 0){
+//        *out = 0;
+//        return 1;
+//    }
+//    // Trim trailing space
+//    end = str + strlen(str) - 1;
+//    while(end > str && isspace((unsigned char)*end)) end--;
+//    end++;
+//
+//    // Set output size to minimum of trimmed string length and buffer size minus 1
+//    out_size = (end-str) < len-1 ? (end-str) : len-1;
+//
+//    // Copy trimmed string and add null terminator
+//    memcpy(out, str, out_size);
+//    out[out_size] = 0;
+//
+//    return out_size;
+//}
 
 char *replaceUmlauts(char *str)
 {
@@ -237,7 +312,6 @@ void removeChar(char *str, int c)
             str[j++] = str[i];
         }
     }
-
     str[j] = '\0';
 }
 
@@ -266,17 +340,29 @@ void printMenuEnding(int menuHeaderLength)
     printf("\n");
 }
 
-//void showReturnToMenu()
-//{
-//    printf("Zur%cck zum Men%c [ENTER]:", ue, ue);
-//    char enter = 0;
-//    while (enter != '\r' && enter != '\n'){
-//        enter = getchar();
-//    }
-//}
-
 void freeTempString(char *var)
 {
     free(var);
     var = NULL;
+}
+
+/*
+ *  function: freeFoundBooks
+ *      frees previously allocated memory of a foundBooks structure
+ *  params:
+ *      foundBooks *foundBooks    (a pointer to the foundBooks structure)
+ */
+void freeFoundBooks(foundBooks *foundBooks)
+{
+    // Free all pointers of each array element first
+    for(int i=0; i<foundBooks->size-1; i++)
+    {
+        free(&foundBooks->books[i]);
+        foundBooks->books[i]=NULL;
+    }
+    // Now free the array
+    free(foundBooks->books);
+    foundBooks->books = NULL;
+
+    foundBooks->size = 0;
 }

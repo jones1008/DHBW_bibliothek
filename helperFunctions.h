@@ -19,12 +19,13 @@
 #define ue (unsigned char)129
 #define ss (unsigned char)225
 
-//void getUserInput(char *userVariable, const char message[]);
 void getUserInput(char *userVariable);
 int wrongCharInput(char *userInput, char *allowedChars);
 int isAborted(char *userVariable);
 
-char *trimwhitespace(char *str);
+//char *trimWhitespace(char *str);
+char *trim(char *str);
+//size_t trimWhitespace(char *out, size_t len, const char *str);
 char *replaceUmlauts(char *str);
 void stringToLower(char *strPtr);
 int countChars(char* str, char c);
@@ -33,6 +34,8 @@ void removeChar(char *str, int c);
 void printMenuHeader(char *header);
 void printMenuEnding(int menuHeaderLength);
 void showReturnToMenu();
+
 void freeTempString(char *var);
+void freeFoundBooks(foundBooks *foundBooks);
 
 #endif

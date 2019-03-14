@@ -69,20 +69,14 @@ void addBook(Bib *bib)
                 } while(isNotAborted && !isNumber);
 
                 if(isNotAborted){
-//                    // remove trailing and leading spaces
-//                    isbn = trimwhitespace(newIsbn);
-//                    title = trimwhitespace(title);
-//                    author = trimwhitespace(author);
-//                    // convert Umlaute to corresponding characters
-//                    title = replaceUmlauts(title);
-//                    author = replaceUmlauts(author);
-
                     // remove trailing and leading spaces
+                    trim(isbn);
+                    trim(title);
+                    trim(author);
+//                    trimWhitespace(isbn, strlen(isbn), isbn);
+//                    trimWhitespace(title, strlen(title), title);
+//                    trimWhitespace(author, strlen(author), author);
 
-                    // funktioniert nicht, wenn whitespace vorne ist
-                    trimwhitespace(isbn);
-                    trimwhitespace(title);
-                    trimwhitespace(author);
                     // convert Umlaute to corresponding characters
                     replaceUmlauts(title);
                     replaceUmlauts(author);

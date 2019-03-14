@@ -14,13 +14,18 @@ Jones:
 - editBookData()? (title, author, isbn)
 - clearScreen -> system("cls") oder system("clear")
 / alle anzeigen
-- deleteBooks() + actualDelete()
-(- addCopies() + actualAddCopies())
-- borrowBook() + actualBorrowBook()
-- returnBook() + actualReturnBook()
+/ deleteBooks() + actualDelete()
+(- addCopies() + actualAddCopies()) -> vlt in editBookData reinpacken?
+/ borrowBook() + actualBorrowBook()
+/ returnBook() + actualReturnBook()
 - close Window after exiting
 
+- gscheite Werte für Datenbank raussuchen
+- wird immer richtig gespeichert?
+- testen, ob noch alle funktionen gebraucht werden
+- usability testen
 
 Rules:
 - nach jeder Methode am Ende den allokierten Bereich der ArrayPointer löschen (free)
 - immer Kommentare hinterlassen
+- unnötige Kommentare wegstreichen

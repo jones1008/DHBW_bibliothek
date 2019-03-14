@@ -17,167 +17,90 @@ void returnBook(Bib *bib)
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
+            // decrease chosenBook since arrays start at 0
+            chosenBook--;
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+
             if(isNotAborted){
                 actualReturnBook(bib, foundBooks.books[chosenBook]);
             }
         } else if(foundBooks.size == 1){
             actualReturnBook(bib, foundBooks.books[0]);
         }
+        freeFoundBooks(&foundBooks);
     }
 }
-//void newBorrower(foundBorrowers *foundBorrowers)
-//{
-//    foundBorrowers->size = foundBorrowers->size+1;
-//    foundBorrowers->borrowers = realloc(foundBorrowers->borrowers, foundBorrowers->size*sizeof(borrower));
-//}
 
 void actualReturnBook(Bib *bib, book *book)
 {
-    // TODO: convert umlaute beim Suchen
-    // TODO: show errormessage if borrowlist empty
-    // TODO: testen!!! ist bisher ungetestet
+    // print error message if borrowlist is empty
+    if(book->borrowlist[0] != '\0'){
+        char name[BUFFERSIZE];
 
-    char name[BUFFERSIZE];
-    printf("Titel    : %s\n", book->title);
-    printf("Autor    : %s\n", book->author);
-    printf("Ausleiher: %s\n", book->borrowlist);
+        printf("\n");
+        printf("Titel    : %s\n", book->title);
+        printf("Autor    : %s\n", book->author);
+        printf("Ausleiher: %s\n", book->borrowlist);
+        printf("\n");
 
-    int isNotAborted;
-//    char *namePointer = NULL;
-    do{
-        printf("Name Zur%cckgebender ([ENTER] zum Abbrechen): ", ue);
-        getUserInput(name);
-        isNotAborted = !isAborted(name);
-        if(isNotAborted){
-            // remove commas from user input
-            removeChar(name, ',');
-//            stringToLower(name);
-            char delimiter[] = ",";
+        // repeat user input if nothing was found
+        int isNotAborted;
+        int firstUnmatch = 1;
+        int found = 0;
+        do{
+            printf("Name Zur%cckgebender ([ENTER] zum Abbrechen): ", ue);
+            getUserInput(name);
+            isNotAborted = !isAborted(name);
+            if(isNotAborted){
+                // remove commas from user input
+                removeChar(name, ',');
+                replaceUmlauts(name);
 
-//            foundBorrowers foundBorrowers;
-//            foundBorrowers.borrowers = malloc(0);
-//            foundBorrowers.size = 0;
-            // TODO: evtl in function?
-            // create copy to work with
-            char borrowListCopy[strlen(book->borrowlist)];
-            strncpy(borrowListCopy, book->borrowlist, strlen(book->borrowlist));
-            borrowListCopy[strlen(book->borrowlist)] = '\0';
+                // initialize newBorrowList
+                char *newBorrowList = malloc(strlen(book->borrowlist)*sizeof(char));
+                memset(newBorrowList, 0, strlen(book->borrowlist));
 
-            int i=0;
-            char *ptr = strtok(borrowListCopy, delimiter);
-            while(ptr != NULL){
-                // copy ptr
-//                char borrower[strlen(ptr)];
-//                strncpy(borrower, ptr, strlen(ptr));
-//                borrower[strlen(ptr)] = '\0';
-//                stringToLower(borrower);
-                char *newPtr = trimwhitespace(ptr);
-                printf("newPtr: %s\n", newPtr);
-                printf("strlen(newPtr): %d\n", strlen(newPtr));
-                printf("name: %s\n", name);
-                printf("strlen(name): %d\n", strlen(name));
-                if(newPtr == name){
-                    // TODO: get string from ptr to next comma or \0
-                    printf("FOUND: %s\n", ptr);
-                    // TODO: ask user if he wants to remove this borrower
+                // split borrowlist into its borrowers
+                char delimiter[] = ",";
+                char *ptr = strtok(book->borrowlist, delimiter);
 
-                    break;
-                    // add ptr to ptrarray
-//                    newBorrower(&foundBorrowers);
-//                    foundBorrowers.borrowers[i] = &ptr;
+                int i=0;
+                while(ptr != NULL){
+                    // create a temporary copy of the current string with trimmed spaces
+//                    char *tmpPtr = trimWhitespace(ptr);
+                    char *tmpPtr = trim(ptr);
+//                    char tmpPtr[strlen(ptr)];
+//                    trimWhitespace(tmpPtr, strlen(ptr), ptr);
+
+                    // check if current string doesn't match the user input
+                    if(strcmp(tmpPtr, name) != 0){
+                        // check if this is the first loop it doesn't match the user input and change what should be written to newBorrowList
+                        if(firstUnmatch){
+                            snprintf(newBorrowList, strlen(tmpPtr)+1, "%s", tmpPtr);
+                        } else{
+                            snprintf(newBorrowList, strlen(newBorrowList)+3+strlen(tmpPtr), "%s, %s", newBorrowList, tmpPtr);
+                        }
+                        firstUnmatch = 0;
+                    } else{
+                        found = 1;
+                    }
+                    ptr = strtok(NULL, delimiter);
+                    i++;
                 }
-                ptr = strtok(NULL, delimiter);
-                i++;
+
+                // save new borrowlist only if something was found
+                if(found){
+                    book->borrowlist = newBorrowList;
+                    printf("---> '%s' wurde von der Ausleihliste entfernt.\n", name);
+                    saveBooks(bib);
+                } else{
+                    printf("ERROR: '%s' nicht in der Ausleihliste gefunden!\n", name);
+                }
+
+                freeTempString(newBorrowList);
             }
-
-            printf("index: %d\n", ptr-borrowListCopy);
-            borrowListCopy[ptr-borrowListCopy] = '\0';
-            printf("borrowListCopy: %s\n", borrowListCopy);
-
-//            for(int j=0; j<foundBorrowers.size; j++){
-//                printf("borrower: %s", foundBorrowers.borrowers[j]);
-//                // ask user which one to choose
-//            }
-
-            // copy borrowlist to newBorrowList
-//            printf("strlen(book->borrowlist): %d\n", strlen(book->borrowlist));
-
-//            char newBorrowList[strlen(book->borrowlist)];
-//            strncpy(newBorrowList, book->borrowlist, strlen(book->borrowlist));
-//            newBorrowList[strlen(book->borrowlist)] = '\0';
-//            printf("newBorrowList: %s\n", newBorrowList);
-
-            // TODO: in function? copyString()? (überall, wo strncpy verwendet wird
-            // create lowercase copy to compare string
-//            char borrowListCompareCopy[strlen(book->borrowlist)];
-//            strncpy(borrowListCompareCopy, book->borrowlist, strlen(book->borrowlist));
-//            borrowListCompareCopy[strlen(book->borrowlist)] = '\0';
-//            stringToLower(borrowListCompareCopy);
-//            stringToLower(name);
-//            namePointer = strstr(borrowListCompareCopy, name);
-
-            // create copy to work with
-//            char borrowListCopy[strlen(book->borrowlist)];
-//            strncpy(borrowListCopy, book->borrowlist, strlen(book->borrowlist));
-//            borrowListCopy[strlen(book->borrowlist)] = '\0';
-
-//            printf("borrowListCopy: %s\n", borrowListCopy);
-            // check if name occurs in borrowlist
-//            if(namePointer != NULL){
-                // TODO: doesnt work yet for people to be the first one
-                // find the first comma occurence or start of string before namePointer and take this pointer then to cut the string
-//                while(namePointer != borrowListCompareCopy && namePointer[0] != ','){
-//                    printf("namePointer:%s\n", namePointer);
-////                    printf("namePointerChar:%c\n", namePointer[0]);
-//                    namePointer--;
-//                }
-//                printf("namePointer:%s\n", namePointer);
-////                borrowListCopy[namePointer-borrowListCompareCopy] = '\0';
-////                printf("borrowlistCopy: %s\n", borrowListCopy);
-//                // copy first part to newBorrowList
-//                int index = namePointer-borrowListCompareCopy;
-//                printf("index: %d\n", index);
-//                if(index != 0){
-//                    printf("is not null\n");
-//                    strncpy(newBorrowList, borrowListCopy, index);
-//                    newBorrowList[index] = '\0';
-//                } else{
-//                    newBorrowList[0] = '\0';
-//                }
-////                borrowListCopy[namePointer-borrowListCompareCopy] = ',';
-//
-//                printf("after finding first comma: %s\n", newBorrowList);
-//
-//                namePointer++;
-//                // TODO: find next comma occurence or end of string after namePointer
-//                while(namePointer[0] != '\0' && namePointer[0] != ','){
-//                    printf("namePointer: %s\n", namePointer);
-//                    namePointer++;
-//                }
-//                printf("namePointer: %s\n", namePointer);
-//                // ad the last part to newBorrowList
-////                borrowListCopy[namePointer-borrowListCompareCopy] = '\0';
-//                printf("borrowlistCopy: %s\n", borrowListCopy);
-//                int index2 = namePointer-borrowListCompareCopy+2;
-//                printf("index2: %d\n", index2);
-//                printf("borrowListCopy[index2]: %c\n", borrowListCopy[index2]);
-////                if(index2 != 0){
-////                    printf("is not 0\n");
-////                    strcat(newBorrowList, &borrowListCopy[index2+2]);
-////                } else{
-//                    strcat(newBorrowList, &borrowListCopy[index2]);
-////                }
-//                printf("newBorrowList: %s\n", newBorrowList);
-
-
-                // TODO: get substring from "',' or start of string" to "next ',' or end of string" (wenn zu schwer: dann einfach nur rauslöschen, ohne Überprüfung und User Nachfrage und danach unnötige spaces und Kommas rauslöschen)
-                // TODO: ask user if he really wants to remove X
-                // TODO: remove name from book->borrowlist
-
-//                saveBooks(bib);
-//            } else{
-//                printf("ERROR: Name '%s' in Ausleihliste nicht gefunden!\n", name);
-//            }
-        }
-    } while(isNotAborted);
+        } while(isNotAborted && !found);
+    } else{
+        printf("ERROR: Das gew%chlte Buch wurde bisher noch nicht ausgeliehen!\n", ae);
+    }
 }

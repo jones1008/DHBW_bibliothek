@@ -16,18 +16,21 @@ void borrowBook(Bib *bib)
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
+            chosenBook--;
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+
             if(isNotAborted){
                 actualBorrowBook(bib, foundBooks.books[chosenBook]);
             }
         } else if(foundBooks.size == 1){
             actualBorrowBook(bib, foundBooks.books[0]);
         }
+        freeFoundBooks(&foundBooks);
     }
 }
 
 void actualBorrowBook(Bib *bib, book *book)
 {
-    // TODO: convert umlaute
     // get number of borrowers
     int numberOfBorrowers;
 
@@ -54,6 +57,7 @@ void actualBorrowBook(Bib *bib, book *book)
         if(!isAborted(name)){
             // remove comma if user put some in -> for example: Mustermann, Max
             removeChar(name, ',');
+            replaceUmlauts(name);
 
             // create new borrowlist and write it
             char newBorrowList[strlen(book->borrowlist)+1+strlen(name)];

@@ -17,6 +17,9 @@ void deleteBooks(Bib *bib)
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
+            chosenBook--;
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+
             if(isNotAborted){
     //            printf("chosenbook pointer: %d\n", **foundBooks.books[chosenBook]);
                 actualDeleteBooks(bib, foundBooks.books[chosenBook]);
@@ -25,11 +28,13 @@ void deleteBooks(Bib *bib)
         } else if(foundBooks.size == 1){
             actualDeleteBooks(bib, foundBooks.books[0]);
         }
+        freeFoundBooks(&foundBooks);
     }
 }
 
 void actualDeleteBooks(Bib *bib, book *book)
 {
+    // TODO: Success-Meldung: Ausleihe wurde erfolgreich eingetragen
 //    printf("author: %s\n", book->author);
     printf("Anzahl Exemplare von '%s' von %s: %s\n", book->title, book->author, book->numberof);
     char deleteCountString[BUFFERSIZE];

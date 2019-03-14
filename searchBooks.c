@@ -1,7 +1,9 @@
 #include "searchBooks.h"
 
+// TODO: stürzt ab, wenn zweimal hintereinander in der Suche ein Leerzeichen eingegeben wurde: Lösung:? wenn nur Leerzeichen, dann Fehlermeldung, dass nichts eingegeben wurde
 void searchBooks(Bib *bib)
 {
+    // TODO: automatically chose first one, if only one ergebnis
     // get user search input
 //    char *searchString = malloc(0);
     char searchString[BUFFERSIZE];
@@ -29,6 +31,7 @@ void searchBooks(Bib *bib)
         } else{
             searchBooks(bib);
         }
+        freeFoundBooks(&foundBooks);
     }
 }
 
