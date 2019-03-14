@@ -116,11 +116,11 @@ void addBook(Bib *bib)
                         writeStringToArrayNode(bib, 'n', numberof);
                         writeStringToArrayNode(bib, 'b', "");
 
-//                        printf("isbn  : %s\n", bib->array[bib->used].isbn);
-//                        printf("title : %s\n", bib->array[bib->used].title);
-//                        printf("author: %s\n", bib->array[bib->used].author);
-//                        printf("anzahl: %s\n", bib->array[bib->used].numberof);
-//                        printf("borrow: %s\n", bib->array[bib->used].borrowlist);
+//                        printf("isbn  : %s\n", bib->books[bib->used].isbn);
+//                        printf("title : %s\n", bib->books[bib->used].title);
+//                        printf("author: %s\n", bib->books[bib->used].author);
+//                        printf("anzahl: %s\n", bib->books[bib->used].numberof);
+//                        printf("borrow: %s\n", bib->books[bib->used].borrowlist);
 
                         // increase bib-used-parameter
 //                        printf("bib used: %d", bib->used);

@@ -25,7 +25,7 @@ typedef struct
 
 // TODO: direkt auf das Buch pointern (normaler Pointer)
 typedef struct{
-    book **array;
+    book **books;
     size_t size;
 } foundBooks;
 

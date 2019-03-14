@@ -5,7 +5,7 @@ void loadBooks(Bib *bib)
     // initialize array
 //    int initialSize = 1;
     // Allocate initial space
-    bib->array = malloc(0);
+    bib->books = malloc(0);
     bib->used = 0;           // no elements used
     bib->size = 0; // available nr of elements
 
@@ -51,14 +51,14 @@ void loadBooks(Bib *bib)
 //                        printf("strlen: %d\n", strlen(records));
 //                        printf("string: %s\n", records);
 //                        printf("before alloc\n");
-//                        bib->array[bib->used].numberof = malloc(strlen(records));
-////                        bib->array[bib->used].numberof = malloc(sizeof(records)*sizeof(char));
+//                        bib->books[bib->used].numberof = malloc(strlen(records));
+////                        bib->books[bib->used].numberof = malloc(sizeof(records)*sizeof(char));
 //                        printf("afer alloc\n");
-//                        printf("array->numberof: %s\n", bib->array[bib->used].numberof);
+//                        printf("array->numberof: %s\n", bib->books[bib->used].numberof);
 //                        printf("record: %s\n", records);
-//                        strncpy(bib->array[bib->used].numberof, records, strlen(records));
+//                        strncpy(bib->books[bib->used].numberof, records, strlen(records));
 //                        printf("before before 0ing\n");
-//                        bib->array[bib->used].numberof[strlen(records)] = '\0';
+//                        bib->books[bib->used].numberof[strlen(records)] = '\0';
 //                        printf("number of done\n");
                         break;
                     case 4:

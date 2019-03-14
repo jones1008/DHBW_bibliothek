@@ -119,24 +119,24 @@ void freeBooks(Bib *bib)
     // Free all name variables of each array element first
     for(int i=0; i<bib->used; i++)
     {
-        free(&bib->array[i].isbn);
-        bib->array[i].isbn=NULL;
+        free(&bib->books[i].isbn);
+        bib->books[i].isbn=NULL;
 
-        free(&bib->array[i].title);
-        bib->array[i].title=NULL;
+        free(&bib->books[i].title);
+        bib->books[i].title=NULL;
 
-        free(&bib->array[i].author);
-        bib->array[i].author=NULL;
+        free(&bib->books[i].author);
+        bib->books[i].author=NULL;
 
-        free(&bib->array[i].numberof);
-        bib->array[i].numberof=NULL;
+        free(&bib->books[i].numberof);
+        bib->books[i].numberof=NULL;
 
-        free(&bib->array[i].borrowlist);
-        bib->array[i].borrowlist=NULL;
+        free(&bib->books[i].borrowlist);
+        bib->books[i].borrowlist=NULL;
     }
     // Now free the array
-    free(bib->array);
-    bib->array = NULL;
+    free(bib->books);
+    bib->books = NULL;
 
     bib->used = 0;
     bib->size = 0;
@@ -154,12 +154,12 @@ void freeFoundBooks(foundBooks *foundBooks){
     // Free all pointers of each array element first
     for(int i=0; i<foundBooks->size-1; i++)
     {
-        free(&foundBooks->array[i]);
-//        foundBooks->array[i]=NULL;
+        free(&foundBooks->books[i]);
+        foundBooks->books[i]=NULL;
     }
     // Now free the array
-    free(foundBooks->array);
-    foundBooks->array = NULL;
+    free(foundBooks->books);
+    foundBooks->books = NULL;
 
     foundBooks->size = 0;
 }
@@ -174,7 +174,7 @@ int main()
 //    system("cls");
     showMenu(&bib);
 
-//    bib.array[0].author = "neu";
+//    bib.books[0].author = "neu";
 //    saveBooks(&bib);
 
     // searching for books and printing the author and the title of the found ones

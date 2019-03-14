@@ -39,7 +39,7 @@ void contextBookAction(Bib *bib, foundBooks *foundBooks)
 
     // when a number was chosen: ask user what he wants to do with that book
     if(isNotAborted) {
-        printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks->array[chosenBook-1]->author, foundBooks->array[chosenBook-1]->title);
+        printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks->books[chosenBook-1]->author, foundBooks->books[chosenBook-1]->title);
 
         char *allowedChars = "azlc";
         char userChar[BUFFERSIZE];
@@ -69,16 +69,16 @@ void contextBookAction(Bib *bib, foundBooks *foundBooks)
             // TODO: add feedback to the user that the action was performed
             switch(userChar[0]){
                 case 'a':
-//                    actualBorrowBook(bib, foundBooks->array[chosenBook-1]);
+//                    actualBorrowBook(bib, foundBooks->books[chosenBook-1]);
                     break;
                 case 'z':
-//                    actualReturnBook(bib, foundBooks->array[chosenBook-1]);
+//                    actualReturnBook(bib, foundBooks->books[chosenBook-1]);
                     break;
                 case 'l':
-//                    actualDeleteBooks(bib, foundBooks->array[chosenBook-1]);
+//                    actualDeleteBooks(bib, foundBooks->books[chosenBook-1]);
                     break;
                 case 'c':
-//                    actualAddCopies(bib, foundBooks->array[chosenBook-1]);
+//                    actualAddCopies(bib, foundBooks->books[chosenBook-1]);
                     break;
                 default:
                     printf("Falsche Eingabe!\n");
