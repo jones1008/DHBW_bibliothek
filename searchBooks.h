@@ -14,5 +14,6 @@
 #include "returnBook.h"
 
 void searchBooks(Array *books);
+void contextBookAction(Array *books, foundBooks *foundBooks);
 
 #endif

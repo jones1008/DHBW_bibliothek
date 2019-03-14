@@ -11,6 +11,7 @@
 #include "search.h"
 #include "searchBooks.h"
 #include "saveBooks.h"
+#include "showAll.h"
 #include "structure.h"
 #include "helperFunctions.h"
 
@@ -18,6 +19,7 @@ void showMenu(Array *books)
 {
     printf("HAUPTMEN%c:\n", UE);
 
+    printf("[B]: Alle B%ccher anzeigen\n", ue);
     printf("[S]: B%ccher suchen\n", ue);
     printf("[A]: Buch ausleihen\n");
     printf("[Z]: Buch zur%cckgeben\n", ue);
@@ -28,7 +30,7 @@ void showMenu(Array *books)
 
 //    char *menuPoint = malloc(0);
     char menuPoint[BUFFERSIZE];
-    char *allowedChars = "sazhlce";
+    char *allowedChars = "bsazhlce";
 
     // repeat user input if the input was wrong
     // TODO: manchmal spackt user input rum, wenn man beim Suchen rumprobiert
@@ -50,6 +52,11 @@ void showMenu(Array *books)
     char *menuHeader = "";
     printf("\n");
     switch(menuPoint[0]){
+        case 'b':
+            menuHeader = "ALLE BUECHER";
+            printMenuHeader(menuHeader);
+            showAll(books);
+            break;
         case 's':
             menuHeader = "BUCH SUCHEN";
             printMenuHeader(menuHeader);

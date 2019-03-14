@@ -41,7 +41,7 @@ void search(Array *books, foundBooks *foundBooks, char *searchString)
             // adding the pointer to this book to the foundBooks array
             foundBooks->array = realloc(foundBooks->array, (index+1)*sizeof(book *));
 //            foundBooks->array = (book *) realloc(foundBooks->array, (index+1)*sizeof(book *));
-            // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks()
+            // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks() (evtl in struct ein * weglassen?)
             foundBooks->array[index] = &books->array[i];
 //            printf("pointer to book: %d\n", &books->array[i]);
             index++;

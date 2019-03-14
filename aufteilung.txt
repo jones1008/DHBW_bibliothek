@@ -13,7 +13,7 @@ Jones:
 / exit()
 - editBookData()? (title, author, isbn)
 - clearScreen -> system("cls") oder system("clear")
-- alle anzeigen
+/ alle anzeigen
 - deleteBooks() + actualDelete()
 (- addCopies() + actualAddCopies())
 - borrowBook() + actualBorrowBook()
