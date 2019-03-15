@@ -35,10 +35,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="addBook.h" />
-		<Unit filename="addCopies.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="addCopies.h" />
 		<Unit filename="borrowBook.c">
 			<Option compilerVar="CC" />
 		</Unit>
