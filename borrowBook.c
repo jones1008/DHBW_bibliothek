@@ -45,7 +45,7 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 {
     // TODO: Ausleiher durchnummerieren und Benutzer nur Nummer angeben lassen?
     // TODO: wenn erster Ausleiher hinzugefügt wird, ist ein ", " zu viel davor
-    // get number of borrowers
+    // get current number of borrowers
     int numberOfBorrowers;
 
     if(strlen(book->borrowlist)==0){
@@ -68,7 +68,7 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
         char name[BUFFERSIZE];
         printf("Name Ausleiher (z.B. Max Mustermann) ([ENTER] zum Abbrechen): ");
         getUserInput(name);
-        printf("actalBorrow: name: %s\n", name);
+//        printf("actalBorrow: name: %s\n", name);
         if(!isAborted(name)){
             // remove comma if user put some in -> for example: Mustermann, Max
             removeChar(name, ',');
@@ -76,10 +76,15 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 
             // create new borrowlist and write it
             char newBorrowList[strlen(book->borrowlist)+1+strlen(name)];
-            sprintf(newBorrowList, "%s, %s", book->borrowlist, name);
-            printf("newBorrowList: %s\n", newBorrowList);
+            if(numberOfBorrowers == 0){
+//                printf("numberof bo")
+                sprintf(newBorrowList, "%s", name);
+            } else{
+                sprintf(newBorrowList, "%s, %s", book->borrowlist, name);
+            }
+//            printf("newBorrowList: %s\n", newBorrowList);
             book->borrowlist = newBorrowList;
-            printf("book->newBorrowList: %s\n", book->borrowlist);
+//            printf("book->newBorrowList: %s\n", book->borrowlist);
 
             saveBooks(bib);
             printf("after saving");
