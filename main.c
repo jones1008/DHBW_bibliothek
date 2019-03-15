@@ -15,6 +15,40 @@
 #include "helperFunctions.h"
 
 /*
+ *  function: freeBooks
+ *      frees previously allocated memory of a books structure
+ *  params:
+ *      Bib *books    (a pointer to the books structure)
+ */
+void freeBooks(Bib *bib)
+{
+    // Free all name variables of each array element first
+    for(int i=0; i<bib->used; i++)
+    {
+        free(&bib->books[i].isbn);
+        bib->books[i].isbn=NULL;
+
+        free(&bib->books[i].title);
+        bib->books[i].title=NULL;
+
+        free(&bib->books[i].author);
+        bib->books[i].author=NULL;
+
+        free(&bib->books[i].numberof);
+        bib->books[i].numberof=NULL;
+
+        free(&bib->books[i].borrowlist);
+        bib->books[i].borrowlist=NULL;
+    }
+    // Now free the array
+    free(bib->books);
+    bib->books = NULL;
+
+    bib->used = 0;
+    bib->size = 0;
+}
+
+/*
  *  function:
  *      shows the options to the user, receives it's choice and decides which function to call
  *  params:
@@ -96,6 +130,7 @@ void showMenu(Bib *bib)
             break;
         case 'e':
             printf("Schlie%ce Bibliothek...\n", ss);
+            freeBooks(bib);
             exit(0);
             break;
         default:
@@ -112,40 +147,6 @@ void showMenu(Bib *bib)
     printf("\n");
     // call itself after other functions are completed
     showMenu(bib);
-}
-
-/*
- *  function: freeBooks
- *      frees previously allocated memory of a books structure
- *  params:
- *      Bib *books    (a pointer to the books structure)
- */
-void freeBooks(Bib *bib)
-{
-    // Free all name variables of each array element first
-    for(int i=0; i<bib->used; i++)
-    {
-        free(&bib->books[i].isbn);
-        bib->books[i].isbn=NULL;
-
-        free(&bib->books[i].title);
-        bib->books[i].title=NULL;
-
-        free(&bib->books[i].author);
-        bib->books[i].author=NULL;
-
-        free(&bib->books[i].numberof);
-        bib->books[i].numberof=NULL;
-
-        free(&bib->books[i].borrowlist);
-        bib->books[i].borrowlist=NULL;
-    }
-    // Now free the array
-    free(bib->books);
-    bib->books = NULL;
-
-    bib->used = 0;
-    bib->size = 0;
 }
 
 /*

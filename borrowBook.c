@@ -2,9 +2,10 @@
 
 /*
  *  function:
- *
+ *      First the user is asked which book he wants to borrow (input searchString).
+ *      Then he decides which one he wants from the found books. If it is only one result it auto-selects the first one and continues.
  *  params:
- *
+ *      Bib *bib
  */
 void borrowBook(Bib *bib)
 {
@@ -51,9 +52,11 @@ void borrowBook(Bib *bib)
 
 /*
  *  function:
- *
+ *      Gets the chosen book as second parameter and checks if it is borrowable. If yes, it asks for the name (user input) and adds it to the borrowlist
  *  params:
- *
+ *      Bib *bib
+ *      book *book (the book pointer that was chosen before)
+ *      int chosenBook
  */
 void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 {
