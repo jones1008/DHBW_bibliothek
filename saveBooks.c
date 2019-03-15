@@ -31,21 +31,28 @@ void saveBooks(Bib *bib)
         printf("borrow: %s\n", bib->books[i].borrowlist);
         // skip line, if book was deleted
         if(!(bib->books[i].isbn == NULL && bib->books[i].title == NULL && bib->books[i].author == NULL && bib->books[i].numberof == NULL && bib->books[i].borrowlist == NULL)){
+            printf("in if\n");
             // get length of the line and allocate the memory for the line
-            int lineSize = 5+strlen(bib->books[i].isbn)+strlen(bib->books[i].title)+strlen(bib->books[i].author)+strlen(bib->books[i].numberof)+strlen(bib->books[i].borrowlist);
-    //        printf("lineSize: %d\n", lineSize);
-            char *line = malloc(lineSize*sizeof(char));
-    //        printf("after malloc\n");
+            int lineSize = 6+strlen(bib->books[i].isbn)+strlen(bib->books[i].title)+strlen(bib->books[i].author)+strlen(bib->books[i].numberof)+strlen(bib->books[i].borrowlist);
+            printf("lineSize: %d\n", lineSize);
+            char line[lineSize];
+//            strncpy(line, )
+//            char *line = (char*) malloc(lineSize*sizeof(char));
+            printf("after malloc\n");
     //        // write all entries of array into line variable
-            snprintf(line, lineSize, "%s;%s;%s;%s;%s\n", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
-    //        printf("line: %s", line);
+            printf("bib->books[i].isbn: %s\n", bib->books[i].isbn);
+//            sprintf(line, "%s;%s;%s;%s;%s\n", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
+            snprintf(line, lineSize, "%s;%s;%s;%s;%s", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
+            printf("line: %s", line);
     //        // write first line and append the following lines
             FILE *dataFile;
+            printf("before opening file\n");
             if(i==0){
                 dataFile = fopen("data.csv", "w");
             } else{
                 dataFile = fopen("data.csv", "a");
             }
+            printf("before checking if NULL\n");
             // TODO: skip line if it is the same as before (only write new lines)
             if(dataFile == NULL){
                 printf("error!");
@@ -55,11 +62,11 @@ void saveBooks(Bib *bib)
                 fclose(dataFile);
                 break;
             }
-    //        printf("before printing into file");
+            printf("before printing into file\n");
             fprintf(dataFile, "%s\n", line);
-    //        printf("after printing into file");
+            printf("after printing into file\n");
             fclose(dataFile);
-            freeTempString(line);
+//            freeTempString(line);
         }
     }
     if(fileSuccess){

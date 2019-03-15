@@ -1,6 +1,7 @@
 #include "borrowBook.h"
 void borrowBook(Bib *bib)
 {
+//    saveBooks(bib);
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll ausgeliehen werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
     // get user search, search for it
