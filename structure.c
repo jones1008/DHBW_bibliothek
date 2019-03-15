@@ -1,14 +1,25 @@
 #include "structure.h"
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void newBook(Bib *bib)
 {
-    // TODO: brauchen wir ->size überhaupt?
     if (bib->used == bib->size){
         bib->size++;
         bib->books = realloc(bib->books, bib->size*sizeof(book));
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void writeStringToArrayNode(Bib *bib, char node, char *string)
 {
 //    printf("strlen: %d\n", strlen(string));

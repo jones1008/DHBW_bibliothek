@@ -10,7 +10,6 @@
 #define BUFFERSIZE 256
 #define HEADERTABSIZE 6
 
-// TODO: brauchen wir das noch?
 #define AE (unsigned char)142
 #define ae (unsigned char)132
 #define OE (unsigned char)153
@@ -34,7 +33,6 @@ void removeChar(char *str, int c);
 void printMenuHeader(char *header);
 void printMenuEnd(char *end);
 //void printMenuEnding(int menuHeaderLength);
-void showReturnToMenu();
 
 void freeTempString(char *var);
 void freeFoundBooks(foundBooks *foundBooks);

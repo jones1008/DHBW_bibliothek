@@ -18,9 +18,14 @@
 //    return string;
 //}
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void saveBooks(Bib *bib)
 {
-    // TODO: nur saven, wenn was verändert wurde?
     // loop over the array
     int fileSuccess = 1;
     for(int i=0; i<bib->used; i++){
@@ -42,29 +47,32 @@ void saveBooks(Bib *bib)
     //        // write all entries of array into line variable
 //            printf("bib->books[i].isbn: %s\n", bib->books[i].isbn);
 //            sprintf(line, "%s;%s;%s;%s;%s\n", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
-            snprintf(line, lineSize, "%s;%s;%s;%s;%s", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
-            printf("line: %s", line);
+            snprintf(line, lineSize, "%s;%s;%s;%s;%s\n", bib->books[i].isbn, bib->books[i].title, bib->books[i].author, bib->books[i].numberof, bib->books[i].borrowlist);
+            printf("line: %s\n", line);
     //        // write first line and append the following lines
             FILE *dataFile;
-//            printf("before opening file\n");
+            printf("before opening file\n");
             if(i==0){
+                printf("first time\n");
                 dataFile = fopen("data.csv", "w");
             } else{
+                printf("after first time\n");
                 dataFile = fopen("data.csv", "a");
             }
-//            printf("before checking if NULL\n");
-            // TODO: skip line if it is the same as before (only write new lines)
+            printf("before checking if NULL\n");
             if(dataFile == NULL){
-//                printf("error!");
+                printf("error!");
                 printf("Problem beim Öffnen der Datenbank-Datei: %s\n", strerror(errno));
                 fileSuccess = 0;
 
                 fclose(dataFile);
                 break;
+            } else{
+                printf("line: %s\n", line);
+                printf("before printing into file\n");
+                fprintf(dataFile, "%s", line);
+                printf("after printing into file\n");
             }
-//            printf("before printing into file\n");
-            fprintf(dataFile, "%s\n", line);
-//            printf("after printing into file\n");
             fclose(dataFile);
 //            freeTempString(line);
         }

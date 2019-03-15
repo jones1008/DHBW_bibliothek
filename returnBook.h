@@ -9,14 +9,6 @@
 #include "saveBooks.h"
 #include "search.h"
 
-//typedef struct{
-//    char *ptr;
-//} borrower;
-//typedef struct{
-//    borrower *borrowers;
-//    size_t size;
-//} foundBorrowers;
-
 void returnBook(Bib *bib);
 void actualReturnBook(Bib *bib, book *book, int chosenBook);
 //void newBorrower(foundBorrowers *foundBorrowers);

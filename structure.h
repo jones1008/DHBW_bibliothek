@@ -23,7 +23,6 @@ typedef struct
     size_t size;
 } Bib;
 
-// TODO: direkt auf das Buch pointern (normaler Pointer)
 typedef struct{
     book **books;
     size_t size;

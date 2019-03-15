@@ -1,4 +1,12 @@
 #include "addBook.h"
+
+/*
+ *  function:
+ *      adds a new book to the data.csv and to the current bib-array
+ *      asks the user for input (isbn, title, author and numberof)
+ *  params:
+ *      Bib *bib
+ */
 void addBook(Bib *bib)
 {
 //    char *newIsbn = "";
@@ -109,6 +117,8 @@ void addBook(Bib *bib)
                         writeStringToArrayNode(bib, 'a', author);
                         writeStringToArrayNode(bib, 'n', numberof);
                         writeStringToArrayNode(bib, 'b', "");
+
+//                        printf("after writeSTrings");
 
 //                        printf("isbn  : %s\n", bib->books[bib->used].isbn);
 //                        printf("title : %s\n", bib->books[bib->used].title);

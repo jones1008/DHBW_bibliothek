@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <strings.h>
 #include <ctype.h>
+#include <errno.h>
 #include "structure.h"
 #include "helperFunctions.h"
 

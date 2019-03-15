@@ -1,5 +1,11 @@
 #include "deleteBooks.h"
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void deleteBooks(Bib *bib)
 {
     char searchString[BUFFERSIZE];
@@ -20,22 +26,35 @@ void deleteBooks(Bib *bib)
 
             if(isNotAborted){
                 chosenBook--;
-                printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+                // write book and free foundBooks before other function is called
+                book *book = foundBooks.books[chosenBook];
+                freeFoundBooks(&foundBooks);
+
+                showChosenBook(chosenBook, book);
     //            printf("chosenbook pointer: %d\n", **foundBooks.books[chosenBook]);
-                actualDeleteBooks(bib, foundBooks.books[chosenBook], chosenBook);
+                actualDeleteBooks(bib, book, chosenBook);
     //            printf("nach actualDeleteBooks: book->numberof: %s\n", bib->books[5].numberof);
             }
         } else if(foundBooks.size == 1){
-            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, 1, foundBooks.books[0]->author, foundBooks.books[0]->title);
-            actualDeleteBooks(bib, foundBooks.books[0], 1);
+            book *book = foundBooks.books[0];
+            freeFoundBooks(&foundBooks);
+            showChosenBook(0, book);
+            actualDeleteBooks(bib, book, 1);
+        } else{
+            freeFoundBooks(&foundBooks);
+            deleteBooks(bib);
         }
-        freeFoundBooks(&foundBooks);
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
 {
-    // TODO: Success-Meldung: Ausleihe wurde erfolgreich eingetragen
 //    printf("author: %s\n", book->author);
     char deleteCountString[BUFFERSIZE];
     int deleteCount;
@@ -64,8 +83,9 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
             sprintf(newNumberofString, "%d", newNumberof);
 //            printf("last char of newString: %d\n", newNumberofString[strlen(newNumberofString)]);
 //            newNumberofString[strlen(newNumberofString)] = '\0';
-//            printf("newNumberofString: %s\n", newNumberofString);
             book->numberof = newNumberofString;
+            printf("---> %s Exemplare des Buchs werden entfernt...\n", newNumberofString);
+//            printf("book->numberof: %s\n", book->numberof);
         } else{
             // TODO: in array steht falscher wert nach dem Ändern (siehe printfs in main() vor und nach getUserInput
             // TODO: Buch aus der Mitte komplett rauslöschen und danach Verhalten überprüfen, wenn interaktionen mit Büchern danach ausgeführt werden
@@ -86,6 +106,7 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
                 book->title = NULL;
                 book->numberof = NULL;
                 book->borrowlist = NULL;
+                printf("---> Das Buch wird komplett gelöscht...\n");
             } else if(choice[0] == 'n'){
                 // set isNotAborted to 0, so it won't save
                 isNotAborted = 0;
@@ -95,6 +116,7 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
         }
         if(isNotAborted){
 //            printf("vor dem Speichern: book->numberof: %s\n", bib->books[5].numberof);
+            // TODO: speichern funktioniert hier nicht! (gleicher Fehler wie bei borrowBook und bei returnBook
             saveBooks(bib);
 //            printf("nach dem Speichern: book->numberof: %s\n", bib->books[5].numberof);
         }

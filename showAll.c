@@ -1,5 +1,11 @@
 #include "showAll.h"
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void showAll(Bib *bib)
 {
     foundBooks foundBooks;
@@ -11,7 +17,17 @@ void showAll(Bib *bib)
     int chosenBook = 0;
     int isNotAborted;
     chooseBook(&foundBooks, &chosenBook, &isNotAborted);
-    chosenBook--;
-    contextBookAction(bib, foundBooks.books[chosenBook], chosenBook);
-    freeFoundBooks(&foundBooks);
+    if(isNotAborted){
+//        printf("before minus\n");
+        chosenBook--;
+//        printf("chosenBook: %s\n", chosenBook);
+
+        book *book = foundBooks.books[chosenBook];
+        freeFoundBooks(&foundBooks);
+
+        contextBookAction(bib, book, chosenBook);
+//        printf("after contextBookAction\n");
+    } else{
+        freeFoundBooks(&foundBooks);
+    }
 }

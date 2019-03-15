@@ -11,11 +11,9 @@ Jones:
 / addBook() (Umlaute ersetzen! (siehe saveBooks.c?))
 	/ ISBN-Checker?
 / exit()
-- editBookData()? (title, author, isbn)
 - clearScreen -> system("cls") oder system("clear")
 / alle anzeigen
 / deleteBooks() + actualDelete()
-(- addCopies() + actualAddCopies()) -> vlt in editBookData reinpacken?
 / borrowBook() + actualBorrowBook()
 / returnBook() + actualReturnBook()
 - close Window after exiting

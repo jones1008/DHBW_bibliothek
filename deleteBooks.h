@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include "structure.h"
 #include "helperFunctions.h"
+#include "saveBooks.h"
 #include "search.h"
 
 void deleteBooks(Bib *bib);

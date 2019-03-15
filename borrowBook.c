@@ -1,4 +1,11 @@
 #include "borrowBook.h"
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void borrowBook(Bib *bib)
 {
 //    saveBooks(bib);
@@ -10,7 +17,7 @@ void borrowBook(Bib *bib)
         foundBooks foundBooks;
         search(bib, &foundBooks, searchString);
 //        printf("Anzahl gefunden: %d\n", foundBooks.size);
-        showFoundBooks(&foundBooks, "atinb");
+        showFoundBooks(&foundBooks, "atib");
 
         // if only one result choose this book automatically
         if(foundBooks.size>1){
@@ -24,27 +31,33 @@ void borrowBook(Bib *bib)
                 // write book and free foundBooks before other function is called
                 book *book = foundBooks.books[chosenBook];
                 freeFoundBooks(&foundBooks);
-                // TODO: in function?
-                printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, book->author, book->title);
+
+                showChosenBook(chosenBook, book);
                 actualBorrowBook(bib, book, chosenBook);
             }
         } else if(foundBooks.size == 1){
             // write book and free foundBooks before other function is called
             book *book = foundBooks.books[0];
             freeFoundBooks(&foundBooks);
-            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, 1, book->author, book->title);
+            showChosenBook(0, book);
             actualBorrowBook(bib, book, 1);
         } else{
             freeFoundBooks(&foundBooks);
+            borrowBook(bib);
         }
 //        freeFoundBooks(&foundBooks);
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 {
-    // TODO: Ausleiher durchnummerieren und Benutzer nur Nummer angeben lassen?
-    // TODO: wenn erster Ausleiher hinzugefügt wird, ist ein ", " zu viel davor
+    // TODO: speichern stürzt hier danach ab bei fprintf in saveBooks()
     // get current number of borrowers
     int numberOfBorrowers;
 
@@ -77,7 +90,7 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
             // create new borrowlist and write it
             char newBorrowList[strlen(book->borrowlist)+1+strlen(name)];
             if(numberOfBorrowers == 0){
-//                printf("numberof bo")
+                printf("numberof bo\n");
                 sprintf(newBorrowList, "%s", name);
             } else{
                 sprintf(newBorrowList, "%s, %s", book->borrowlist, name);
@@ -87,6 +100,7 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 //            printf("book->newBorrowList: %s\n", book->borrowlist);
 
             saveBooks(bib);
+            printf("---> '%s' wurde in die Ausleihliste eingetragen.\n", name);
             printf("after saving");
         }
     }

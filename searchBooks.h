@@ -8,12 +8,7 @@
 #include "structure.h"
 #include "helperFunctions.h"
 #include "search.h"
-#include "borrowBook.h"
-#include "addCopies.h"
-#include "deleteBooks.h"
-#include "returnBook.h"
 
 void searchBooks(Bib *bib);
-void contextBookAction(Bib *bib, book *book, int chosenBook);
 
 #endif

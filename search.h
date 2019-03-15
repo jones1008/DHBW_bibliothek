@@ -7,10 +7,14 @@
 #include <ctype.h>
 #include "structure.h"
 #include "helperFunctions.h"
-#include "searchBooks.h"
+#include "borrowBook.h"
+#include "deleteBooks.h"
+#include "returnBook.h"
 
 void search(Bib *bib, foundBooks *foundBooks, char *searchString);
 void showFoundBooks(foundBooks *foundBooks, char *attributes);
 void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted);
+void showChosenBook(int chosenBook, book *book);
+void contextBookAction(Bib *bib, book *book, int chosenBook);
 
 #endif

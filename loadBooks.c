@@ -1,4 +1,11 @@
 #include "loadBooks.h"
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void loadBooks(Bib *bib)
 {
     //https://codereview.stackexchange.com/questions/44649/dynamic-array-of-structs-in-c
@@ -24,7 +31,6 @@ void loadBooks(Bib *bib)
 //            line[strlen(line)-1] = '\0';
 //            printf("line: %s\n", line);
             // initialize bib structure
-            // TODO: wird size tatsächlich gebraucht?
             newBook(bib);
             records = strtok(line, delimiter);
 
@@ -47,7 +53,6 @@ void loadBooks(Bib *bib)
                     case 3:
                         // insert numberof
                         writeStringToArrayNode(bib, 'n', records);
-                        // TODO: hier schmierts ab und zu einfach so ab...
 //                        printf("strlen: %d\n", strlen(records));
 //                        printf("string: %s\n", records);
 //                        printf("before alloc\n");

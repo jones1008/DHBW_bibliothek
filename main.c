@@ -3,7 +3,6 @@
 #include <strings.h>
 #include <ctype.h>
 #include "addBook.h"
-#include "addCopies.h"
 #include "borrowBook.h"
 #include "deleteBooks.h"
 #include "loadBooks.h"
@@ -15,6 +14,12 @@
 #include "structure.h"
 #include "helperFunctions.h"
 
+/*
+ *  function:
+ *      shows the options to the user, receives it's choice and decides which function to call
+ *  params:
+ *      Bib *bib
+ */
 void showMenu(Bib *bib)
 {
     printf("HAUPTMEN%c:\n", UE);
@@ -25,7 +30,6 @@ void showMenu(Bib *bib)
     printf("[Z]: Buch zur%cckgeben\n", ue);
     printf("[H]: Buch hinzuf%cgen\n", ue);
     printf("[L]: Buch l%cschen\n", oe);
-    printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
     printf("[E]: Bibliotheksverwaltung verlassen\n");
 
     char menuPoint[BUFFERSIZE];
@@ -49,6 +53,7 @@ void showMenu(Bib *bib)
 
     } while(wrongCharInput(menuPoint, allowedChars));
 
+    // TODO: nachdem editing-functions erfolgreich durchgeführt wurden, stürzts nach der nächsten suche/Eingabe ab
     // switch case structure to call the chosen function
     char menuHeader[BUFFERSIZE] = "";
     printf("\n");
@@ -89,12 +94,6 @@ void showMenu(Bib *bib)
             printMenuHeader(menuHeader);
             deleteBooks(bib);
             break;
-        case 'c':
-            strcpy(menuHeader, "BUCHEXEMPLAR HINZUFUEGEN");
-//            menuHeader = "BUCHEXEMPLAR HINZUFUEGEN";
-            printMenuHeader(menuHeader);
-            addCopies(bib);
-            break;
         case 'e':
             printf("Schlie%ce Bibliothek...\n", ss);
             exit(0);
@@ -113,10 +112,6 @@ void showMenu(Bib *bib)
     printf("\n");
     // call itself after other functions are completed
     showMenu(bib);
-}
-void showHeading()
-{
-    printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
 }
 
 /*
@@ -153,14 +148,20 @@ void freeBooks(Bib *bib)
     bib->size = 0;
 }
 
+/*
+ *  function:
+ *      initializes the bibliothek, loads the bibliothek from data.csv file and starts the initial program
+ *  params:
+ *
+ */
 int main()
 {
     // initially loading the books from the data-text file
     Bib bib;
     loadBooks(&bib);
 
-    showHeading();
-//    system("cls");
+    // show "BIBLIOTHEK"-Header
+    printf(" _______  ___   _______  ___      ___   _______  _______  __   __  _______  ___   _ \n|  _    ||   | |  _    ||   |    |   | |       ||       ||  | |  ||       ||   | | |\n| |_|   ||   | | |_|   ||   |    |   | |   _   ||_     _||  |_|  ||    ___||   |_| |\n|       ||   | |       ||   |    |   | |  | |  |  |   |  |       ||   |___ |      _|\n|  _   | |   | |  _   | |   |___ |   | |  |_|  |  |   |  |       ||    ___||     |_ \n| |_|   ||   | | |_|   ||       ||   | |       |  |   |  |   _   ||   |___ |    _  |\n|_______||___| |_______||_______||___| |_______|  |___|  |__| |__||_______||___| |_|\n\n");
     showMenu(&bib);
 
 //    bib.books[0].author = "neu";

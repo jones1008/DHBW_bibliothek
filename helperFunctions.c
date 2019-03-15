@@ -1,5 +1,11 @@
 #include "helperFunctions.h"
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void getUserInput(char *userVariable)
 {
 //    char buffer[BUFFERSIZE];
@@ -71,15 +77,15 @@ void getUserInput(char *userVariable)
 
 //    memset(userVariable, 0, BUFFERSIZE);
     fgets(userVariable, BUFFERSIZE, stdin);
-    printf("userVar: %s\n", userVariable);
+//    printf("userVar: %s\n", userVariable);
     if ( strlen(userVariable)>0 && userVariable[strlen(userVariable)-1] == '\n' ){
-        printf("strlen(userVariable): %d\n", strlen(userVariable));
+//        printf("strlen(userVariable): %d\n", strlen(userVariable));
         userVariable[strlen(userVariable)-1] = '\0';
-        printf("userVar: %s\n", userVariable);
+//        printf("userVar: %s\n", userVariable);
         trim(userVariable);
-        printf("after trim: %s\n", userVariable);
+//        printf("after trim: %s\n", userVariable);
     }
-    printf("after getUserInput\n");
+//    printf("after getUserInput\n");
 //    printf("userVariableD: %d\n", userVariable[0]);
     printf("userVariable: %s\n", userVariable);
 
@@ -99,6 +105,12 @@ void getUserInput(char *userVariable)
 
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 int wrongCharInput(char *userInput, char *allowedChars)
 {
 //    printf("verifyUI: %s\n", userInput);
@@ -121,6 +133,12 @@ int wrongCharInput(char *userInput, char *allowedChars)
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 int isAborted(char *userInput)
 {
 //    printf("abortUI: %s\n", userInput);
@@ -153,6 +171,13 @@ int isAborted(char *userInput)
 //    end[1] = '\0';
 //    return str;
 //}
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 char *trim(char *str)
 {
     size_t len = 0;
@@ -226,6 +251,12 @@ char *trim(char *str)
 //    return out_size;
 //}
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 char *replaceUmlauts(char *str)
 {
 //    printf("urspruenglich: %s\n", str);
@@ -304,11 +335,23 @@ void stringToLower(char *strPtr)
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 int countChars(char* str, char c)
 {
     return (*str == '\0') ? 0 : countChars(str+1, c) + (*str == c);
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void removeChar(char *str, int c)
 {
     int j, n = strlen(str);
@@ -320,6 +363,12 @@ void removeChar(char *str, int c)
     str[j] = '\0';
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void printHeaderTabs()
 {
     for(int i=0; i<HEADERTABSIZE; i++){
@@ -327,6 +376,12 @@ void printHeaderTabs()
     }
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void printMenuHeader(char *header)
 {
     printHeaderTabs();
@@ -334,6 +389,13 @@ void printMenuHeader(char *header)
     printHeaderTabs();
     printf("\n");
 }
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void printMenuEnd(char *end)
 {
     printHeaderTabs();
@@ -352,6 +414,12 @@ void printMenuEnd(char *end)
 //    printf("\n");
 //}
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void freeTempString(char *var)
 {
     free(var);

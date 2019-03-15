@@ -11,25 +11,26 @@ void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 {
 //    printf("search: book->author: %s\n", bib->books[5].numberof);
 //    printf("search: before malloc: %s\n", searchString);
-    // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
     // initialize the array where the book pointers will be stored
-//    printf("foundBooks->books: %p\n", foundBooks->books);
+    printf("foundBooks->books: %p\n", foundBooks->books);
     foundBooks->books = malloc(0);
 
 
     // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
-//    printf("search: before replaceUmlauts\n");
+    printf("search: before replaceUmlauts\n");
     replaceUmlauts(searchString);
-//    printf("search: after replaceUmlauts\n");
+    printf("search: after replaceUmlauts\n");
 
     // make the searchString to lower case, so the comparison is case insensitive
-//    printf("search: before strToLower\n");
+    printf("search: before strToLower\n");
     stringToLower(searchString);
-//    printf("search: after strToLower\n");
+    printf("search: after strToLower\n");
 
     // iterate over array of bib and add pointer to PointerBib "foundBooks" if isbn, author or title matches the given SearchString
     int index = 0;
+    printf("bib->used: %d\n", bib->used);
     for(int i=0; i<bib->used; i++){
+        printf("loop: %d\n", i);
         // skip book if all of its attributes is NULL
         if(!(bib->books[i].isbn == NULL && bib->books[i].title == NULL && bib->books[i].author == NULL && bib->books[i].numberof == NULL && bib->books[i].borrowlist == NULL)){
             // make the author and the title to lower case, so the comparison is case insensitive
@@ -37,15 +38,18 @@ void search(Bib *bib, foundBooks *foundBooks, char *searchString)
             char title[strlen(bib->books[i].title)+1];
             strcpy(author, bib->books[i].author);
             strcpy(title, bib->books[i].title);
+            printf("after strcpy\n");
             stringToLower(author);
             stringToLower(title);
 
             // check if searchString matches any of isbn, author or title of the current book
             if(strstr(bib->books[i].isbn, searchString) != NULL || strstr(author, searchString) != NULL || strstr(title, searchString) != NULL){
                 // adding the pointer to this book to the foundBooks array
+                printf("before realloc: %s\n", bib->books[i].title);
+                printf("size: %d\n", (index+1)*sizeof(book *));
                 foundBooks->books = realloc(foundBooks->books, (index+1)*sizeof(book *));
+                printf("after realloc\n");
     //            foundBooks->books = (book *) realloc(foundBooks->books, (index+1)*sizeof(book *));
-                // TODO: wird hier tatsächlich der Richtige Pointer hinzugefügt? hat nicht die gleiche Adresse, wie hinterher in deleteBooks() (evtl in struct ein * weglassen?)
                 foundBooks->books[index] = &bib->books[i];
     //            printf("pointer to book: %d\n", &bib->books[i]);
                 index++;
@@ -60,7 +64,14 @@ void search(Bib *bib, foundBooks *foundBooks, char *searchString)
         printf("ERROR: Keine B%ccher mit '%s' gefunden!\n", ue, searchString);
     }
 }
+
 // for each found book in foundbooks print the given attributes in order
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void showFoundBooks(foundBooks *foundBooks, char attributes[])
 {
     printf("\n");
@@ -96,6 +107,12 @@ void showFoundBooks(foundBooks *foundBooks, char attributes[])
     printf("\n");
 }
 
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
 void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
 {
     char userNumber[BUFFERSIZE];
@@ -115,5 +132,84 @@ void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
         if(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size)){
             printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
         }
+        printf("before end of while\n");
     } while(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size));
+}
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
+void showChosenBook(int chosenBook, book *book)
+{
+    printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, book->author, book->title);
+}
+
+/*
+ *  function:
+ *
+ *  params:
+ *
+ */
+void contextBookAction(Bib *bib, book *book, int chosenBook)
+{
+    // let the user choose a book to borrow/return/delete/addCopy the chosen book
+    printf("before chosenBook: %d\n", chosenBook);
+    showChosenBook(chosenBook, book);
+
+    // when a number was chosen: ask user what he wants to do with that book
+//    if(isNotAborted) {
+//        printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks->books[chosenBook-1]->author, foundBooks->books[chosenBook-1]->title);
+    char *allowedChars = "azlc";
+    char userChar[BUFFERSIZE];
+    int isNotAborted;
+
+    printf("[A]: Buch ausleihen\n");
+    printf("[Z]: Buch zur%cckgeben\n", ue);
+    printf("[L]: Buch l%cschen\n", oe);
+    printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
+
+    // repeat user input if the input was wrong or not Aborted
+    do{
+        // get user input and write tolower-variable so comparison is
+        printf("Aktion w%chlen ([ENTER] zum Abbrechen): ", ae);
+        getUserInput(userChar);
+        *userChar = tolower(*userChar);
+
+        // check for Abortion through user (pressed ENTER)
+        isNotAborted = !isAborted(userChar);
+    } while(isNotAborted && wrongCharInput(userChar, allowedChars));
+
+    // if user chose a number and did not hit ENTER
+    if(isNotAborted){
+        printf("\n");
+        // run the corresponding function with a pointer to the chosen book
+        char menuHeader[BUFFERSIZE] = "";
+        switch(userChar[0]){
+            case 'a':
+                strcpy(menuHeader, "BUCH AUSLEIHEN");
+                printMenuHeader(menuHeader);
+                actualBorrowBook(bib, book, chosenBook);
+                break;
+            case 'z':
+                strcpy(menuHeader, "BUCH ZURUECKGEBEN");
+                printMenuHeader(menuHeader);
+                actualReturnBook(bib, book, chosenBook);
+                break;
+            case 'l':
+                strcpy(menuHeader, "BUCH LOESCHEN");
+                printMenuHeader(menuHeader);
+                actualDeleteBooks(bib, book, chosenBook);
+                break;
+            default:
+                printf("Falsche Eingabe!\n");
+                break;
+        }
+        stringToLower(menuHeader);
+        printMenuEnd(menuHeader);
+//            printf("\n");
+    }
+//    }
 }
