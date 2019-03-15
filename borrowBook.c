@@ -8,29 +8,42 @@ void borrowBook(Bib *bib)
     if(!isAborted(searchString)){
         foundBooks foundBooks;
         search(bib, &foundBooks, searchString);
+//        printf("Anzahl gefunden: %d\n", foundBooks.size);
+        showFoundBooks(&foundBooks, "atinb");
 
         // if only one result choose this book automatically
         if(foundBooks.size>1){
-            // print the results and let the user choose a book
-            showFoundBooks(&foundBooks, "atinb");
+            // let the user choose a book
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
-            chosenBook--;
-            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
 
             if(isNotAborted){
-                actualBorrowBook(bib, foundBooks.books[chosenBook]);
+                chosenBook--;
+                // write book and free foundBooks before other function is called
+                book *book = foundBooks.books[chosenBook];
+                freeFoundBooks(&foundBooks);
+                // TODO: in function?
+                printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, book->author, book->title);
+                actualBorrowBook(bib, book, chosenBook);
             }
         } else if(foundBooks.size == 1){
-            actualBorrowBook(bib, foundBooks.books[0]);
+            // write book and free foundBooks before other function is called
+            book *book = foundBooks.books[0];
+            freeFoundBooks(&foundBooks);
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, 1, book->author, book->title);
+            actualBorrowBook(bib, book, 1);
+        } else{
+            freeFoundBooks(&foundBooks);
         }
-        freeFoundBooks(&foundBooks);
+//        freeFoundBooks(&foundBooks);
     }
 }
 
-void actualBorrowBook(Bib *bib, book *book)
+void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 {
+    // TODO: Ausleiher durchnummerieren und Benutzer nur Nummer angeben lassen?
+    // TODO: wenn erster Ausleiher hinzugefügt wird, ist ein ", " zu viel davor
     // get number of borrowers
     int numberOfBorrowers;
 
@@ -54,6 +67,7 @@ void actualBorrowBook(Bib *bib, book *book)
         char name[BUFFERSIZE];
         printf("Name Ausleiher (z.B. Max Mustermann) ([ENTER] zum Abbrechen): ");
         getUserInput(name);
+        printf("actalBorrow: name: %s\n", name);
         if(!isAborted(name)){
             // remove comma if user put some in -> for example: Mustermann, Max
             removeChar(name, ',');
@@ -62,9 +76,12 @@ void actualBorrowBook(Bib *bib, book *book)
             // create new borrowlist and write it
             char newBorrowList[strlen(book->borrowlist)+1+strlen(name)];
             sprintf(newBorrowList, "%s, %s", book->borrowlist, name);
+            printf("newBorrowList: %s\n", newBorrowList);
             book->borrowlist = newBorrowList;
+            printf("book->newBorrowList: %s\n", book->borrowlist);
 
             saveBooks(bib);
+            printf("after saving");
         }
     }
 }

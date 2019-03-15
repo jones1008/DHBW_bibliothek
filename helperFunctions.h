@@ -32,7 +32,8 @@ int countChars(char* str, char c);
 void removeChar(char *str, int c);
 
 void printMenuHeader(char *header);
-void printMenuEnding(int menuHeaderLength);
+void printMenuEnd(char *end);
+//void printMenuEnding(int menuHeaderLength);
 void showReturnToMenu();
 
 void freeTempString(char *var);

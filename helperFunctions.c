@@ -69,14 +69,19 @@ void getUserInput(char *userVariable)
 
 
 
+//    memset(userVariable, 0, BUFFERSIZE);
     fgets(userVariable, BUFFERSIZE, stdin);
-//    printf("userVar: %s\n", userVariable);
+    printf("userVar: %s\n", userVariable);
     if ( strlen(userVariable)>0 && userVariable[strlen(userVariable)-1] == '\n' ){
+        printf("strlen(userVariable): %d\n", strlen(userVariable));
         userVariable[strlen(userVariable)-1] = '\0';
+        printf("userVar: %s\n", userVariable);
         trim(userVariable);
+        printf("after trim: %s\n", userVariable);
     }
+    printf("after getUserInput\n");
 //    printf("userVariableD: %d\n", userVariable[0]);
-//    printf("userVariable: %s\n", userVariable);
+    printf("userVariable: %s\n", userVariable);
 
 
 
@@ -325,20 +330,27 @@ void printHeaderTabs()
 void printMenuHeader(char *header)
 {
     printHeaderTabs();
-    printf(" %s ", header);
+    printf(" START: %s ", header);
+    printHeaderTabs();
+    printf("\n");
+}
+void printMenuEnd(char *end)
+{
+    printHeaderTabs();
+    printf(" ende: %s ", end);
     printHeaderTabs();
     printf("\n");
 }
 
-void printMenuEnding(int menuHeaderLength)
-{
-    printHeaderTabs();
-    for(int i=0; i<menuHeaderLength+2; i++){
-        printf("#");
-    }
-    printHeaderTabs();
-    printf("\n");
-}
+//void printMenuEnding(int menuHeaderLength)
+//{
+//    printHeaderTabs();
+//    for(int i=0; i<menuHeaderLength+2; i++){
+//        printf("#");
+//    }
+//    printHeaderTabs();
+//    printf("\n");
+//}
 
 void freeTempString(char *var)
 {
@@ -355,14 +367,20 @@ void freeTempString(char *var)
 void freeFoundBooks(foundBooks *foundBooks)
 {
     // Free all pointers of each array element first
-    for(int i=0; i<foundBooks->size-1; i++)
+//    printf("free: foundbooks->size: %d\n", foundBooks->size);
+    for(int i=0; i<foundBooks->size; i++)
     {
+//        printf("free: in loop\n");
         free(&foundBooks->books[i]);
         foundBooks->books[i]=NULL;
+//        printf("free: end of loop\n");
     }
     // Now free the array
+//    printf("free: before free()\n");
     free(foundBooks->books);
+//    printf("before setting NULL\n");
     foundBooks->books = NULL;
+//    printf("after NUlling: %p\n", foundBooks->books);
 
     foundBooks->size = 0;
 }

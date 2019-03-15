@@ -9,34 +9,34 @@ void deleteBooks(Bib *bib)
     if(!isAborted(searchString)){
         foundBooks foundBooks;
         search(bib, &foundBooks, searchString);
+        showFoundBooks(&foundBooks, "atin");
 
         // if only one result choose this book automatically
         if(foundBooks.size>1){
-            // print the results and let the user choose a book
-            showFoundBooks(&foundBooks, "atin");
+            // let the user choose a book
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
-            chosenBook--;
-            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
 
             if(isNotAborted){
+                chosenBook--;
+                printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
     //            printf("chosenbook pointer: %d\n", **foundBooks.books[chosenBook]);
-                actualDeleteBooks(bib, foundBooks.books[chosenBook]);
+                actualDeleteBooks(bib, foundBooks.books[chosenBook], chosenBook);
     //            printf("nach actualDeleteBooks: book->numberof: %s\n", bib->books[5].numberof);
             }
         } else if(foundBooks.size == 1){
-            actualDeleteBooks(bib, foundBooks.books[0]);
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, 1, foundBooks.books[0]->author, foundBooks.books[0]->title);
+            actualDeleteBooks(bib, foundBooks.books[0], 1);
         }
         freeFoundBooks(&foundBooks);
     }
 }
 
-void actualDeleteBooks(Bib *bib, book *book)
+void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
 {
     // TODO: Success-Meldung: Ausleihe wurde erfolgreich eingetragen
 //    printf("author: %s\n", book->author);
-    printf("Anzahl Exemplare von '%s' von %s: %s\n", book->title, book->author, book->numberof);
     char deleteCountString[BUFFERSIZE];
     int deleteCount;
     int numberof = atoi(book->numberof);

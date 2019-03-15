@@ -10,6 +10,6 @@
 #include "search.h"
 
 void borrowBook(Bib *bib);
-void actualBorrowBook(Bib *bib, book *book);
+void actualBorrowBook(Bib *bib, book *book, int chosenBook);
 
 #endif

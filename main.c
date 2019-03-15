@@ -50,41 +50,48 @@ void showMenu(Bib *bib)
     } while(wrongCharInput(menuPoint, allowedChars));
 
     // switch case structure to call the chosen function
-    char *menuHeader = "";
+    char menuHeader[BUFFERSIZE] = "";
     printf("\n");
     switch(menuPoint[0]){
         case 'b':
-            menuHeader = "ALLE BUECHER";
+            strcpy(menuHeader, "ALLE BUECHER");
+//            menuHeader = "ALLE BUECHER";
             printMenuHeader(menuHeader);
             showAll(bib);
             break;
         case 's':
-            menuHeader = "BUCH SUCHEN";
+            strcpy(menuHeader, "BUCH SUCHEN");
+//            menuHeader = "BUCH SUCHEN";
             printMenuHeader(menuHeader);
             searchBooks(bib);
             break;
         case 'a':
-            menuHeader = "BUCH AUSLEIHEN";
+            strcpy(menuHeader, "BUCH AUSLEIHEN");
+//            menuHeader = "BUCH AUSLEIHEN";
             printMenuHeader(menuHeader);
             borrowBook(bib);
             break;
         case 'z':
-            menuHeader = "BUCH ZURUECKGEBEN";
+            strcpy(menuHeader, "BUCH ZURUECKGEBEN");
+//            menuHeader = "BUCH ZURUECKGEBEN";
             printMenuHeader(menuHeader);
             returnBook(bib);
             break;
         case 'h':
-            menuHeader = "NEUES BUCH HINZUFUEGEN";
+            strcpy(menuHeader, "NEUES BUCH HINZUFUEGEN");
+//            menuHeader = "NEUES BUCH HINZUFUEGEN";
             printMenuHeader(menuHeader);
             addBook(bib);
             break;
         case 'l':
-            menuHeader = "BUCH LOESCHEN";
+            strcpy(menuHeader, "BUCH LOESCHEN");
+//            menuHeader = "BUCH LOESCHEN";
             printMenuHeader(menuHeader);
             deleteBooks(bib);
             break;
         case 'c':
-            menuHeader = "BUCHEXEMPLAR HINZUFUEGEN";
+            strcpy(menuHeader, "BUCHEXEMPLAR HINZUFUEGEN");
+//            menuHeader = "BUCHEXEMPLAR HINZUFUEGEN";
             printMenuHeader(menuHeader);
             addCopies(bib);
             break;
@@ -96,10 +103,13 @@ void showMenu(Bib *bib)
             printf("ERROR: Falsche Eingabe!\n");
             break;
     }
+//    printf("before strToLower\n");
+    stringToLower(menuHeader);
+    printMenuEnd(menuHeader);
 
 //    freeTempString(menuPoint);
 
-    printMenuEnding(strlen(menuHeader));
+//    printMenuEnding(strlen(menuHeader));
     printf("\n");
     // call itself after other functions are completed
     showMenu(bib);

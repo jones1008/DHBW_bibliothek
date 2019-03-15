@@ -10,10 +10,12 @@
 void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 {
 //    printf("search: book->author: %s\n", bib->books[5].numberof);
-//    printf("search: searchString: %s\n", searchString);
+//    printf("search: before malloc: %s\n", searchString);
     // TODO: if searched with isbn-13: 978-3-86680-192-9 strip out the hyphen
     // initialize the array where the book pointers will be stored
+//    printf("foundBooks->books: %p\n", foundBooks->books);
     foundBooks->books = malloc(0);
+
 
     // replace umlauts of searchstring with corresponding chars (ä=>-124, ü=>-127, ö=>-108, ß=>-31)
 //    printf("search: before replaceUmlauts\n");
@@ -97,15 +99,17 @@ void showFoundBooks(foundBooks *foundBooks, char attributes[])
 void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
 {
     char userNumber[BUFFERSIZE];
+    printf("chosenBook: %d\n", *chosenBook);
     do{
         printf("Buch w%chlen [NUMMER] ([ENTER] zum Abbrechen): ", ae);
         getUserInput(userNumber);
+        printf("after getting userinput\n");
         *chosenBook = atoi(userNumber);
 
         // check for Abortion through user (pressed ENTER)
         *isNotAborted = !isAborted(userNumber);
 
-//        printf("isNotAborted: %d\n", *isNotAborted);
+        printf("isNotAborted: %d\n", *isNotAborted);
 
         // if number out of index was chosen
         if(*isNotAborted && (*chosenBook<=0 || *chosenBook>foundBooks->size)){

@@ -24,11 +24,11 @@ void saveBooks(Bib *bib)
     // loop over the array
     int fileSuccess = 1;
     for(int i=0; i<bib->used; i++){
-//        printf("isbn  : %s\n", bib->books[i].isbn);
-//        printf("title : %s\n", bib->books[i].title);
-//        printf("author: %s\n", bib->books[i].author);
-//        printf("anzahl: %s\n", bib->books[i].numberof);
-//        printf("borrow: %s\n", bib->books[i].borrowlist);
+        printf("isbn  : %s\n", bib->books[i].isbn);
+        printf("title : %s\n", bib->books[i].title);
+        printf("author: %s\n", bib->books[i].author);
+        printf("anzahl: %s\n", bib->books[i].numberof);
+        printf("borrow: %s\n", bib->books[i].borrowlist);
         // skip line, if book was deleted
         if(!(bib->books[i].isbn == NULL && bib->books[i].title == NULL && bib->books[i].author == NULL && bib->books[i].numberof == NULL && bib->books[i].borrowlist == NULL)){
             // get length of the line and allocate the memory for the line
@@ -48,6 +48,7 @@ void saveBooks(Bib *bib)
             }
             // TODO: skip line if it is the same as before (only write new lines)
             if(dataFile == NULL){
+                printf("error!");
                 printf("Problem beim Öffnen der Datenbank-Datei: %s\n", strerror(errno));
                 fileSuccess = 0;
 

@@ -8,6 +8,10 @@ void showAll(Bib *bib)
 
     showFoundBooks(&foundBooks, "itanb");
 
-    contextBookAction(bib, &foundBooks);
+    int chosenBook = 0;
+    int isNotAborted;
+    chooseBook(&foundBooks, &chosenBook, &isNotAborted);
+    chosenBook--;
+    contextBookAction(bib, foundBooks.books[chosenBook], chosenBook);
     freeFoundBooks(&foundBooks);
 }

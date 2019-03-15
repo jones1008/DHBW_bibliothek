@@ -14,6 +14,6 @@
 #include "returnBook.h"
 
 void searchBooks(Bib *bib);
-void contextBookAction(Bib *bib, foundBooks *foundBooks);
+void contextBookAction(Bib *bib, book *book, int chosenBook);
 
 #endif

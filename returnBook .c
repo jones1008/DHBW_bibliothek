@@ -9,39 +9,34 @@ void returnBook(Bib *bib)
         foundBooks foundBooks;
         // TODO: repeat if foundBooks.size = 0 (auch in anderen funktionen borrowBooks and deleteBooks)
         search(bib, &foundBooks, searchString);
+        showFoundBooks(&foundBooks, "atib");
 
         // if only one result choose this book automatically
         if(foundBooks.size>1){
-            // print the results and let the user choose a book
-            showFoundBooks(&foundBooks, "atib");
+            // let the user choose a book
             int chosenBook = 0;
             int isNotAborted;
             chooseBook(&foundBooks, &chosenBook, &isNotAborted);
-            // decrease chosenBook since arrays start at 0
-            chosenBook--;
-            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+            printf("after chosing\n");
 
             if(isNotAborted){
-                actualReturnBook(bib, foundBooks.books[chosenBook]);
+                chosenBook--;
+                printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook+1, foundBooks.books[chosenBook]->author, foundBooks.books[chosenBook]->title);
+                actualReturnBook(bib, foundBooks.books[chosenBook], chosenBook);
             }
         } else if(foundBooks.size == 1){
-            actualReturnBook(bib, foundBooks.books[0]);
+            printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, 1, foundBooks.books[0]->author, foundBooks.books[0]->title);
+            actualReturnBook(bib, foundBooks.books[0], 1);
         }
         freeFoundBooks(&foundBooks);
     }
 }
 
-void actualReturnBook(Bib *bib, book *book)
+void actualReturnBook(Bib *bib, book *book, int chosenBook)
 {
     // print error message if borrowlist is empty
     if(book->borrowlist[0] != '\0'){
         char name[BUFFERSIZE];
-
-        printf("\n");
-        printf("Titel    : %s\n", book->title);
-        printf("Autor    : %s\n", book->author);
-        printf("Ausleiher: %s\n", book->borrowlist);
-        printf("\n");
 
         // repeat user input if nothing was found
         int isNotAborted;

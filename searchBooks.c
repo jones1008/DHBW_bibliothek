@@ -18,33 +18,56 @@ void searchBooks(Bib *bib)
     // check if the input was aborted
 //    printf("isAborted: %d\n", isAborted(searchString));
     if(!isAborted(searchString)){
+//        printf("is not aborted!\n");
         // pass searchString to the search-function
         foundBooks foundBooks;
 //        printf("vor search: book->numberof: %s\n", bib->books[5].numberof);
+//        printf("before search\n");
         search(bib, &foundBooks, searchString);
 //        printf("searchBooks: nach dem Suchen: book->author: %s\n", foundBooks.books[0]->numberof);
 
-        if(foundBooks.size > 0){
+        if(foundBooks.size != 0){
             showFoundBooks(&foundBooks, "atinb");
-            // run context-action for the foundBooks
-            contextBookAction(bib, &foundBooks);
+            if(foundBooks.size>1){
+                int chosenBook = 0;
+                int isNotAborted;
+                chooseBook(&foundBooks, &chosenBook, &isNotAborted);
+                if(isNotAborted){
+                    chosenBook--;
+                    // write book and free foundBooks before other function is called
+                    book *book = foundBooks.books[chosenBook];
+                    freeFoundBooks(&foundBooks);
+                    // run context-action for the foundBooks
+                    contextBookAction(bib, book, chosenBook);
+                }
+            } else if(foundBooks.size == 1){
+                // write book and free foundBooks before other function is called
+                book *book = foundBooks.books[0];
+                freeFoundBooks(&foundBooks);
+                contextBookAction(bib, book, 1);
+            } else{
+                freeFoundBooks(&foundBooks);
+            }
         } else{
+//            printf("no results: before freefoundBooks\n");
+            freeFoundBooks(&foundBooks);
+//            printf("no results: before searchBooks\n");
             searchBooks(bib);
         }
-        freeFoundBooks(&foundBooks);
+//        freeFoundBooks(&foundBooks);
     }
+//    printf("end of searchBooks()\n");
 }
 
-void contextBookAction(Bib *bib, foundBooks *foundBooks)
+// TODO: evtl in search.c platzieren? macht mehr Sinn?
+void contextBookAction(Bib *bib, book *book, int chosenBook)
 {
     // let the user choose a book to borrow/return/delete/addCopy the chosen book
-    int chosenBook = 0;
-    int isNotAborted;
-    chooseBook(foundBooks, &chosenBook, &isNotAborted);
+    printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, book->author, book->title);
 
     // when a number was chosen: ask user what he wants to do with that book
-    if(isNotAborted) {
-        printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks->books[chosenBook-1]->author, foundBooks->books[chosenBook-1]->title);
+//    if(isNotAborted) {
+//        printf("---> gew%chltes Buch: [%d] - %s - %s\n", ae, chosenBook, foundBooks->books[chosenBook-1]->author, foundBooks->books[chosenBook-1]->title);
 
         char *allowedChars = "azlc";
         char userChar[BUFFERSIZE];
@@ -72,23 +95,36 @@ void contextBookAction(Bib *bib, foundBooks *foundBooks)
             printf("\n");
             // run the corresponding function with a pointer to the chosen book
             // TODO: add feedback to the user that the action was performed
+            char menuHeader[BUFFERSIZE] = "";
             switch(userChar[0]){
                 case 'a':
-//                    actualBorrowBook(bib, foundBooks->books[chosenBook-1]);
+                    strcpy(menuHeader, "BUCH AUSLEIHEN");
+                    printMenuHeader(menuHeader);
+                    actualBorrowBook(bib, book, chosenBook);
                     break;
                 case 'z':
-//                    actualReturnBook(bib, foundBooks->books[chosenBook-1]);
+                    strcpy(menuHeader, "BUCH ZURUECKGEBEN");
+                    printMenuHeader(menuHeader);
+                    actualReturnBook(bib, book, chosenBook);
                     break;
                 case 'l':
-//                    actualDeleteBooks(bib, foundBooks->books[chosenBook-1]);
+                    strcpy(menuHeader, "BUCH LOESCHEN");
+                    printMenuHeader(menuHeader);
+                    actualDeleteBooks(bib, book, chosenBook);
                     break;
                 case 'c':
-//                    actualAddCopies(bib, foundBooks->books[chosenBook-1]);
+                    // TODO: ein oder ausbauen!
+                    strcpy(menuHeader, "BUCHEXEMPLAR HINZUFUEGEN");
+                    printMenuHeader(menuHeader);
+//                    actualAddCopies(bib, book, chosenBook);
                     break;
                 default:
                     printf("Falsche Eingabe!\n");
                     break;
             }
+            stringToLower(menuHeader);
+            printMenuEnd(menuHeader);
+//            printf("\n");
         }
-    }
+//    }
 }

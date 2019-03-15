@@ -10,6 +10,6 @@
 #include "search.h"
 
 void deleteBooks(Bib *bib);
-void actualDeleteBooks(Bib *bib, book *book);
+void actualDeleteBooks(Bib *bib, book *book, int chosenBook);
 
 #endif
