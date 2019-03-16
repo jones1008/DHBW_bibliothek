@@ -16,7 +16,7 @@ void deleteBooks(Bib *bib)
     if(!isAborted(searchString)){
         foundBooks foundBooks;
         search(bib, &foundBooks, searchString);
-        showFoundBooks(&foundBooks, "atin");
+        showFoundBooks(&foundBooks, "atbn");
 
         // if only one result choose this book automatically
         if(foundBooks.size>1){
@@ -32,9 +32,7 @@ void deleteBooks(Bib *bib)
                 freeFoundBooks(&foundBooks);
 
                 showChosenBook(chosenBook, book);
-    //            printf("chosenbook pointer: %d\n", **foundBooks.books[chosenBook]);
                 actualDeleteBooks(bib, book, chosenBook);
-    //            printf("nach actualDeleteBooks: book->numberof: %s\n", bib->books[5].numberof);
             }
         } else if(foundBooks.size == 1){
             book *book = foundBooks.books[0];
@@ -59,25 +57,29 @@ void deleteBooks(Bib *bib)
  */
 void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
 {
-//    printf("author: %s\n", book->author);
     char deleteCountString[BUFFERSIZE];
     int deleteCount;
+
+    // get numberof into int
     int numberof = atoi(book->numberof);
+    // note: you can't delete books that are currently borrowed -> maxDeletion
+    int maxDeletion = numberof-getNumberOfBorrowers(book);
+
     int isNotAborted;
     // repeat input if deleteCount is not a number or above numberof
     do{
-        printf("Anzahl zu l%cschender Exemplare ([ENTER] zum Abbrechen): ", oe);
+        printf("Anzahl zu l%cschender Exemplare (max. %d) ([ENTER] zum Abbrechen): ", oe, maxDeletion);
         getUserInput(deleteCountString);
         isNotAborted = !isAborted(deleteCountString);
         if(isNotAborted){
             deleteCount = atoi(deleteCountString);
 
             // if number out of allowed area was chosen
-            if(deleteCount<=0 || deleteCount>numberof){
+            if(deleteCount>maxDeletion || deleteCount<=0){
                 printf("ERROR: Falsche Eingabe oder eingegebene Zahl au%cerhalb des Index!\n", ss);
             }
         }
-    } while(isNotAborted && (deleteCount<=0 || deleteCount>numberof));
+    } while(isNotAborted && (deleteCount>maxDeletion || deleteCount<=0));
 
     if(isNotAborted){
         // lower the number of if deleteCount is lower than the existing copies, else delete book entry completely
@@ -85,15 +87,10 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
             int newNumberof = numberof-deleteCount;
             char newNumberofString[12];
             sprintf(newNumberofString, "%d", newNumberof);
-//            printf("last char of newString: %d\n", newNumberofString[strlen(newNumberofString)]);
-//            newNumberofString[strlen(newNumberofString)] = '\0';
             book->numberof = newNumberofString;
-            printf("---> %s Exemplare des Buchs werden entfernt...\n", newNumberofString);
-//            printf("book->numberof: %s\n", book->numberof);
+            printf("\n");
+            printf("---> %d Exemplare des Buchs werden entfernt...\n", deleteCount);
         } else{
-            // TODO: in array steht falscher wert nach dem Ändern (siehe printfs in main() vor und nach getUserInput
-            // TODO: Buch aus der Mitte komplett rauslöschen und danach Verhalten überprüfen, wenn interaktionen mit Büchern danach ausgeführt werden
-
             // ask user if he wants is sure to delete the complete book
             char choice[BUFFERSIZE];
             char *allowedChars = "jn";
@@ -110,7 +107,8 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
                 book->title = NULL;
                 book->numberof = NULL;
                 book->borrowlist = NULL;
-                printf("---> Das Buch wird komplett gelöscht...\n");
+                printf("\n");
+                printf("---> Das Buch wird komplett gel%cscht...\n", oe);
             } else if(choice[0] == 'n'){
                 // set isNotAborted to 0, so it won't save
                 isNotAborted = 0;
@@ -119,10 +117,7 @@ void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
             }
         }
         if(isNotAborted){
-//            printf("vor dem Speichern: book->numberof: %s\n", bib->books[5].numberof);
-            // TODO: speichern funktioniert hier nicht! (gleicher Fehler wie bei borrowBook und bei returnBook
             saveBooks(bib);
-//            printf("nach dem Speichern: book->numberof: %s\n", bib->books[5].numberof);
         }
     }
 }

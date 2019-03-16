@@ -18,15 +18,12 @@ void showAll(Bib *bib)
     int isNotAborted;
     chooseBook(&foundBooks, &chosenBook, &isNotAborted);
     if(isNotAborted){
-//        printf("before minus\n");
         chosenBook--;
-//        printf("chosenBook: %s\n", chosenBook);
 
         book *book = foundBooks.books[chosenBook];
         freeFoundBooks(&foundBooks);
 
         contextBookAction(bib, book, chosenBook);
-//        printf("after contextBookAction\n");
     } else{
         freeFoundBooks(&foundBooks);
     }

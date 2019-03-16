@@ -11,6 +11,5 @@
 
 void returnBook(Bib *bib);
 void actualReturnBook(Bib *bib, book *book, int chosenBook);
-//void newBorrower(foundBorrowers *foundBorrowers);
 
 #endif

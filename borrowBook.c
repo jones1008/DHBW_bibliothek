@@ -9,7 +9,6 @@
  */
 void borrowBook(Bib *bib)
 {
-//    saveBooks(bib);
     char searchString[BUFFERSIZE];
     printf("Welches Buch soll ausgeliehen werden? (Titel, Autor, ISBN) ([ENTER] zum Abbrechen): ");
     // get user search, search for it
@@ -17,7 +16,6 @@ void borrowBook(Bib *bib)
     if(!isAborted(searchString)){
         foundBooks foundBooks;
         search(bib, &foundBooks, searchString);
-//        printf("Anzahl gefunden: %d\n", foundBooks.size);
         showFoundBooks(&foundBooks, "atib");
 
         // if only one result choose this book automatically
@@ -46,7 +44,6 @@ void borrowBook(Bib *bib)
             freeFoundBooks(&foundBooks);
             borrowBook(bib);
         }
-//        freeFoundBooks(&foundBooks);
     }
 }
 
@@ -61,20 +58,9 @@ void borrowBook(Bib *bib)
 void actualBorrowBook(Bib *bib, book *book, int chosenBook)
 {
     // get current number of borrowers
-    int numberOfBorrowers;
-
-    if(strlen(book->borrowlist)==0){
-        numberOfBorrowers = 0;
-    } else{
-        int numberOfCommas = countChars(book->borrowlist, ',');
-//        printf("numberOfCommas: %d\n", numberOfCommas);
-        if(numberOfCommas == 0){
-            numberOfBorrowers = 1;
-        } else{
-            numberOfBorrowers = numberOfCommas+1;
-        }
-    }
     int numberof = atoi(book->numberof);
+    int numberOfBorrowers = getNumberOfBorrowers(book);
+
     // check if book has enough copies to borrow a copy (compare numberof and number of borrowers in borrowlist)
     if(numberOfBorrowers >= numberof){
         printf("ERROR: Dieses Buch kann nicht ausgeliehen werden, da keine Exemplare mehr zur Verf%cgung stehen.\n", ue);
@@ -83,7 +69,6 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
         char name[BUFFERSIZE];
         printf("Name Ausleiher (z.B. Max Mustermann) ([ENTER] zum Abbrechen): ");
         getUserInput(name);
-//        printf("actalBorrow: name: %s\n", name);
         if(!isAborted(name)){
             // remove comma if user put some in -> for example: Mustermann, Max
             removeChar(name, ',');
@@ -92,18 +77,15 @@ void actualBorrowBook(Bib *bib, book *book, int chosenBook)
             // create new borrowlist and write it
             char newBorrowList[strlen(book->borrowlist)+1+strlen(name)];
             if(numberOfBorrowers == 0){
-//                printf("numberof bo\n");
                 sprintf(newBorrowList, "%s", name);
             } else{
                 sprintf(newBorrowList, "%s, %s", book->borrowlist, name);
             }
-//            printf("newBorrowList: %s\n", newBorrowList);
             book->borrowlist = newBorrowList;
-//            printf("book->newBorrowList: %s\n", book->borrowlist);
 
-            saveBooks(bib);
+            printf("\n");
             printf("---> '%s' wurde in die Ausleihliste eingetragen.\n", name);
-//            printf("after saving");
+            saveBooks(bib);
         }
     }
 }

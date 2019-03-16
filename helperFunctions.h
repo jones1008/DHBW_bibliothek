@@ -22,6 +22,7 @@
 void getUserInput(char *userVariable);
 int wrongCharInput(char *userInput, char *allowedChars);
 int isAborted(char *userVariable);
+int getNumberOfBorrowers(book *book);
 
 // string operation functions
 char *trim(char *str);

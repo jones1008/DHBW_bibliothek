@@ -9,7 +9,6 @@
  */
 void addBook(Bib *bib)
 {
-//    char *newIsbn = "";
     int isNotAborted;
     char isbn[BUFFERSIZE];
 
@@ -19,14 +18,6 @@ void addBook(Bib *bib)
 
         isNotAborted = !isAborted(isbn);
         if(isNotAborted){
-            // if in first loop allocate the newisbn
-//            if(strlen(newIsbn) == 0){
-//                newIsbn = calloc(1, 1);
-//            }
-    //      // realloc newIsbn and zero content from the loop before
-//            newIsbn = realloc(newIsbn, (strlen(isbn)+1)*sizeof(char));
-//            memset(isbn, 0, strlen(isbn));
-
             // delete all other characters not being a digit from isbn and add the null terminator at the end
             int j=0;
             for(int i=0; i<strlen(isbn); i++){
@@ -81,9 +72,6 @@ void addBook(Bib *bib)
                     trim(isbn);
                     trim(title);
                     trim(author);
-//                    trimWhitespace(isbn, strlen(isbn), isbn);
-//                    trimWhitespace(title, strlen(title), title);
-//                    trimWhitespace(author, strlen(author), author);
 
                     // convert Umlaute to corresponding characters
                     replaceUmlauts(title);
@@ -107,10 +95,6 @@ void addBook(Bib *bib)
                     if(choice[0] == 'j'){
                         // create new Book array and adding information to this new added book-array-element
                         newBook(bib);
-                        printf("ISBN  : %s\n", isbn);
-                        printf("Titel : %s\n", title);
-                        printf("Autor : %s\n", author);
-                        printf("Anzahl: %s\n", numberof);
 
                         writeStringToArrayNode(bib, 'i', isbn);
                         writeStringToArrayNode(bib, 't', title);
@@ -118,31 +102,18 @@ void addBook(Bib *bib)
                         writeStringToArrayNode(bib, 'n', numberof);
                         writeStringToArrayNode(bib, 'b', "");
 
-//                        printf("after writeSTrings");
-
-//                        printf("isbn  : %s\n", bib->books[bib->used].isbn);
-//                        printf("title : %s\n", bib->books[bib->used].title);
-//                        printf("author: %s\n", bib->books[bib->used].author);
-//                        printf("anzahl: %s\n", bib->books[bib->used].numberof);
-//                        printf("borrow: %s\n", bib->books[bib->used].borrowlist);
-
                         // increase bib-used-parameter
-//                        printf("bib used: %d", bib->used);
                         bib->used = bib->used+1;
-//                        printf("books used: %d", bib->used);
 
                         // save bib to text-file
+                        printf("---> Buch wurde erfolgreich hinzugefügt!");
                         saveBooks(bib);
                     }
                     if(choice[0] == 'n'){
                         addBook(bib);
                     }
                 }
-//                freeTempString(numberof);
             }
-//            freeTempString(author);
         }
-//        freeTempString(title);
     }
-//    freeTempString(isbn);
 }
