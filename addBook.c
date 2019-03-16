@@ -27,7 +27,6 @@ void addBook(Bib *bib)
                 }
             }
             isbn[j] = '\0';
-            printf("isbn: %s\n", isbn);
 
             if(strlen(isbn)!=13){
                 printf("ERROR: Die ISBN muss 13 Ziffern lang sein\n");
@@ -106,7 +105,8 @@ void addBook(Bib *bib)
                         bib->used = bib->used+1;
 
                         // save bib to text-file
-                        printf("---> Buch wurde erfolgreich hinzugefügt!");
+                        printf("\n");
+                        printf("---> Buch wurde erfolgreich hinzugef%cgt!\n", ue);
                         saveBooks(bib);
                     }
                     if(choice[0] == 'n'){
