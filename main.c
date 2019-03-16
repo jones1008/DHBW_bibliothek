@@ -146,6 +146,7 @@ void showMenu(Bib *bib)
 
 //    printMenuEnding(strlen(menuHeader));
     printf("\n");
+
     // call itself after other functions are completed
     showMenu(bib);
 }

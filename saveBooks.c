@@ -79,5 +79,8 @@ void saveBooks(Bib *bib)
     }
     if(fileSuccess){
         printf("Datenbank erfolgreich aktualisiert!\n");
+
+        // reload bib structure from file after saving
+        loadBooks(bib);
     }
 }

@@ -48,7 +48,7 @@ void searchBooks(Bib *bib)
                 // write book and free foundBooks before other function is called
                 book *book = foundBooks.books[0];
                 freeFoundBooks(&foundBooks);
-                contextBookAction(bib, book, 1);
+                contextBookAction(bib, book, 0);
             } else{
                 freeFoundBooks(&foundBooks);
             }

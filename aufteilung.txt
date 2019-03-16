@@ -18,10 +18,7 @@ Jones:
 / returnBook() + actualReturnBook()
 - close Window after exiting
 
-- gscheite Werte für Datenbank raussuchen
 - wird immer richtig gespeichert?
-- testen, ob noch alle funktionen gebraucht werden
-- usability testen
 
 Rules:
 - nach jeder Methode am Ende den allokierten Bereich der ArrayPointer löschen (free)

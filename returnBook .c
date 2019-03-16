@@ -70,6 +70,7 @@ void actualReturnBook(Bib *bib, book *book, int chosenBook)
         strcpy(borrowlistCopy, book->borrowlist);
         char *ptr = strtok(borrowlistCopy, delimiter);
 
+        printf("Liste der Ausleiher:\n");
         int i = 0;
         while(ptr != NULL){
             char *tmpPtr = trim(ptr);
@@ -103,45 +104,48 @@ void actualReturnBook(Bib *bib, book *book, int chosenBook)
 
 //        printf("chosenNumber: %d\n", chosenNumber);
 
-        char newBorrowList[strlen(book->borrowlist)];
-        char chosenBorrower[strlen(book->borrowlist)];
-        memset(newBorrowList, 0, strlen(book->borrowlist));
+        if(isNotAborted){
+            char newBorrowList[strlen(book->borrowlist)];
+            char chosenBorrower[strlen(book->borrowlist)];
+            memset(newBorrowList, 0, strlen(book->borrowlist));
 
-        char *newPtr = strtok(book->borrowlist, delimiter);
-        int j = 0;
-//        printf("chosenNumber-1: %d\n", chosenNumber-1);
-        int firstUnmatch = 1;
-        while(newPtr != NULL){
-            char *tmpPtr = trim(newPtr);
-            printf("j: %d\n", j);
-            printf("chosenNumber: %d\n", chosenNumber);
-            // if the chosenNumber is not the current loop -> not the current tmpPtr -> not the current borrower -> add this borrower to the newBorrowList
-            if(j!=(chosenNumber-1)){
-                if(firstUnmatch){
-//                    printf("before snprintf 1\n");
-                    printf("tmpPtr: %s\n", tmpPtr);
-                    snprintf(newBorrowList, strlen(tmpPtr)+1, "%s", tmpPtr);
+            char *newPtr = strtok(book->borrowlist, delimiter);
+            int j = 0;
+    //        printf("chosenNumber-1: %d\n", chosenNumber-1);
+            int firstUnmatch = 1;
+            while(newPtr != NULL){
+                char *tmpPtr = trim(newPtr);
+                printf("j: %d\n", j);
+                printf("chosenNumber: %d\n", chosenNumber);
+                // if the chosenNumber is not the current loop -> not the current tmpPtr -> not the current borrower -> add this borrower to the newBorrowList
+                if(j!=(chosenNumber-1)){
+                    if(firstUnmatch){
+    //                    printf("before snprintf 1\n");
+                        printf("tmpPtr: %s\n", tmpPtr);
+                        snprintf(newBorrowList, strlen(tmpPtr)+1, "%s", tmpPtr);
+                    } else{
+    //                    printf("before snprintf 2\n");
+                        snprintf(newBorrowList, strlen(newBorrowList)+3+strlen(tmpPtr), "%s, %s", newBorrowList, tmpPtr);
+                    }
+                    firstUnmatch = 0;
                 } else{
-//                    printf("before snprintf 2\n");
-                    snprintf(newBorrowList, strlen(newBorrowList)+3+strlen(tmpPtr), "%s, %s", newBorrowList, tmpPtr);
+                    printf("tmpPtr: %s\n", tmpPtr);
+                    printf("stlren(tmpPtr): %d\n", strlen(tmpPtr));
+                    snprintf(chosenBorrower, strlen(tmpPtr)+1, "%s", tmpPtr);
                 }
-                firstUnmatch = 0;
-            } else{
-                printf("tmpPtr: %s\n", tmpPtr);
-                printf("stlren(tmpPtr): %d\n", strlen(tmpPtr));
-                snprintf(chosenBorrower, strlen(tmpPtr)+1, "%s", tmpPtr);
+                printf("current newBorrowList: %s\n", newBorrowList);
+                newPtr = strtok(NULL, delimiter);
+                j++;
             }
-            printf("current newBorrowList: %s\n", newBorrowList);
-            newPtr = strtok(NULL, delimiter);
-            j++;
-        }
-        // TODO: falscher Wert in newBorrowList, wenn der letzte Ausleiher gelöscht wurde
-        printf("newBorrowList: %s\n", newBorrowList);
-        book->borrowlist = newBorrowList;
+            // TODO: falscher Wert in newBorrowList, wenn der letzte Ausleiher gelöscht wurde
+            printf("newBorrowList: %s\n", newBorrowList);
+            book->borrowlist = newBorrowList;
 
-        // TODO: speichern funktioniert hier nicht! (gleicher Fehler wie bei borrowBook -> oder funktionierts doch?
-        saveBooks(bib);
-        printf("---> '%s' wurde von der Ausleihliste entfernt.\n", chosenBorrower);
+            // TODO: speichern funktioniert hier nicht! (gleicher Fehler wie bei borrowBook -> oder funktionierts doch?
+            saveBooks(bib);
+            printf("---> '%s' wurde von der Ausleihliste entfernt.\n", chosenBorrower);
+
+        }
 
 
         // repeat user input if nothing was found
