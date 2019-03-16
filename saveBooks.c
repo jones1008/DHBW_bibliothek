@@ -32,7 +32,11 @@ void saveBooks(Bib *bib)
                 fclose(dataFile);
                 break;
             } else{
+                // TODO: stürzt hier bei fprintf ab (test ob saveBooks allgemein abstürzt oder nur bei borrowbook) -> wenns tut, dann ein Video machen von allen Funktionen
+                // TODO: auch Fehler beim Ausleihen: newBorrowList ist nur letzter Buchstabe
+                printf("line: %s\n", line);
                 fprintf(dataFile, "%s", line);
+                printf("after fprintf\n");
             }
             fclose(dataFile);
         }
@@ -41,6 +45,7 @@ void saveBooks(Bib *bib)
         printf("---> Datenbank erfolgreich aktualisiert!\n");
 
         // reload bib structure from file after saving
+        printf("before loadingBooks\n");
         loadBooks(bib);
     }
 }

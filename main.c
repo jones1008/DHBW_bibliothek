@@ -46,47 +46,53 @@ void showMenu(Bib *bib)
     // switch case structure to call the chosen function
     char menuHeader[BUFFERSIZE] = "";
     printf("\n");
-    switch(menuPoint[0]){
-        case 'b':
-            strcpy(menuHeader, "ALLE BUECHER");
-            printMenuHeader(menuHeader);
-            showAll(bib);
-            break;
-        case 's':
-            strcpy(menuHeader, "BUCH SUCHEN");
-            printMenuHeader(menuHeader);
-            searchBooks(bib);
-            break;
-        case 'a':
-            strcpy(menuHeader, "BUCH AUSLEIHEN");
-            printMenuHeader(menuHeader);
-            borrowBook(bib);
-            break;
-        case 'z':
-            strcpy(menuHeader, "BUCH ZURUECKGEBEN");
-            printMenuHeader(menuHeader);
-            returnBook(bib);
-            break;
-        case 'h':
-            strcpy(menuHeader, "NEUES BUCH HINZUFUEGEN");
-            printMenuHeader(menuHeader);
-            addBook(bib);
-            break;
-        case 'l':
-            strcpy(menuHeader, "BUCH LOESCHEN");
-            printMenuHeader(menuHeader);
-            deleteBooks(bib);
-            break;
-        case 'e':
-            printf("Schlie%ce Bibliothek...\n", ss);
-            exit(0);
-            break;
-        default:
-            printf("ERROR: Falsche Eingabe!\n");
-            break;
+
+    // check if any books are in the data structure
+    if(bib->used != 0 || menuPoint[0] == 'h' || menuPoint[0] == 'e'){
+        switch(menuPoint[0]){
+            case 'b':
+                strcpy(menuHeader, "ALLE BUECHER");
+                printMenuHeader(menuHeader);
+                showAll(bib);
+                break;
+            case 's':
+                strcpy(menuHeader, "BUCH SUCHEN");
+                printMenuHeader(menuHeader);
+                searchBooks(bib);
+                break;
+            case 'a':
+                strcpy(menuHeader, "BUCH AUSLEIHEN");
+                printMenuHeader(menuHeader);
+                borrowBook(bib);
+                break;
+            case 'z':
+                strcpy(menuHeader, "BUCH ZURUECKGEBEN");
+                printMenuHeader(menuHeader);
+                returnBook(bib);
+                break;
+            case 'h':
+                strcpy(menuHeader, "NEUES BUCH HINZUFUEGEN");
+                printMenuHeader(menuHeader);
+                addBook(bib);
+                break;
+            case 'l':
+                strcpy(menuHeader, "BUCH LOESCHEN");
+                printMenuHeader(menuHeader);
+                deleteBooks(bib);
+                break;
+            case 'e':
+                printf("Schlie%ce Bibliothek...\n", ss);
+                exit(0);
+                break;
+            default:
+                printf("ERROR: Falsche Eingabe!\n");
+                break;
+        }
+        stringToLower(menuHeader);
+        printMenuEnd(menuHeader);
+    } else{
+        printf("ERROR: Keine B%ccher vorhanden. F%cge zuerst neue B%ccher hinzu oder stelle die Datenbank aus der 'data - backup.csv' Datei wieder her.\n", ue, ue, ue);
     }
-    stringToLower(menuHeader);
-    printMenuEnd(menuHeader);
     printf("\n");
 
     // call itself after other functions are completed
