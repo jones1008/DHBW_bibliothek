@@ -130,7 +130,8 @@ void showMenu(Bib *bib)
             break;
         case 'e':
             printf("Schlie%ce Bibliothek...\n", ss);
-            freeBooks(bib);
+            // TODO: stürzt ab und zu ab
+//            freeBooks(bib);
             exit(0);
             break;
         default:

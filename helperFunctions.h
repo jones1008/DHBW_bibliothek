@@ -18,22 +18,23 @@
 #define ue (unsigned char)129
 #define ss (unsigned char)225
 
+// input functions
 void getUserInput(char *userVariable);
 int wrongCharInput(char *userInput, char *allowedChars);
 int isAborted(char *userVariable);
 
-//char *trimWhitespace(char *str);
+// string operation functions
 char *trim(char *str);
-//size_t trimWhitespace(char *out, size_t len, const char *str);
 char *replaceUmlauts(char *str);
 void stringToLower(char *strPtr);
 int countChars(char* str, char c);
 void removeChar(char *str, int c);
 
+// printing functions
 void printMenuHeader(char *header);
 void printMenuEnd(char *end);
-//void printMenuEnding(int menuHeaderLength);
 
+// free functions
 void freeTempString(char *var);
 void freeFoundBooks(foundBooks *foundBooks);
 

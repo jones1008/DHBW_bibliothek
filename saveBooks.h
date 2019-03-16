@@ -7,7 +7,6 @@
 #include <ctype.h>
 #include <errno.h>
 #include "structure.h"
-#include "helperFunctions.h"
 
 void saveBooks(Bib *bib);
 
