@@ -2,9 +2,10 @@
 
 /*
  *  function:
- *
+ *      Asks the user for a searchString, calls the search function with this searchString.
+ *      Then it calls functions to show the results, choose a book and show available context actions.
  *  params:
- *
+ *      Bib *bib
  */
 void searchBooks(Bib *bib)
 {

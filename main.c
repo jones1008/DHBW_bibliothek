@@ -151,7 +151,7 @@ void showMenu(Bib *bib)
 
 /*
  *  function:
- *      initializes the bibliothek, loads the bibliothek from data.csv file and starts the initial program
+ *      Initializes the Bibliothek, calls the loadBooks-function to loads the Bibliothek from data.csv file and starts the initial program.
  *  params:
  *
  */
@@ -178,7 +178,7 @@ int main()
 //    }
 
     // free all previously allocated memory
-    freeBooks(&bib);
+//    freeBooks(&bib);
 //    freeFoundBooks(&foundBooks);
 
     return 0;

@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <stddef.h>
 
-// define book-structure inside of array
+// defines a book structure with all it's attributes
 typedef struct
 {
     char* title;
@@ -16,6 +16,7 @@ typedef struct
     char* numberof;
     char* borrowlist;
 } book;
+// defines the Bibliothek-wrapper-structure with a pointer to the books and information about size and used
 typedef struct
 {
     book *books;
@@ -23,6 +24,7 @@ typedef struct
     size_t size;
 } Bib;
 
+// defines the foundBooks structure with a pointer pointer to the books and the size
 typedef struct{
     book **books;
     size_t size;

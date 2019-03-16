@@ -2,9 +2,9 @@
 
 /*
  *  function:
- *
+ *      Loads the book data from the data.csv-file into a Bibliothek-structure.
  *  params:
- *
+ *      Bib *bib (pointer to the structure)
  */
 void loadBooks(Bib *bib)
 {

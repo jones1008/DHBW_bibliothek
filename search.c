@@ -1,11 +1,11 @@
 #include "search.h"
 /*
  *  function: search
- *      searches for books with given searchString and adds them to foundBooksArray
+ *      Searches for books with given searchString and adds them to the foundBooks structure.
  *  params:
- *      Bib *bib        (pointer to bib structure)
- *      foundBooks *foundBooks      (pointer to array of book pointers)
- *      char *searchString  (pointer to string to search for)
+ *      Bib *bib (pointer to bib structure)
+ *      foundBooks *foundBooks (pointer to array of book pointers)
+ *      char *searchString (pointer to string to search for)
 */
 void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 {
@@ -68,9 +68,10 @@ void search(Bib *bib, foundBooks *foundBooks, char *searchString)
 // for each found book in foundbooks print the given attributes in order
 /*
  *  function:
- *
+ *      Loops over the found books structure and prints the given attributes from every book in foundBooks.
  *  params:
- *
+ *      foundBooks *foundBooks (pointer to the foundBooks structure)
+ *      char attributes[] (char array of abbreviations for the attributes to print)
  */
 void showFoundBooks(foundBooks *foundBooks, char attributes[])
 {
@@ -109,9 +110,11 @@ void showFoundBooks(foundBooks *foundBooks, char attributes[])
 
 /*
  *  function:
- *
+ *      Lets the user choose a book of the foundBooks and prints error messages, if a wrong input was made.
  *  params:
- *
+ *      foundBooks *foundBooks (pointer to the foundBooks structure)
+ *      int chosenBook (this is where the chosenBook index is stored)
+ *      int *isNotAborted (int pointer to basically a bool value if the process was aborted by the user or not (ENTER))
  */
 void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
 {
@@ -138,9 +141,10 @@ void chooseBook(foundBooks *foundBooks, int *chosenBook, int *isNotAborted)
 
 /*
  *  function:
- *
+ *      Shows a brief summary to the user which book was chosen.
  *  params:
- *
+ *      int chosenBook (integer value of the chosen book)
+ *      book *book (pointer to the chosen book)
  */
 void showChosenBook(int chosenBook, book *book)
 {
@@ -149,9 +153,11 @@ void showChosenBook(int chosenBook, book *book)
 
 /*
  *  function:
- *
+ *      Shows the context actions "borrow", "return" and "delete" for the chosen book. Calls the corresponding function of the chosen action.
  *  params:
- *
+ *      Bib *bib
+ *      book *book (a pointer to the chosen book)
+ *      int chosenBook (the index of the chosen book in the foundBooks structure)
  */
 void contextBookAction(Bib *bib, book *book, int chosenBook)
 {
@@ -169,7 +175,6 @@ void contextBookAction(Bib *bib, book *book, int chosenBook)
     printf("[A]: Buch ausleihen\n");
     printf("[Z]: Buch zur%cckgeben\n", ue);
     printf("[L]: Buch l%cschen\n", oe);
-    printf("[C]: Buchexemplar hinzuf%cgen\n", ue);
 
     // repeat user input if the input was wrong or not Aborted
     do{

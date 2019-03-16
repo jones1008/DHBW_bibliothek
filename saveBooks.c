@@ -20,9 +20,9 @@
 
 /*
  *  function:
- *
+ *      Converts the bib structure into a string (line) and writes them to the data.csv to save the current bib-structure
  *  params:
- *
+ *      Bib *bib
  */
 void saveBooks(Bib *bib)
 {

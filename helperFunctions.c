@@ -2,9 +2,9 @@
 
 /*
  *  function:
- *
+ *      Waits for the user input and writes it to the given variable.
  *  params:
- *
+ *      char *userVariable (the variable the user input value is written to)
  */
 void getUserInput(char *userVariable)
 {
@@ -107,9 +107,11 @@ void getUserInput(char *userVariable)
 
 /*
  *  function:
- *
+ *      If there is an input where only one char is allowed, this checks if the user has entered only one char and checks if the char is an allowed char.
+ *      Returns 1 if it was wrong, else 0.
  *  params:
- *
+ *      char *userInput (where the user input is stored)
+ *      char *allowedChars (a char pointer to the allowed chars)
  */
 int wrongCharInput(char *userInput, char *allowedChars)
 {
@@ -135,9 +137,10 @@ int wrongCharInput(char *userInput, char *allowedChars)
 
 /*
  *  function:
- *
+ *      Checks if the userInput was ENTER and prints Abbrechen...
+ *      Returns 1 if it was aborted, else 0.
  *  params:
- *
+ *      char *userInput
  */
 int isAborted(char *userInput)
 {
@@ -174,9 +177,9 @@ int isAborted(char *userInput)
 
 /*
  *  function:
- *
+ *      Trims leading and trailing whitespaces from given input.
  *  params:
- *
+ *      char *str (pointer to the string)
  */
 char *trim(char *str)
 {
@@ -253,9 +256,10 @@ char *trim(char *str)
 
 /*
  *  function:
- *
+ *      Replaces German umlauts with the corresponding equivalent. E.g.: ä -> ae
+ *      Returns the given string with replaced umlauts
  *  params:
- *
+ *      char *str (a pointer to the string where the umlauts should be replaced)
  */
 char *replaceUmlauts(char *str)
 {
@@ -323,9 +327,9 @@ char *replaceUmlauts(char *str)
 
 /*
  *  function: stringToLower
- *      turns a string into a complete lowercased string
+ *      Turns a string into a complete lowercased string.
  *  params:
- *      char *strPtr    (a pointer to the string that should be lowercased)
+ *      char *strPtr (a pointer to the string that should be lowercased)
  */
 void stringToLower(char *strPtr)
 {
@@ -337,20 +341,22 @@ void stringToLower(char *strPtr)
 
 /*
  *  function:
- *
+ *      Recursive function that counts the occurrences of a specific char in a string and returns the count.
  *  params:
- *
+ *      char *str (string in which the char should be searched for)
+ *      char c (the char that should be counted)
  */
-int countChars(char* str, char c)
+int countChars(char *str, char c)
 {
     return (*str == '\0') ? 0 : countChars(str+1, c) + (*str == c);
 }
 
 /*
  *  function:
- *
+ *      Removes a specific char from a given string
  *  params:
- *
+ *      char *str (the string where the char should be removed from)
+ *      int c (the char as the corresponding ascii integer value)
  */
 void removeChar(char *str, int c)
 {
@@ -365,7 +371,7 @@ void removeChar(char *str, int c)
 
 /*
  *  function:
- *
+ *      Prints a specific amount of '#'
  *  params:
  *
  */
@@ -378,9 +384,9 @@ void printHeaderTabs()
 
 /*
  *  function:
- *
+ *      Prints the header of a menu with given header-string.
  *  params:
- *
+ *      char *header (the name of the header)
  */
 void printMenuHeader(char *header)
 {
@@ -392,9 +398,9 @@ void printMenuHeader(char *header)
 
 /*
  *  function:
- *
+ *      Prints the end of a menu with the given end-string.
  *  params:
- *
+ *      char *end (the name of the end)
  */
 void printMenuEnd(char *end)
 {
@@ -416,9 +422,9 @@ void printMenuEnd(char *end)
 
 /*
  *  function:
- *
+ *      Frees a string that was allocated before.
  *  params:
- *
+ *      char *var (the variable to be freed)
  */
 void freeTempString(char *var)
 {
@@ -428,9 +434,9 @@ void freeTempString(char *var)
 
 /*
  *  function: freeFoundBooks
- *      frees previously allocated memory of a foundBooks structure
+ *      Frees previously allocated memory of a foundBooks structure.
  *  params:
- *      foundBooks *foundBooks    (a pointer to the foundBooks structure)
+ *      foundBooks *foundBooks (a pointer to the foundBooks structure)
  */
 void freeFoundBooks(foundBooks *foundBooks)
 {

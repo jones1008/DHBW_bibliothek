@@ -2,9 +2,10 @@
 
 /*
  *  function:
- *
+ *      Asks the user for a searchString to specify which book should be deleted.
+ *      If results are more than one let the user choose. If it has only one result auto select this book. After that call the actualDeleteBooks function.
  *  params:
- *
+ *      Bib *bib
  */
 void deleteBooks(Bib *bib)
 {
@@ -49,9 +50,12 @@ void deleteBooks(Bib *bib)
 
 /*
  *  function:
- *
+ *      Asks the user how many books should be deleted from given book.
+ *      Then checks if the number is equal to the current number of copies. If yes: deletes book entry completely. If no: subtracts the number from the numberof-attribute
  *  params:
- *
+ *      Bib *bib
+ *      book *book (the pointer to the book that was chosen before)
+ *      int chosenBook (the index of the pointer in the foundBooks array)
  */
 void actualDeleteBooks(Bib *bib, book *book, int chosenBook)
 {

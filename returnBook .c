@@ -2,9 +2,10 @@
 
 /*
  *  function:
- *
+ *      Asks the user which book should be returned (searchString) and lets the user choose which one he want to return.
+ *      If only one book was found auto-select this one. After that actualReturnBook with the given book is called.
  *  params:
- *
+ *      Bib *bib
  */
 void returnBook(Bib *bib)
 {
@@ -51,9 +52,12 @@ void returnBook(Bib *bib)
 
 /*
  *  function:
- *
+ *      Checks if book can be returned (if something is in the borrowlist)
+ *      Then lets the user choose which one of the borrowlist is returning the book to delete him from the borrowlist.
  *  params:
- *
+ *      Bib *bib
+ *      book *book (the pointer to the book that was chosen before)
+ *      int chosenBook (the index of the pointer in the foundBooks array)
  */
 void actualReturnBook(Bib *bib, book *book, int chosenBook)
 {

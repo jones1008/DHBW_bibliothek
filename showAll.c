@@ -2,9 +2,9 @@
 
 /*
  *  function:
- *
+ *      Shows all books in the bib structure, lets the user choose one and shows available context actions.
  *  params:
- *
+ *      Bib *bib
  */
 void showAll(Bib *bib)
 {

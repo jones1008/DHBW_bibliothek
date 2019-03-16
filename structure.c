@@ -2,9 +2,9 @@
 
 /*
  *  function:
- *
+ *      Adds a new book to the bib structure
  *  params:
- *
+ *      Bib *bib
  */
 void newBook(Bib *bib)
 {
@@ -16,9 +16,11 @@ void newBook(Bib *bib)
 
 /*
  *  function:
- *
+ *      Writes a given string either to isbn, title, author, numberof or borrowlist in the bib structure to the last book entry.
  *  params:
- *
+ *      Bib *bib
+ *      char node (a char that represents either isbn, title, author, numberof or borrowlist, so the function knows where to store the string)
+ *      char *string (the string that should be written)
  */
 void writeStringToArrayNode(Bib *bib, char node, char *string)
 {
