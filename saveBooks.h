@@ -8,6 +8,7 @@
 #include <errno.h>
 #include "structure.h"
 #include "loadBooks.h"
+#include "helperFunctions.h"
 
 void saveBooks(Bib *bib);
 
