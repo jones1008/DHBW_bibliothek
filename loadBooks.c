@@ -14,21 +14,17 @@ void loadBooks(Bib *bib)
     bib->size = 0;
 
     // read every line of the csv-file and write data to the array
-    char buffer[1024];
+    char buffer[BUFFERSIZE];
     char *line, *records;
     char delimiter[] = ";";
-    printf("before opening\n");
     FILE *dataFile = fopen("data.csv", "r");
-    printf("after opening\n");
     if(dataFile == NULL){
         printf("ERROR: Datenbank-Datei kann nicht gelesen werden!\n");
     }
     while((line=fgets(buffer,sizeof(buffer),dataFile))!=NULL){
         // skip empty lines
-        printf("line: %s\n", line);
         if(line[0] != '\n'){
             // initialize bib structure
-            printf("before newBook\n");
             newBook(bib);
             records = strtok(line, delimiter);
 
@@ -37,12 +33,10 @@ void loadBooks(Bib *bib)
                 switch(index){
                     case 0:
                         // insert isbn
-                        printf("before isbn writing\n");
                         writeStringToArrayNode(bib, 'i', records);
                         break;
                     case 1:
                         // insert title
-                        printf("before title writing\n");
                         writeStringToArrayNode(bib, 't', records);
                         break;
                     case 2:

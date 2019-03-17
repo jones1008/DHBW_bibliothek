@@ -26,14 +26,9 @@ void writeStringToArrayNode(Bib *bib, char node, char *string)
 {
     switch(node){
         case 'i':
-            printf("isbn: %s\n", string);
-            printf("bib->used: %d\n", bib->used);
-            bib->books[bib->used].isbn = calloc(strlen(string)+1, sizeof(char));
-            printf("before copying\n");
+            bib->books[bib->used].isbn = malloc((strlen(string)+1)*sizeof(char));
             strncpy(bib->books[bib->used].isbn, string, strlen(string));
-            printf("before writing null\n");
             bib->books[bib->used].isbn[strlen(string)] = '\0';
-            printf("bib->isbn: %s\n", bib->books[bib->used].isbn);
             break;
         case 't':
             bib->books[bib->used].title = malloc((strlen(string)+1)*sizeof(char));

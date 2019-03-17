@@ -1,0 +1,11 @@
+In unserem Code ist ein Bug drin, den wir nicht mehr beheben konnten.
+Der Fehler taucht auf, wenn die Funktion loadBooks() in der Funktion saveBooks() (Zeile 44) ausgeführt wird, weshalb diese Zeile auch auskommentiert ist.
+
+Das Auskommentieren führt aber dazu, dass das Programm abstürzt, wenn man eine Änderung der Daten vornimmt (z.B.: Buch ausleihen, Buch zurückgeben, Buch löschen) UND danach zum Beispiel eine Suche durchführt.
+
+Zusätzlich kann es beim Testen von Funktionen, die hintereinander getestet werden zu undefiniertem Verhalten kommen, was das Programm zum Abstürzen bringt.
+Daher empfehle ich die Funktionen einzeln zu testen. Das heißt nach jedem Test einer Funktion des Programms die Bibliothek zu verlassen und das Programm neu laufen zu lassen.
+
+Das Traurige dabei ist, dass das aber eigentlich alles schon mal funktioniert hat und ich nur den Stand bei dem es funktionert hat, nicht mehr gefunden habe.
+
+Sollte im Laufe des Programms die data.csv korrupt werden oder leer sein, können Sie 
